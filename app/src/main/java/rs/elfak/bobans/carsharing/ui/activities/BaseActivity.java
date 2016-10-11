@@ -96,6 +96,12 @@ public abstract class BaseActivity<M, I extends AbstractInteractor, V extends IB
     }
 
     @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        // we don't use this
+        return null;
+    }
+
+    @Override
     public final void setContentView(View view, ViewGroup.LayoutParams params) {
         if (contentView == null) {
             throw new RuntimeException("Can't set content view before calling on create");

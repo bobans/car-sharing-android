@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Car Sharing</string>
+    <string name="text_splash_screen_headline">Car Sharing</string>
 </resources>
