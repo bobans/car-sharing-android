@@ -10,8 +10,9 @@ import android.widget.FrameLayout;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceActivity;
 
 import rs.elfak.bobans.carsharing.R;
-import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
-import rs.elfak.bobans.carsharing.presenters.BasePresenter;
+import rs.elfak.bobans.carsharing.interactors.AbstractInteractor;
+import rs.elfak.bobans.carsharing.presenters.AbstractPresenter;
+import rs.elfak.bobans.carsharing.ui.dialogs.ProgressDialog;
 import rs.elfak.bobans.carsharing.views.IBaseView;
 
 /**
@@ -20,35 +21,59 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseView<M>, P extends BasePresenter<V, I>>
+public abstract class BaseActivity<M, I extends AbstractInteractor, V extends IBaseView<M>, P extends AbstractPresenter<V, I>>
         extends MvpLceActivity<FrameLayout, M, V, P>
         implements IBaseView<M> {
+
+    private ProgressDialog progressDialog;
+    private int progressCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base);
+
+        errorView.setVisibility(View.GONE);
+        contentView.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressCount = 0;
     }
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        errorView.setVisibility(View.VISIBLE);
-        loadingView.setVisibility(View.GONE);
-        contentView.setVisibility(View.GONE);
+        // TODO show error popup
     }
 
     @Override
     public void showLoading(boolean pullToRefresh) {
-        errorView.setVisibility(View.GONE);
-        loadingView.setVisibility(View.VISIBLE);
-        contentView.setVisibility(View.GONE);
+        progressCount++;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (!progressDialog.isShowing()) {
+                    progressDialog.show();
+                }
+            }
+        });
     }
 
     @Override
     public void showContent() {
-        errorView.setVisibility(View.GONE);
-        contentView.setVisibility(View.VISIBLE);
-        loadingView.setVisibility(View.GONE);
+        progressCount--;
+        if (progressCount < 0) {
+            progressCount = 0;
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (progressDialog.isShowing() && progressCount == 0) {
+                    progressDialog.dismiss();
+                }
+            }
+        });
     }
 
     @Override
