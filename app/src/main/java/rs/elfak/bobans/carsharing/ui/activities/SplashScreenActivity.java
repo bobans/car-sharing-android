@@ -26,6 +26,13 @@ public class SplashScreenActivity extends BaseActivity<Object, SplashScreenInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        loadData(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do nothing
     }
 
     @Override
@@ -35,7 +42,16 @@ public class SplashScreenActivity extends BaseActivity<Object, SplashScreenInter
 
     @Override
     public void loadData(boolean pullToRefresh) {
-
+        getPresenter().login();
     }
 
+    @Override
+    public void showLogin() {
+        // TODO show login activity
+    }
+
+    @Override
+    public void showMain() {
+        // TODO show main activity
+    }
 }

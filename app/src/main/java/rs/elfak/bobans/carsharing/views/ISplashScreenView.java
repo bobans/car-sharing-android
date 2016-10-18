@@ -7,4 +7,6 @@ package rs.elfak.bobans.carsharing.views;
  */
 
 public interface ISplashScreenView extends IBaseView<Object> {
+    void showLogin();
+    void showMain();
 }
