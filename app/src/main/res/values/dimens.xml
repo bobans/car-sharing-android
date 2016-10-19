@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="layout_side_margin">15dp</dimen>
+    <dimen name="layout_top_margin">15dp</dimen>
+    <dimen name="layout_bottom_margin">15dp</dimen>
+    <dimen name="layout_control_space">10dp</dimen>
 </resources>

@@ -5,24 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/layout_side_margin"
-    android:background="@drawable/splash_screen"
     tools:context=".ui.activities.SplashScreenActivity" >
 
     <ProgressBar
         android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccentSplashScreen"
+        android:indeterminateTintMode="src_in"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:targetApi="lollipop" />
 
-    <TextView
-        android:layout_marginBottom="50dp"
+    <ImageView
+        android:src="@drawable/logo"
         android:layout_alignParentBottom="true"
-        android:text="@string/text_splash_screen_headline"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="88dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_logo_image"/>
 
 </RelativeLayout>

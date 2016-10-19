@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -47,7 +48,8 @@ public class SplashScreenActivity extends BaseActivity<Object, SplashScreenInter
 
     @Override
     public void showLogin() {
-        // TODO show login activity
+        startActivity(new Intent(this, LoginEmailActivity.class));
+        finish();
     }
 
     @Override

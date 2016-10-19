@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="content_description_logo_image">Logo</string>
+    <string name="content_description_header_image">Header image</string>
+</resources>

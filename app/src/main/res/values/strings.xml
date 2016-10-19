@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Car Sharing</string>
     <string name="text_splash_screen_headline">Car Sharing</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="label_sign_up">Don\'t have account? Sign up</string>
+    <string name="link_sign_up">Sign up</string>
 </resources>

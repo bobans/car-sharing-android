@@ -57,8 +57,10 @@ public class SplashScreenPresenter extends AbstractPresenter<ISplashScreenView, 
                         }
                     }
                 } else if (isViewAttached()) {
-                    getView().showError(e, false);
-                    getView().showContent();
+//                    getView().showError(e, false);
+//                    getView().showContent();
+                    // TODO
+                    delayAndShowLogin();
                 }
             }
 

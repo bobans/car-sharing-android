@@ -3,6 +3,8 @@ package rs.elfak.bobans.carsharing.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Response;
@@ -35,6 +37,7 @@ public class ApiManager {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .connectTimeout(5, TimeUnit.SECONDS)
                 .build();
         Gson gson = new GsonBuilder().create();
         retrofit = new Retrofit.Builder()
