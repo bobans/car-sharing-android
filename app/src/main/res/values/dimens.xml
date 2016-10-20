@@ -4,4 +4,9 @@
     <dimen name="layout_top_margin">15dp</dimen>
     <dimen name="layout_bottom_margin">15dp</dimen>
     <dimen name="layout_control_space">10dp</dimen>
+
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="dialog_button_height">36dp</dimen>
+    <dimen name="button_text_size">18dp</dimen>
+    <dimen name="dialog_button_text_size">16dp</dimen>
 </resources>

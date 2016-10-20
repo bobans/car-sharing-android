@@ -6,5 +6,5 @@ package rs.elfak.bobans.carsharing.interactors;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public abstract class AbstractInteractor {
+public abstract class BaseInteractor {
 }

@@ -19,7 +19,7 @@ import rx.Observer;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class SplashScreenPresenter extends AbstractPresenter<ISplashScreenView, SplashScreenInteractor> {
+public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, SplashScreenInteractor> {
 
     private long startTime;
 

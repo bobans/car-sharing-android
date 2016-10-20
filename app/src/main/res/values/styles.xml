@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:dialogTheme">@style/AppTheme.Dialog</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,6 +17,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:dialogTheme">@style/AppTheme.Dialog</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="AppTheme.SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
@@ -23,15 +27,35 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDarkSplashScreen</item>
         <item name="colorAccent">@color/colorAccentSplashScreen</item>
         <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog" >
-
+        <item name="buttonStyle">@style/ButtonStyle.Dialog</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="AppTheme.Dialog.Transparent" parent="Theme.AppCompat.Light.Dialog" >
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button" >
+        <item name="android:background">@drawable/button_blue</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <style name="ButtonStyle.Dialog" parent="Widget.AppCompat.Button" >
+        <item name="android:background">@drawable/button_blue</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+        <item name="android:layout_height">@dimen/dialog_button_height</item>
+        <item name="android:textSize">@dimen/dialog_button_text_size</item>
+    </style>
+
+    <style name="TextAppearance.Error" parent="TextAppearance.AppCompat" >
+        <item name="android:textColor">@color/colorTextError</item>
     </style>
 
 </resources>

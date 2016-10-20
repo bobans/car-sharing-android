@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
@@ -10,8 +11,9 @@ import android.widget.FrameLayout;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceActivity;
 
 import rs.elfak.bobans.carsharing.R;
-import rs.elfak.bobans.carsharing.interactors.AbstractInteractor;
-import rs.elfak.bobans.carsharing.presenters.AbstractPresenter;
+import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
+import rs.elfak.bobans.carsharing.presenters.BasePresenter;
+import rs.elfak.bobans.carsharing.ui.dialogs.GenericErrorDialog;
 import rs.elfak.bobans.carsharing.ui.dialogs.ProgressDialog;
 import rs.elfak.bobans.carsharing.views.IBaseView;
 
@@ -21,17 +23,25 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public abstract class BaseActivity<M, I extends AbstractInteractor, V extends IBaseView<M>, P extends AbstractPresenter<V, I>>
+public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseView<M>, P extends BasePresenter<V, I>>
         extends MvpLceActivity<FrameLayout, M, V, P>
         implements IBaseView<M> {
 
     private ProgressDialog progressDialog;
     private int progressCount;
 
+    protected Typeface fontRegular;
+    protected Typeface fontMedium;
+    protected Typeface fontBold;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base);
+
+        fontRegular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        fontMedium = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+        fontBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
 
         errorView.setVisibility(View.GONE);
         contentView.setVisibility(View.VISIBLE);
@@ -44,7 +54,9 @@ public abstract class BaseActivity<M, I extends AbstractInteractor, V extends IB
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        // TODO show error popup
+        GenericErrorDialog dialog = new GenericErrorDialog(this, R.string.server_error_generic, null);
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
     @Override
@@ -81,7 +93,7 @@ public abstract class BaseActivity<M, I extends AbstractInteractor, V extends IB
         if (contentView == null) {
             throw new RuntimeException("Can't set content view before calling on create");
         }
-        View view = LayoutInflater.from(getApplicationContext()).inflate(layoutResID, contentView, false);
+        View view = LayoutInflater.from(this).inflate(layoutResID, contentView, false);
         contentView.removeAllViews();
         contentView.addView(view);
     }

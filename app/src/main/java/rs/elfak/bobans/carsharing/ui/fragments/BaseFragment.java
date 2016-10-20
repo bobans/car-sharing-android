@@ -11,8 +11,8 @@ import android.widget.FrameLayout;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceFragment;
 
 import rs.elfak.bobans.carsharing.R;
-import rs.elfak.bobans.carsharing.interactors.AbstractInteractor;
-import rs.elfak.bobans.carsharing.presenters.AbstractPresenter;
+import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
+import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.ui.activities.BaseActivity;
 import rs.elfak.bobans.carsharing.views.IBaseView;
 
@@ -22,7 +22,7 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public abstract class BaseFragment<M, I extends AbstractInteractor, V extends IBaseView<M>, P extends AbstractPresenter<V, I>>
+public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseView<M>, P extends BasePresenter<V, I>>
         extends MvpLceFragment<FrameLayout, M, V, P>
         implements IBaseView<M> {
 

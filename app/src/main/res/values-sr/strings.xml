@@ -2,9 +2,17 @@
 <resources>
     <string name="app_name">Deljenje Vožnje</string>
     <string name="text_splash_screen_headline">Deljenje Vožnje</string>
-    <string name="username">Korisničko ime</string>
-    <string name="password">Šifra</string>
-    <string name="login">Prijavi se</string>
+    <string name="hint_username">Korisničko ime</string>
+    <string name="hint_password">Šifra</string>
+    <string name="button_login">Prijavi se</string>
     <string name="label_sign_up">Nemaš nalog? Napravi nalog</string>
-    <string name="llink_sign_up">Napravi nalog</string>
+    <string name="link_sign_up">Napravi nalog</string>
+    <string name="button_sign_up">Napravi nalog</string>
+    <string name="error_no_username">Korisničko ime je prazno</string>
+    <string name="error_no_password">Šifra je prazna</string>
+    <string name="error_minimum_length">Dužina mora biti bar %d</string>
+    <string name="error_username_colon">Korisničko ime ne može sadržati \':\'</string>
+    <string name="error_password_colon">Šifra ne može sadržati \':\'</string>
+    <string name="ok">U redu</string>
+    <string name="server_error_generic">Došlo je do greške</string>
 </resources>

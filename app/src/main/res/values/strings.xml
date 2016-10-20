@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">Car Sharing</string>
     <string name="text_splash_screen_headline">Car Sharing</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Login</string>
     <string name="label_sign_up">Don\'t have account? Sign up</string>
     <string name="link_sign_up">Sign up</string>
+    <string name="button_sign_up">Sign Up</string>
+    <string name="error_no_username">Username empty</string>
+    <string name="error_no_password">Password empty</string>
+    <string name="error_minimum_length">Length at least %d</string>
+    <string name="error_username_colon">Username can\'t contain \':\'</string>
+    <string name="error_password_colon">Password can\'t contain \':\'</string>
+    <string name="ok">OK</string>
+    <string name="server_error_generic">Some error happened</string>
 </resources>

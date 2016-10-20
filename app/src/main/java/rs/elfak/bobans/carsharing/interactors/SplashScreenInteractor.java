@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class SplashScreenInteractor extends AbstractInteractor {
+public class SplashScreenInteractor extends BaseInteractor {
 
     public void login(String authentication, Observer<Token> observer) {
         Observable<Token> response = ApiManager.getInstance().getApiMethods().login(authentication);

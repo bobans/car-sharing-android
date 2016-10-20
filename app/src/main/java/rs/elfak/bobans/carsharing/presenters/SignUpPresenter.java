@@ -5,10 +5,11 @@ import android.support.annotation.NonNull;
 import retrofit2.adapter.rxjava.HttpException;
 import rs.elfak.bobans.carsharing.api.ApiError;
 import rs.elfak.bobans.carsharing.api.ApiManager;
-import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
+import rs.elfak.bobans.carsharing.interactors.SignUpInteractor;
+import rs.elfak.bobans.carsharing.models.Registration;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
-import rs.elfak.bobans.carsharing.views.ILoginEmailView;
+import rs.elfak.bobans.carsharing.views.ISignUpView;
 import rx.Observer;
 
 /**
@@ -17,19 +18,20 @@ import rx.Observer;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEmailInteractor> {
+public class SignUpPresenter extends BasePresenter<ISignUpView, SignUpInteractor> {
 
     @NonNull
     @Override
-    LoginEmailInteractor createInteractor() {
-        return new LoginEmailInteractor();
+    SignUpInteractor createInteractor() {
+        return new SignUpInteractor();
     }
 
-    public void login(String username, String password) {
+    public void register(String username, String password) {
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().login(username, password, new Observer<Token>() {
+        Registration registration = new Registration(username, password);
+        getInteractor().register(registration, new Observer<Token>() {
             @Override
             public void onCompleted() {
 
@@ -40,9 +42,9 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
                 if (e instanceof HttpException) {
                     ApiError error = ApiManager.parseError(((HttpException) e).response());
                     switch (error.getCode()) {
-                        case 401: {
+                        case 409: {
                             if (isViewAttached()) {
-                                getView().showWrongCredentials();
+                                getView().showAlreadyExists();
                                 getView().showContent();
                             }
                             break;
@@ -66,7 +68,7 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
             public void onNext(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
                 if (isViewAttached()) {
-                    getView().showMain();
+                    getView().showCreateUser();
                 }
             }
         });

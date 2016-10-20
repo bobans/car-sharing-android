@@ -1,8 +1,9 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -18,6 +19,8 @@ import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.presenters.LoginEmailPresenter;
+import rs.elfak.bobans.carsharing.utils.ClearErrorTextWatcher;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ILoginEmailView;
 
 /**
@@ -26,9 +29,11 @@ import rs.elfak.bobans.carsharing.views.ILoginEmailView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteractor, ILoginEmailView, LoginEmailPresenter> implements View.OnClickListener {
+public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteractor, ILoginEmailView, LoginEmailPresenter> implements ILoginEmailView, View.OnClickListener {
 
+    @BindView(R.id.text_input_username) TextInputLayout tiUsername;
     @BindView(R.id.edit_text_username) EditText etUsername;
+    @BindView(R.id.text_input_password) TextInputLayout tiPassword;
     @BindView(R.id.edit_text_password) EditText etPassword;
     @BindView(R.id.button_login) Button btnLogin;
     @BindView(R.id.text_view_sign_up) TextView tvSignUp;
@@ -36,14 +41,23 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_email);
 
         ButterKnife.bind(this);
+
+        SessionManager.getInstance().setToken(null);
 
         initView();
     }
 
     private void initView() {
+        etUsername.setTypeface(fontRegular);
+        etPassword.setTypeface(fontRegular);
+        btnLogin.setTypeface(fontMedium);
+        tvSignUp.setTypeface(fontRegular);
+
+        etUsername.addTextChangedListener(new ClearErrorTextWatcher(tiUsername));
+        etPassword.addTextChangedListener(new ClearErrorTextWatcher(tiPassword));
         btnLogin.setOnClickListener(this);
 
         String text = getString(R.string.label_sign_up);
@@ -51,8 +65,7 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                // TODO sign up activity
-                Toast.makeText(LoginEmailActivity.this, "Sign Up", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginEmailActivity.this, SignUpActivity.class));
             }
         };
         String link = getString(R.string.link_sign_up);
@@ -84,9 +97,37 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_login: {
-                // TODO validate and login
+                if (validate()) {
+                    getPresenter().login(etUsername.getText().toString(), etPassword.getText().toString());
+                }
                 break;
             }
         }
     }
+
+    private boolean validate() {
+        boolean valid = true;
+        if (etUsername.length() == 0) {
+            tiUsername.setError(getString(R.string.error_no_username));
+            valid = false;
+        }
+        if (etPassword.length() == 0) {
+            tiPassword.setError(getString(R.string.error_no_password));
+            valid = false;
+        }
+        return valid;
+    }
+
+    @Override
+    public void showWrongCredentials() {
+        // TODO show error dialog
+        Toast.makeText(this, "Wrong credentials", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMain() {
+        // TODO show main
+        showContent();
+    }
+
 }

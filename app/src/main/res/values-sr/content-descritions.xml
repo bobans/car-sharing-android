@@ -2,4 +2,5 @@
 <resources>
     <string name="content_description_logo_image">Logo</string>
     <string name="content_description_header_image">Slika zaglavlja</string>
+    <string name="alert_icon">Ikona upozorenja</string>
 </resources>

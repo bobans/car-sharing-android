@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import rs.elfak.bobans.carsharing.interactors.AbstractInteractor;
+import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
 import rs.elfak.bobans.carsharing.views.IBaseView;
 
 /**
@@ -13,11 +13,11 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public abstract class AbstractPresenter<V extends IBaseView, I extends AbstractInteractor> extends MvpBasePresenter<V> {
+public abstract class BasePresenter<V extends IBaseView, I extends BaseInteractor> extends MvpBasePresenter<V> {
 
     private I interactor;
 
-    public AbstractPresenter() {
+    public BasePresenter() {
         interactor = createInteractor();
     }
 

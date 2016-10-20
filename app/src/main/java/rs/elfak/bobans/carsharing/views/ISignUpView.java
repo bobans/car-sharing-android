@@ -6,7 +6,7 @@ package rs.elfak.bobans.carsharing.views;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public interface ILoginEmailView extends IBaseView<Object> {
-    void showWrongCredentials();
-    void showMain();
+public interface ISignUpView extends IBaseView<Object> {
+    void showCreateUser();
+    void showAlreadyExists();
 }
