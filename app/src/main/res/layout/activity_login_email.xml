@@ -71,6 +71,16 @@
                 android:textColorHighlight="@android:color/transparent"
                 android:textColorLink="@color/colorText" />
 
+            <TextView
+                android:id="@+id/text_view_forgot_password"
+                android:text="@string/label_forgot_password"
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHighlight="@android:color/transparent"
+                android:textColorLink="@color/colorText" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -15,4 +15,6 @@
     <string name="error_password_colon">Šifra ne može sadržati \':\'</string>
     <string name="ok">U redu</string>
     <string name="server_error_generic">Došlo je do greške</string>
+    <string name="label_forgot_password">Zaboravljena lozinka?</string>
+    <string name="link_forgot_password">Zaboravljena lozinka?</string>
 </resources>

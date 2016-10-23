@@ -37,6 +37,7 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
     @BindView(R.id.edit_text_password) EditText etPassword;
     @BindView(R.id.button_login) Button btnLogin;
     @BindView(R.id.text_view_sign_up) TextView tvSignUp;
+    @BindView(R.id.text_view_forgot_password) TextView tvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
 
         ButterKnife.bind(this);
 
-        SessionManager.getInstance().setToken(null);
+        SessionManager.getInstance().clearData();
 
         initView();
     }
@@ -60,21 +61,37 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
         etPassword.addTextChangedListener(new ClearErrorTextWatcher(tiPassword));
         btnLogin.setOnClickListener(this);
 
-        String text = getString(R.string.label_sign_up);
-        SpannableString signUpLabel = new SpannableString(text);
-        ClickableSpan clickableSpan = new ClickableSpan() {
+        String signup = getString(R.string.label_sign_up);
+        SpannableString signUpLabel = new SpannableString(signup);
+        ClickableSpan clickableSignup = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
                 startActivity(new Intent(LoginEmailActivity.this, SignUpActivity.class));
             }
         };
-        String link = getString(R.string.link_sign_up);
-        int start = text.indexOf(link);
-        int end = start + link.length();
-        signUpLabel.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String signupLink = getString(R.string.link_sign_up);
+        int start = signup.indexOf(signupLink);
+        int end = start + signupLink.length();
+        signUpLabel.setSpan(clickableSignup, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         tvSignUp.setText(signUpLabel);
         tvSignUp.setMovementMethod(LinkMovementMethod.getInstance());
+
+        String forgot = getString(R.string.label_forgot_password);
+        SpannableString forgotLabel = new SpannableString(forgot);
+        ClickableSpan clickableForgot = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                // TODO start reset password activity
+            }
+        };
+        String forgotLink = getString(R.string.link_forgot_password);
+        start = forgot.indexOf(forgotLink);
+        end = start + forgotLink.length();
+        forgotLabel.setSpan(clickableForgot, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        tvForgotPassword.setText(forgotLabel);
+        tvForgotPassword.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @NonNull

@@ -37,4 +37,8 @@ public class SessionManager {
         return token;
     }
 
+    public void clearData() {
+        token = null;
+    }
+
 }

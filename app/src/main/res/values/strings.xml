@@ -14,4 +14,6 @@
     <string name="error_password_colon">Password can\'t contain \':\'</string>
     <string name="ok">OK</string>
     <string name="server_error_generic">Some error happened</string>
+    <string name="label_forgot_password">Forgot your password?</string>
+    <string name="link_forgot_password">Forgot your password?</string>
 </resources>
