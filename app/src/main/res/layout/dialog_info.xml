@@ -13,10 +13,10 @@
         android:gravity="center" >
 
         <ImageView
-            android:src="@android:drawable/ic_dialog_alert"
+            android:src="@android:drawable/ic_dialog_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/content_description_alert_icon"/>
+            android:contentDescription="@string/content_description_info_icon" />
 
     </LinearLayout>
 
@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/text_view_message"
-                tools:text="Some error happened"
+                tools:text="There is some info"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

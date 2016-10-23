@@ -16,4 +16,10 @@
     <string name="server_error_generic">Some error happened</string>
     <string name="label_forgot_password">Forgot your password?</string>
     <string name="link_forgot_password">Forgot your password?</string>
+    <string name="cancel">Cancel</string>
+    <string name="info_account_exists">Account with specified username already exists.</string>
+    <string name="button_to_login">To Login</string>
+    <string name="back">Back</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">E-mail</string>
 </resources>

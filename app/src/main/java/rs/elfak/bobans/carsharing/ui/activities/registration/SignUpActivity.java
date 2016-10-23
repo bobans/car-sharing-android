@@ -1,21 +1,25 @@
-package rs.elfak.bobans.carsharing.ui.activities;
+package rs.elfak.bobans.carsharing.ui.activities.registration;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
-import rs.elfak.bobans.carsharing.interactors.SignUpInteractor;
-import rs.elfak.bobans.carsharing.presenters.SignUpPresenter;
+import rs.elfak.bobans.carsharing.interactors.registration.SignUpInteractor;
+import rs.elfak.bobans.carsharing.presenters.registration.SignUpPresenter;
+import rs.elfak.bobans.carsharing.ui.activities.BaseActivity;
+import rs.elfak.bobans.carsharing.ui.activities.LoginEmailActivity;
+import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
 import rs.elfak.bobans.carsharing.utils.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.Constants;
-import rs.elfak.bobans.carsharing.views.ISignUpView;
+import rs.elfak.bobans.carsharing.views.registration.ISignUpView;
 
 /**
  * Created by Boban Stajic.
@@ -102,13 +106,23 @@ public class SignUpActivity extends BaseActivity<Object, SignUpInteractor, ISign
 
     @Override
     public void showCreateUser() {
-        // TODO show create user
-        showContent();
+        startActivity(new Intent(this, CreateUserActivity.class));
     }
 
     @Override
     public void showAlreadyExists() {
-        // TODO show already exists dialog
-        Toast.makeText(this, "Already exists", Toast.LENGTH_SHORT).show();
+        TwoButtonsDialog dialog = new TwoButtonsDialog(this, android.R.drawable.ic_dialog_info, R.string.info_account_exists, R.string.button_to_login, R.string.back, new TwoButtonsDialog.OnClickListener() {
+            @Override
+            public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
+                startActivity(new Intent(SignUpActivity.this, LoginEmailActivity.class));
+            }
+
+            @Override
+            public void onNegativeButtonClick(DialogInterface dialogInterface, View view) {
+
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

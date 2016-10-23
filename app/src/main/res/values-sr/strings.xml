@@ -17,4 +17,10 @@
     <string name="server_error_generic">Došlo je do greške</string>
     <string name="label_forgot_password">Zaboravljena lozinka?</string>
     <string name="link_forgot_password">Zaboravljena lozinka?</string>
+    <string name="cancel">Otkaži</string>
+    <string name="info_account_exists">Nalog sa navedenim korisničkim imenom već postoji.</string>
+    <string name="button_to_login">Prijavi se</string>
+    <string name="back">Nazad</string>
+    <string name="hint_name">Ime</string>
+    <string name="hint_email">Mail adresa</string>
 </resources>

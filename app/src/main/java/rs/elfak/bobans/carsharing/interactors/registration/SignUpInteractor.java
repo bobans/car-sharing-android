@@ -1,6 +1,7 @@
-package rs.elfak.bobans.carsharing.interactors;
+package rs.elfak.bobans.carsharing.interactors.registration;
 
 import rs.elfak.bobans.carsharing.api.ApiManager;
+import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
 import rs.elfak.bobans.carsharing.models.Registration;
 import rs.elfak.bobans.carsharing.models.Token;
 import rx.Observable;

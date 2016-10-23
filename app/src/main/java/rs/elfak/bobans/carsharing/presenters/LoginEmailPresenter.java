@@ -21,7 +21,7 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
 
     @NonNull
     @Override
-    LoginEmailInteractor createInteractor() {
+    protected LoginEmailInteractor createInteractor() {
         return new LoginEmailInteractor();
     }
 

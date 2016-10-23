@@ -25,7 +25,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
 
     @NonNull
     @Override
-    SplashScreenInteractor createInteractor() {
+    protected SplashScreenInteractor createInteractor() {
         return new SplashScreenInteractor();
     }
 

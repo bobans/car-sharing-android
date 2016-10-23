@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.presenters.LoginEmailPresenter;
+import rs.elfak.bobans.carsharing.ui.activities.registration.SignUpActivity;
 import rs.elfak.bobans.carsharing.utils.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ILoginEmailView;

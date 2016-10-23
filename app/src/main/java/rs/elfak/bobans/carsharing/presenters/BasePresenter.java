@@ -22,9 +22,9 @@ public abstract class BasePresenter<V extends IBaseView, I extends BaseInteracto
     }
 
     @NonNull
-    abstract I createInteractor();
+    protected abstract I createInteractor();
 
-    I getInteractor() {
+    protected I getInteractor() {
         return interactor;
     }
 

@@ -1,4 +1,6 @@
-package rs.elfak.bobans.carsharing.views;
+package rs.elfak.bobans.carsharing.views.registration;
+
+import rs.elfak.bobans.carsharing.views.IBaseView;
 
 /**
  * Created by Boban Stajic.

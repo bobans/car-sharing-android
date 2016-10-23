@@ -24,7 +24,12 @@
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activities.SignUpActivity"
+        <activity android:name=".ui.activities.registration.SignUpActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.activities.registration.CreateUserActivity"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
 

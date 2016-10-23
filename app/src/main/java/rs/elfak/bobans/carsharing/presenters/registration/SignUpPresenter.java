@@ -1,15 +1,16 @@
-package rs.elfak.bobans.carsharing.presenters;
+package rs.elfak.bobans.carsharing.presenters.registration;
 
 import android.support.annotation.NonNull;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rs.elfak.bobans.carsharing.api.ApiError;
 import rs.elfak.bobans.carsharing.api.ApiManager;
-import rs.elfak.bobans.carsharing.interactors.SignUpInteractor;
+import rs.elfak.bobans.carsharing.interactors.registration.SignUpInteractor;
 import rs.elfak.bobans.carsharing.models.Registration;
 import rs.elfak.bobans.carsharing.models.Token;
+import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
-import rs.elfak.bobans.carsharing.views.ISignUpView;
+import rs.elfak.bobans.carsharing.views.registration.ISignUpView;
 import rx.Observer;
 
 /**
@@ -22,7 +23,7 @@ public class SignUpPresenter extends BasePresenter<ISignUpView, SignUpInteractor
 
     @NonNull
     @Override
-    SignUpInteractor createInteractor() {
+    protected SignUpInteractor createInteractor() {
         return new SignUpInteractor();
     }
 
