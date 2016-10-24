@@ -8,6 +8,7 @@ import rs.elfak.bobans.carsharing.api.ApiError;
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.interactors.SplashScreenInteractor;
 import rs.elfak.bobans.carsharing.models.Token;
+import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ISplashScreenView;
@@ -67,7 +68,52 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
             @Override
             public void onNext(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
-                delayAndShowMain();
+                getUser();
+            }
+        });
+    }
+
+    private void getUser() {
+        getInteractor().getUser(SessionManager.getInstance().getToken(), new Observer<User>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException) {
+                    ApiError error = ApiManager.parseError(((HttpException) e).response());
+                    switch (error.getCode()) {
+                        case 404: {
+                            delayAndShowCreateUser();
+                            break;
+                        }
+
+                        default: {
+                            if (isViewAttached()) {
+                                getView().showError(e, false);
+                                getView().showContent();
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    if (isViewAttached()) {
+                        getView().showError(e, false);
+                        getView().showContent();
+                    }
+                }
+            }
+
+            @Override
+            public void onNext(User user) {
+                if (user != null) {
+                    SessionManager.getInstance().setUser(user);
+                    delayAndShowMain();
+                } else {
+                    delayAndShowCreateUser();
+                }
             }
         });
     }
@@ -101,6 +147,22 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
             }, Constants.SPLASH_SCREEN_MINIMAL_DURATION - duration);
         } else if (isViewAttached()) {
             getView().showMain();
+        }
+    }
+
+    private void delayAndShowCreateUser() {
+        long duration = System.currentTimeMillis() - startTime;
+        if (duration < Constants.SPLASH_SCREEN_MINIMAL_DURATION) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (isViewAttached()) {
+                        getView().showCreateUser();
+                    }
+                }
+            }, Constants.SPLASH_SCREEN_MINIMAL_DURATION - duration);
+        } else if (isViewAttached()) {
+            getView().showCreateUser();
         }
     }
 

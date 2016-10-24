@@ -3,6 +3,8 @@ package rs.elfak.bobans.carsharing.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.joda.time.DateTime;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -11,6 +13,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rs.elfak.bobans.carsharing.utils.DateTimeDeserializer;
 
 /**
  * Created by Boban Stajic.
@@ -39,7 +42,9 @@ public class ApiManager {
                 .addInterceptor(interceptor)
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .build();
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(DateTime.class, new DateTimeDeserializer())
+                .create();
         retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConstants.BASE_URL_LIVE)
                 .client(client)

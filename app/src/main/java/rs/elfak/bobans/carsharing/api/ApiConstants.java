@@ -14,4 +14,6 @@ class ApiConstants {
     static final String LOGIN = "login";
     static final String REGISTER = "register";
 
+    static final String USERS_ME = "users/me";
+
 }

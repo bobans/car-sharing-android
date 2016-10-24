@@ -1,5 +1,7 @@
 package rs.elfak.bobans.carsharing.utils;
 
+import rs.elfak.bobans.carsharing.models.User;
+
 /**
  * Created by Boban Stajic.
  *
@@ -20,6 +22,7 @@ public class SessionManager {
     }
 
     private String token;
+    private User user;
 
     private SessionManager() {
 
@@ -37,8 +40,17 @@ public class SessionManager {
         return token;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void clearData() {
         token = null;
+        user = null;
     }
 
 }

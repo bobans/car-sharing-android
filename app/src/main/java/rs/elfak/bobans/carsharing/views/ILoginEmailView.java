@@ -9,4 +9,5 @@ package rs.elfak.bobans.carsharing.views;
 public interface ILoginEmailView extends IBaseView<Object> {
     void showWrongCredentials();
     void showMain();
+    void showCreateUser();
 }

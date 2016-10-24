@@ -7,6 +7,7 @@ import rs.elfak.bobans.carsharing.api.ApiError;
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.models.Token;
+import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ILoginEmailView;
 import rx.Observer;
@@ -65,8 +66,57 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
             @Override
             public void onNext(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
-                if (isViewAttached()) {
-                    getView().showMain();
+                getUser();
+            }
+        });
+    }
+
+    private void getUser() {
+        getInteractor().getUser(SessionManager.getInstance().getToken(), new Observer<User>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException) {
+                    ApiError error = ApiManager.parseError(((HttpException) e).response());
+                    switch (error.getCode()) {
+                        case 404: {
+                            if (isViewAttached()) {
+                                getView().showCreateUser();
+                            }
+                            break;
+                        }
+
+                        default: {
+                            if (isViewAttached()) {
+                                getView().showError(e, false);
+                                getView().showContent();
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    if (isViewAttached()) {
+                        getView().showError(e, false);
+                        getView().showContent();
+                    }
+                }
+            }
+
+            @Override
+            public void onNext(User user) {
+                if (user != null) {
+                    SessionManager.getInstance().setUser(user);
+                    if (isViewAttached()) {
+                        getView().showMain();
+                    }
+                } else {
+                    if (isViewAttached()) {
+                        getView().showCreateUser();
+                    }
                 }
             }
         });
