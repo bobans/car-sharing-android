@@ -23,4 +23,8 @@
     <string name="back">Nazad</string>
     <string name="hint_name">Ime</string>
     <string name="hint_email">Mail adresa</string>
+    <string name="hint_city">Grad</string>
+    <string name="hint_user_type">Tip korisnika</string>
+    <string name="button_continue">Dalje</string>
+    <string name="title_activity_create_user">Kreiranje korisnika</string>
 </resources>

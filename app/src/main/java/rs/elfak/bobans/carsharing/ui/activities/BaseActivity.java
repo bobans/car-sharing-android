@@ -27,6 +27,7 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         extends MvpLceActivity<FrameLayout, M, V, P>
         implements IBaseView<M> {
 
+    private int onStartCount = 0;
     private ProgressDialog progressDialog;
     private int progressCount;
 
@@ -39,6 +40,13 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base);
 
+        onStartCount = 1;
+        if (savedInstanceState == null) { // 1st time
+            this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        } else { // already created so reverse animation
+            onStartCount++;
+        }
+
         fontRegular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         fontMedium = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
         fontBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
@@ -50,6 +58,17 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressCount = 0;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (onStartCount > 1) {
+            this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        } else if (onStartCount == 1) {
+            onStartCount++;
+        }
     }
 
     @Override

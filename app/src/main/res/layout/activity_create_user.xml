@@ -1,87 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.registration.CreateUserActivity" >
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_side_margin" >
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_name"
-            app:errorTextAppearance="@style/TextAppearance.Error"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_side_margin" >
 
-            <EditText
-                android:id="@+id/edit_text_name"
-                android:hint="@string/hint_name"
-                android:inputType="textPersonName"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_input_name"
+                app:errorTextAppearance="@style/TextAppearance.Error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_text_name"
+                    android:hint="@string/hint_name"
+                    android:inputType="textPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_input_email"
+                app:errorTextAppearance="@style/TextAppearance.Error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_text_email"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/text_view_city"
+                android:text="@string/hint_city"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="@dimen/layout_control_space"
+                style="@style/TextAppearance.Design.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spinner_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-        </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_email"
-            app:errorTextAppearance="@style/TextAppearance.Error"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <!-- Date of birth -->
 
-            <EditText
-                android:id="@+id/edit_text_email"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress"
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Date driver licence -->
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_view_user_type"
+                android:text="@string/hint_user_type"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="@dimen/layout_control_space"
+                style="@style/TextAppearance.Design.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spinner_user_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:text="City"
-            style="@style/TextAppearance.Design.Hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/spinner_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Date of birth -->
-
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    </ScrollView>
 
-            <!-- Date driver licence -->
+    <Button
+        android:id="@+id/button_create_user"
+        android:text="@string/button_continue"
+        android:layout_marginLeft="@dimen/layout_side_margin"
+        android:layout_marginRight="@dimen/layout_side_margin"
+        android:layout_marginBottom="@dimen/layout_bottom_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        </LinearLayout>
-
-        <TextView
-            android:text="User type"
-            style="@style/TextAppearance.Design.Hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/spinner_user_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

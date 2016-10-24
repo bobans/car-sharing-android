@@ -54,7 +54,9 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
     }
 
     private void initView() {
+        tiUsername.setTypeface(fontRegular);
         etUsername.setTypeface(fontRegular);
+        tiPassword.setTypeface(fontRegular);
         etPassword.setTypeface(fontRegular);
         btnLogin.setTypeface(fontMedium);
         tvSignUp.setTypeface(fontRegular);

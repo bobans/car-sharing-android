@@ -29,6 +29,7 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.activities.registration.CreateUserActivity"
+            android:label="@string/title_activity_create_user"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />

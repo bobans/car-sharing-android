@@ -46,7 +46,9 @@ public class SignUpActivity extends BaseActivity<Object, SignUpInteractor, ISign
     }
 
     private void initView() {
+        tiUsername.setTypeface(fontRegular);
         etUsername.setTypeface(fontRegular);
+        tiPassword.setTypeface(fontRegular);
         etPassword.setTypeface(fontRegular);
         btnSignUp.setTypeface(fontMedium);
 
