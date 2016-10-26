@@ -7,8 +7,8 @@
     <string name="label_sign_up">Don\'t have account? Sign up</string>
     <string name="link_sign_up">Sign up</string>
     <string name="button_sign_up">Sign Up</string>
-    <string name="error_no_username">Username empty</string>
-    <string name="error_no_password">Password empty</string>
+    <string name="error_no_username">Username is empty</string>
+    <string name="error_no_password">Password is empty</string>
     <string name="error_minimum_length">Length at least %d</string>
     <string name="error_username_colon">Username can\'t contain \':\'</string>
     <string name="error_password_colon">Password can\'t contain \':\'</string>
@@ -26,4 +26,16 @@
     <string name="hint_user_type">User type</string>
     <string name="button_continue">Continue</string>
     <string name="title_activity_create_user">Create User</string>
+    <string name="user_type_driver">Driver</string>
+    <string name="user_type_passenger">Passenger</string>
+    <string name="error_no_name">Name is empty</string>
+    <string name="error_no_email">Email is empty</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="error_no_city">City is empty</string>
+    <string name="warning_user_already_exists">User already exists. Do you want to login as different user?</string>
+    <string name="hint_driver_license">Driver\'s License Date</string>
+    <string name="hint_birth_date">Birth Date</string>
+    <string name="error_no_birth_date">Birth date is empty</string>
+    <string name="error_no_driver_license">Driver\'s license date is empty</string>
+    <string name="hint_cars">Cars</string>
 </resources>

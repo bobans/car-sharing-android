@@ -15,5 +15,6 @@ class ApiConstants {
     static final String REGISTER = "register";
 
     static final String USERS_ME = "users/me";
+    static final String USERS_CREATE = "users";
 
 }

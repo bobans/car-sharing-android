@@ -9,4 +9,6 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
  */
 
 public interface ICreateUserView extends IBaseView<Object> {
+    void showUserAlreadyExists();
+    void showMain();
 }

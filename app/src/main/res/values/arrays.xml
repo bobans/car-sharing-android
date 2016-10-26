@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="user_types">
+        <item>@string/user_type_passenger</item>
+        <item>@string/user_type_driver</item>
+    </string-array>
+
+</resources>

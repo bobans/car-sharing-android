@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.api;
 
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -26,4 +27,6 @@ public interface ApiMethods {
     @GET(ApiConstants.USERS_ME)
     Observable<User> getUser(@Header("Authorization") String token);
 
+    @POST(ApiConstants.USERS_CREATE)
+    Observable<Response<Void>> createUser(@Header("Authorization") String token, @Body User user);
 }

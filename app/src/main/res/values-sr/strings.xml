@@ -22,9 +22,21 @@
     <string name="button_to_login">Prijavi se</string>
     <string name="back">Nazad</string>
     <string name="hint_name">Ime</string>
-    <string name="hint_email">Mail adresa</string>
+    <string name="hint_email">E-mail adresa</string>
     <string name="hint_city">Grad</string>
     <string name="hint_user_type">Tip korisnika</string>
     <string name="button_continue">Dalje</string>
     <string name="title_activity_create_user">Kreiranje korisnika</string>
+    <string name="user_type_driver">Vozač</string>
+    <string name="user_type_passenger">Putnik</string>
+    <string name="error_no_name">Ime je prazno</string>
+    <string name="error_no_email">E-mail je prazan</string>
+    <string name="error_invalid_email">Nevalidan e-mail</string>
+    <string name="error_no_city">Grad je prazan</string>
+    <string name="warning_user_already_exists">Korisnik već postoji. Uloguj se sa drugim nalogom?</string>
+    <string name="hint_driver_license">Vozačka dozvola</string>
+    <string name="hint_birth_date">Datum Rođenja</string>
+    <string name="error_no_birth_date">Datum rođenja je prazan</string>
+    <string name="error_no_driver_license">Datum vozačke dozvole je prazan</string>
+    <string name="hint_cars">Automobili</string>
 </resources>

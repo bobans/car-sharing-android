@@ -14,6 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rs.elfak.bobans.carsharing.utils.DateTimeDeserializer;
+import rs.elfak.bobans.carsharing.utils.DateTimeSerializer;
 
 /**
  * Created by Boban Stajic.
@@ -44,6 +45,7 @@ public class ApiManager {
                 .build();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(DateTime.class, new DateTimeDeserializer())
+                .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
                 .create();
         retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConstants.BASE_URL_LIVE)

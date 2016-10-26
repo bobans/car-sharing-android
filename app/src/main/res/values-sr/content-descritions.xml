@@ -4,4 +4,5 @@
     <string name="content_description_header_image">Slika zaglavlja</string>
     <string name="content_description_alert_icon">Ikona upozorenja</string>
     <string name="content_description_info_icon">Ikona informacija</string>
+    <string name="content_description_add_icon">Ikona dodaj</string>
 </resources>

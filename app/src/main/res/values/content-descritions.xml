@@ -4,4 +4,5 @@
     <string name="content_description_header_image">Header image</string>
     <string name="content_description_alert_icon">Alert icon</string>
     <string name="content_description_info_icon">Info icon</string>
+    <string name="content_description_add_icon">Add icon</string>
 </resources>
