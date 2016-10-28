@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,8 +20,8 @@ import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.presenters.LoginEmailPresenter;
 import rs.elfak.bobans.carsharing.ui.activities.registration.CreateUserActivity;
 import rs.elfak.bobans.carsharing.ui.activities.registration.SignUpActivity;
-import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
+import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.views.ILoginEmailView;
 
 /**
@@ -141,14 +140,13 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
 
     @Override
     public void showWrongCredentials() {
-        // TODO show error dialog
-        Toast.makeText(this, "Wrong credentials", Toast.LENGTH_SHORT).show();
+        showLightError(getString(R.string.error_wrong_credentials));
     }
 
     @Override
     public void showMain() {
-        // TODO show main
-        showContent();
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     @Override

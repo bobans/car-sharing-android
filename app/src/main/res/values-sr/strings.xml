@@ -51,4 +51,7 @@
     <string name="action_edit">Izmeni</string>
     <string name="action_remove">Izbriši</string>
     <string name="button_update">Izmeni</string>
+    <string name="error_wrong_credentials">Korisničko ime i šifra se ne poklapaju</string>
+    <string name="title_activity_home">Početak</string>
+    <string name="action_home">Početak</string>
 </resources>

@@ -35,6 +35,7 @@ import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.registration.CreateUserPresenter;
 import rs.elfak.bobans.carsharing.ui.activities.BaseActivity;
+import rs.elfak.bobans.carsharing.ui.activities.HomeActivity;
 import rs.elfak.bobans.carsharing.ui.activities.LoginEmailActivity;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
 import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
@@ -293,9 +294,8 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
 
     @Override
     public void showMain() {
-        // TODO show main
-        showContent();
-        Toast.makeText(this, "User created", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     @Override

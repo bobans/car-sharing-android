@@ -5,4 +5,6 @@
     <string name="content_description_alert_icon">Ikona upozorenja</string>
     <string name="content_description_info_icon">Ikona informacija</string>
     <string name="content_description_add_icon">Ikona dodaj</string>
+    <string name="content_description_open_drawer">Otvori Meni</string>
+    <string name="content_description_close_drawer">Zatvori Meni</string>
 </resources>

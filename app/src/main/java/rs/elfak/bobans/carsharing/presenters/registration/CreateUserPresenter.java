@@ -9,6 +9,7 @@ import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.interactors.registration.CreateUserInteractor;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.BasePresenter;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
 import rx.Observer;
 
@@ -25,7 +26,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
         return new CreateUserInteractor();
     }
 
-    public void createUser(User user) {
+    public void createUser(final User user) {
         if (isViewAttached()) {
             getView().showLoading(false);
         }
@@ -67,6 +68,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
             public void onNext(Response<Void> voidResponse) {
                 switch (voidResponse.code()) {
                     case 201: {
+                        SessionManager.getInstance().setUser(user);
                         if (isViewAttached()) {
                             getView().showMain();
                         }
