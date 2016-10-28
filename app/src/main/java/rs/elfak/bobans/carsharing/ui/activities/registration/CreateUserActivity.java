@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -22,17 +25,21 @@ import android.widget.Toast;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.registration.CreateUserInteractor;
+import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.registration.CreateUserPresenter;
 import rs.elfak.bobans.carsharing.ui.activities.BaseActivity;
 import rs.elfak.bobans.carsharing.ui.activities.LoginEmailActivity;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
 import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
-import rs.elfak.bobans.carsharing.utils.ClearErrorTextWatcher;
+import rs.elfak.bobans.carsharing.ui.views.CarViewHolder;
+import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
 import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
@@ -43,7 +50,10 @@ import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class CreateUserActivity extends BaseActivity<Object, CreateUserInteractor, ICreateUserView, CreateUserPresenter> implements ICreateUserView, View.OnClickListener, View.OnFocusChangeListener, AdapterView.OnItemSelectedListener {
+public class CreateUserActivity extends BaseActivity<Object, CreateUserInteractor, ICreateUserView, CreateUserPresenter> implements ICreateUserView, View.OnClickListener, View.OnFocusChangeListener, AdapterView.OnItemSelectedListener, View.OnLongClickListener {
+
+    private static final int REQUEST_CREATE_CAR = 1;
+    private static final int REQUEST_EDIT_CAR = 2;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.text_input_name) TextInputLayout tiName;
@@ -133,15 +143,83 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
         switch (v.getId()) {
             case R.id.button_create_user: {
                 if (validate()) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
                     getPresenter().createUser(createUser());
                 }
                 break;
             }
 
             case R.id.image_view_add_car: {
-                // TODO add car activity
-                Toast.makeText(this, "Add car", Toast.LENGTH_SHORT).show();
+                startActivityForResult(new Intent(this, CreateCarActivity.class), REQUEST_CREATE_CAR);
                 break;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQUEST_CREATE_CAR: {
+                if (resultCode == RESULT_OK) {
+                    Car car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
+                    CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
+                    holder.attachToView(carsContainer);
+                    registerForContextMenu(holder.getItemView());
+                    holder.getItemView().setOnLongClickListener(this);
+                }
+                break;
+            }
+
+            case REQUEST_EDIT_CAR: {
+                if (resultCode == RESULT_OK) {
+                    Car car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
+                    CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
+                    View editing = (View) carsContainer.getTag();
+                    for (int i=0; i<carsContainer.getChildCount(); i++) {
+                        if (editing.equals(carsContainer.getChildAt(i))) {
+                            carsContainer.removeViewAt(i);
+                            holder.attachToView(carsContainer, i);
+                            carsContainer.setTag(null);
+                        }
+                    }
+                    registerForContextMenu(holder.getItemView());
+                    holder.getItemView().setOnLongClickListener(this);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.car_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit: {
+                View view = (View) carsContainer.getTag();
+                Car car = (Car) view.getTag();
+                Intent intent = new Intent(this, CreateCarActivity.class);
+                intent.putExtra(CreateCarActivity.EXTRA_CAR, car);
+                startActivityForResult(intent, REQUEST_EDIT_CAR);
+                return true;
+            }
+
+            case R.id.action_remove: {
+                View view = (View) carsContainer.getTag();
+                carsContainer.removeView(view);
+                carsContainer.setTag(null);
+                return true;
+            }
+
+            default: {
+                return super.onContextItemSelected(item);
             }
         }
     }
@@ -152,8 +230,16 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
         user.setEmail(etEmail.getText().toString());
         user.setCity(etCity.getText().toString());
         user.setBirthDate((DateTime) etBirthDate.getTag());
-        user.setDriverLicenseDate((DateTime) etDriverLicense.getTag());
         user.setUserType(spUserType.getSelectedItemPosition() + 1);
+        if (user.getUserType() == User.TYPE_DRIVER) {
+            user.setDriverLicenseDate((DateTime) etDriverLicense.getTag());
+            for (int i=0; i<carsContainer.getChildCount(); i++) {
+                user.addCar((Car) carsContainer.getChildAt(i).getTag());
+            }
+        } else {
+            user.setDriverLicenseDate(null);
+            user.setCars(new ArrayList<Car>());
+        }
         return user;
     }
 
@@ -223,7 +309,7 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
                     if (dateTime == null) {
                         dateTime = DateTime.now();
                     }
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.AppTheme_Dialog_Alert, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, final int year, final int month, final int dayOfMonth) {
                             DateTime picked = new DateTime(year, month + 1, dayOfMonth, 0, 0);
@@ -251,7 +337,7 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
                     if (dateTime == null) {
                         dateTime = DateTime.now();
                     }
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.AppTheme_Dialog_Alert, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, final int year, final int month, final int dayOfMonth) {
                             DateTime picked = new DateTime(year, month + 1, dayOfMonth, 0, 0);
@@ -291,5 +377,12 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        carsContainer.setTag(v);
+        v.showContextMenu();
+        return true;
     }
 }

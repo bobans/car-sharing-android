@@ -1,4 +1,4 @@
-package rs.elfak.bobans.carsharing.utils;
+package rs.elfak.bobans.carsharing.utils.textwatchers;
 
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;

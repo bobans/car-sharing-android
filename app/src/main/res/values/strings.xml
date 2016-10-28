@@ -38,4 +38,16 @@
     <string name="error_no_birth_date">Birth date is empty</string>
     <string name="error_no_driver_license">Driver\'s license date is empty</string>
     <string name="hint_cars">Cars</string>
+    <string name="title_activity_create_car">Create Car</string>
+    <string name="button_add">Add</string>
+    <string name="hint_make">Make</string>
+    <string name="hint_model">Model</string>
+    <string name="hint_car_year">Year</string>
+    <string name="hint_car_plates">License Plates</string>
+    <string name="error_no_car_year">Year is empty</string>
+    <string name="error_no_plates">Plates is empty</string>
+    <string name="error_invalid_plates">Invalid plates ex. BG 123-AA</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_remove">Remove</string>
+    <string name="button_update">Update</string>
 </resources>

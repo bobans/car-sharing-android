@@ -21,7 +21,7 @@ import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.presenters.LoginEmailPresenter;
 import rs.elfak.bobans.carsharing.ui.activities.registration.CreateUserActivity;
 import rs.elfak.bobans.carsharing.ui.activities.registration.SignUpActivity;
-import rs.elfak.bobans.carsharing.utils.ClearErrorTextWatcher;
+import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ILoginEmailView;
 
@@ -154,6 +154,7 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
     @Override
     public void showCreateUser() {
         startActivity(new Intent(this, CreateUserActivity.class));
+        finish();
     }
 
 }

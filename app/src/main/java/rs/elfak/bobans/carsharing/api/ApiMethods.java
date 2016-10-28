@@ -1,10 +1,15 @@
 package rs.elfak.bobans.carsharing.api;
 
+import java.util.List;
+
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import rs.elfak.bobans.carsharing.models.Make;
+import rs.elfak.bobans.carsharing.models.Model;
 import rs.elfak.bobans.carsharing.models.Registration;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
@@ -29,4 +34,10 @@ public interface ApiMethods {
 
     @POST(ApiConstants.USERS_CREATE)
     Observable<Response<Void>> createUser(@Header("Authorization") String token, @Body User user);
+
+    @GET(ApiConstants.MAKES)
+    Observable<List<Make>> getMakes(@Header("Authorization") String token);
+
+    @GET(ApiConstants.MODELS)
+    Observable<List<Model>> getModels(@Header("Authorization") String token, @Path("makeId") long makeId);
 }

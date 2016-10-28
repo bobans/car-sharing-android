@@ -17,7 +17,7 @@ import rs.elfak.bobans.carsharing.presenters.registration.SignUpPresenter;
 import rs.elfak.bobans.carsharing.ui.activities.BaseActivity;
 import rs.elfak.bobans.carsharing.ui.activities.LoginEmailActivity;
 import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
-import rs.elfak.bobans.carsharing.utils.ClearErrorTextWatcher;
+import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.views.registration.ISignUpView;
 
@@ -109,6 +109,7 @@ public class SignUpActivity extends BaseActivity<Object, SignUpInteractor, ISign
     @Override
     public void showCreateUser() {
         startActivity(new Intent(this, CreateUserActivity.class));
+        finish();
     }
 
     @Override

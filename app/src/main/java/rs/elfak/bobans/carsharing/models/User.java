@@ -2,6 +2,7 @@ package rs.elfak.bobans.carsharing.models;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class User {
     public static final int TYPE_PASSENGER = 1;
     public static final int TYPE_DRIVER = 2;
 
-    private long id;
+    private transient long id;
     private String username;
     private String email;
     private String name;
@@ -25,6 +26,7 @@ public class User {
     private List<Car> cars;
 
     public User() {
+        cars = new ArrayList<>();
     }
 
     public long getId() {

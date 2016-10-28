@@ -65,8 +65,27 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
 
             @Override
             public void onNext(Response<Void> voidResponse) {
-                if (isViewAttached()) {
-                    getView().showMain();
+                switch (voidResponse.code()) {
+                    case 201: {
+                        if (isViewAttached()) {
+                            getView().showMain();
+                        }
+                        break;
+                    }
+                    case 409: {
+                        if (isViewAttached()) {
+                            getView().showUserAlreadyExists();
+                            getView().showContent();
+                        }
+                        break;
+                    }
+
+                    default: {
+                        if (isViewAttached()) {
+                            getView().showError(new Exception(), false);
+                            getView().showContent();
+                        }
+                    }
                 }
             }
         });

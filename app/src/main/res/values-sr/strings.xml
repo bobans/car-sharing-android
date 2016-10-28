@@ -39,4 +39,16 @@
     <string name="error_no_birth_date">Datum rođenja je prazan</string>
     <string name="error_no_driver_license">Datum vozačke dozvole je prazan</string>
     <string name="hint_cars">Automobili</string>
+    <string name="title_activity_create_car">Kreiranje automobila</string>
+    <string name="button_add">Dodaj</string>
+    <string name="hint_make">Marka</string>
+    <string name="hint_model">Tip</string>
+    <string name="hint_car_year">Godina proizvodnje</string>
+    <string name="hint_car_plates">Registracija</string>
+    <string name="error_no_car_year">Godina proizvodnje je prazna</string>
+    <string name="error_no_plates">Registracija je prazna</string>
+    <string name="error_invalid_plates">Nevalidna registracija pr. BG 123-AA</string>
+    <string name="action_edit">Izmeni</string>
+    <string name="action_remove">Izbriši</string>
+    <string name="button_update">Izmeni</string>
 </resources>
