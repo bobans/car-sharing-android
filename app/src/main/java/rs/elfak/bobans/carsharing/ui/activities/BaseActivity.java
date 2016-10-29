@@ -141,4 +141,11 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         contentView.addView(view);
     }
 
+    @Override
+    public void showNoInternetConnection() {
+        GenericErrorDialog dialog = new GenericErrorDialog(this, R.string.error_no_internet_connection, null);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
 }

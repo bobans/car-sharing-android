@@ -54,4 +54,5 @@
     <string name="error_wrong_credentials">Korisničko ime i šifra se ne poklapaju</string>
     <string name="title_activity_home">Početak</string>
     <string name="action_home">Početak</string>
+    <string name="error_no_internet_connection">Nema internet konekcije</string>
 </resources>

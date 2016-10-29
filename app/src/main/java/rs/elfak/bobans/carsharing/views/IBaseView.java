@@ -9,4 +9,5 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
  */
 
 public interface IBaseView<M> extends MvpLceView<M> {
+    void showNoInternetConnection();
 }

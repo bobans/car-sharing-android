@@ -15,4 +15,5 @@
     <color name="colorAccentSplashScreen">#FF5722</color>
     <color name="colorPrimarySplashScreen">#000000</color>
     <color name="colorPrimaryDarkSplashScreen">#000000</color>
+    <color name="colorTextWhite">#ffffff</color>
 </resources>

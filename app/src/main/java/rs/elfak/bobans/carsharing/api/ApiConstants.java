@@ -8,7 +8,7 @@ package rs.elfak.bobans.carsharing.api;
 
 class ApiConstants {
 
-    static final String BASE_URL_LOCAL = "http://192.168.1.2:9000/";
+    static final String BASE_URL_LOCAL = "http://192.168.1.6:8080/";
     static final String BASE_URL_LIVE = "https://car-sharing.herokuapp.com/";
 
     static final String LOGIN = "login";

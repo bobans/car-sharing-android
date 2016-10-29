@@ -111,6 +111,7 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
                 if (user != null) {
                     SessionManager.getInstance().setUser(user);
                     if (isViewAttached()) {
+                        getView().showContent();
                         getView().showMain();
                     }
                 } else {

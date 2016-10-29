@@ -19,6 +19,7 @@ public class User {
     private String username;
     private String email;
     private String name;
+    private String photoUrl;
     private String city;
     private DateTime birthDate;
     private DateTime driverLicenseDate;
@@ -59,6 +60,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public String getCity() {

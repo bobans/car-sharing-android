@@ -7,13 +7,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.HomeInteractor;
+import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.HomePresenter;
+import rs.elfak.bobans.carsharing.utils.PictureUtils;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IHomeView;
 
 /**
@@ -22,7 +30,7 @@ import rs.elfak.bobans.carsharing.views.IHomeView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView, HomePresenter> implements IHomeView {
+public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView, HomePresenter> implements IHomeView, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.navigation_view) NavigationView navigationView;
@@ -42,8 +50,31 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        initView();
+
         if (savedInstanceState == null) {
             // TODO show home fragment
+        }
+    }
+
+    private void initView() {
+        populateHeader(navigationView.getHeaderView(0));
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void populateHeader(View headerView) {
+        ImageView photo = (ImageView) headerView.findViewById(R.id.image_view_photo);
+        TextView name = (TextView) headerView.findViewById(R.id.text_view_name);
+        TextView email = (TextView) headerView.findViewById(R.id.text_view_email);
+
+        name.setTypeface(fontMedium);
+        email.setTypeface(fontRegular);
+
+        User user = SessionManager.getInstance().getUser();
+        if (user != null) {
+            PictureUtils.loadImage(user.getPhotoUrl(), new CropCircleTransformation(this), R.drawable.ic_user_placeholder, photo);
+            name.setText(user.getName());
+            email.setText(user.getEmail());
         }
     }
 
@@ -72,4 +103,14 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // TODO navigation item selected
+        switch (item.getItemId()) {
+
+            default: {
+                return false;
+            }
+        }
+    }
 }
