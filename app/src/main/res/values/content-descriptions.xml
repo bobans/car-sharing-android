@@ -8,4 +8,5 @@
     <string name="content_description_open_drawer">Open Drawer</string>
     <string name="content_description_close_drawer">Close Drawer</string>
     <string name="content_description_user_photo">User photo</string>
+    <string name="content_description_logout_icon">Logout icon</string>
 </resources>

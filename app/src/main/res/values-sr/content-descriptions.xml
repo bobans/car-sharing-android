@@ -8,4 +8,5 @@
     <string name="content_description_open_drawer">Otvori Meni</string>
     <string name="content_description_close_drawer">Zatvori Meni</string>
     <string name="content_description_user_photo">Fotografija korisnika</string>
+    <string name="content_description_logout_icon">Ikona \"Izloguj me\"</string>
 </resources>

@@ -5,4 +5,11 @@
         android:icon="@drawable/ic_add"
         android:title="@string/action_home" />
 
+    <item
+        android:id="@+id/footer_spacer_1"
+        android:checkable="false"
+        android:enabled="false"
+        android:orderInCategory="200"
+        android:title="" />
+
 </menu>

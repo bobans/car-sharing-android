@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -30,12 +31,13 @@ import rs.elfak.bobans.carsharing.views.IHomeView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView, HomePresenter> implements IHomeView, NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView, HomePresenter> implements IHomeView, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.navigation_view) NavigationView navigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.content_home) FrameLayout homeContent;
+    @BindView(R.id.image_view_logout) ImageView ivLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     private void initView() {
         populateHeader(navigationView.getHeaderView(0));
         navigationView.setNavigationItemSelectedListener(this);
+
+        ivLogout.setOnClickListener(this);
     }
 
     private void populateHeader(View headerView) {
@@ -110,6 +114,20 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
 
             default: {
                 return false;
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_view_logout: {
+                SessionManager.getInstance().setToken(null);
+                Intent intent = new Intent(this, LoginEmailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
             }
         }
     }

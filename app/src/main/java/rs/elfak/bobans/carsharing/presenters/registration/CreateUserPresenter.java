@@ -70,6 +70,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
                     case 201: {
                         SessionManager.getInstance().setUser(user);
                         if (isViewAttached()) {
+                            getView().showContent();
                             getView().showMain();
                         }
                         break;

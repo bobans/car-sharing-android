@@ -20,6 +20,28 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
+        app:menu="@menu/activity_home_drawer" >
+
+        <LinearLayout
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:paddingLeft="@dimen/layout_side_margin"
+            android:paddingRight="@dimen/layout_side_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/colorBackground" >
+
+            <ImageView
+                android:id="@+id/image_view_logout"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:src="@android:drawable/ic_lock_power_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description_logout_icon"/>
+
+        </LinearLayout>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
