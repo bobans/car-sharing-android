@@ -32,9 +32,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibVersion"
     compile "com.android.support:design:$rootProject.supportLibVersion"
 
-    // Google
-    compile "com.google.android.gms:play-services:$rootProject.googlePlayServicesVersion"
-
     // mosby
     compile "com.hannesdorfmann.mosby:mvp:$rootProject.mosbyVersion"
 

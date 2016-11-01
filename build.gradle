@@ -29,7 +29,6 @@ ext {
     minSdkVersion = 16
     targetSdkVersion = 24
     supportLibVersion = '24.2.0'
-    googlePlayServicesVersion = '8.4.0'
     mosbyVersion = '2.0.1'
     retrofitVersion = '2.1.0'
     okhttp3Version = '3.4.1'

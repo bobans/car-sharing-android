@@ -116,6 +116,7 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
                     }
                 } else {
                     if (isViewAttached()) {
+                        getView().showContent();
                         getView().showCreateUser();
                     }
                 }

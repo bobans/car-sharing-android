@@ -69,6 +69,7 @@ public class SignUpPresenter extends BasePresenter<ISignUpView, SignUpInteractor
             public void onNext(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
                 if (isViewAttached()) {
+                    getView().showContent();
                     getView().showCreateUser();
                 }
             }
