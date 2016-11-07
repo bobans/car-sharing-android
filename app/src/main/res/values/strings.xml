@@ -54,4 +54,6 @@
     <string name="title_activity_home">Home</string>
     <string name="action_home">Home</string>
     <string name="error_no_internet_connection">No internet connection</string>
+    <string name="text_no_drives_atm">No shared drives at the moment</string>
+    <string name="button_offer_lift">Offer a lift</string>
 </resources>

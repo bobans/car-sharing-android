@@ -57,6 +57,15 @@
         <item name="android:textColor">@color/colorButtonText</item>
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:padding">@dimen/button_padding</item>
+    </style>
+
+    <style name="ButtonStyle.Small" parent="Widget.AppCompat.Button" >
+        <item name="android:background">@drawable/button_blue</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+        <item name="android:layout_height">@dimen/button_height_small</item>
+        <item name="android:textSize">@dimen/button_text_size_small</item>
+        <item name="android:padding">@dimen/button_padding_small</item>
     </style>
 
     <style name="ButtonStyle.Dialog" parent="Widget.AppCompat.Button" >

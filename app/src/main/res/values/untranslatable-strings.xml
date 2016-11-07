@@ -2,5 +2,6 @@
 <resources>
 
     <string name="integer_range" translatable="false">%d - %d</string>
+    <string name="from_to" translatable="false">%s - %s</string>
 
 </resources>

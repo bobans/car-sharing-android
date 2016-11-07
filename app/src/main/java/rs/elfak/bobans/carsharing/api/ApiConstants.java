@@ -20,4 +20,5 @@ class ApiConstants {
     static final String MAKES = "makes";
     static final String MODELS = "makes/{makeId}/models";
 
+    static final String SHARED_DRIVES = "drives";
 }

@@ -55,4 +55,6 @@
     <string name="title_activity_home">Početak</string>
     <string name="action_home">Početak</string>
     <string name="error_no_internet_connection">Nema internet konekcije</string>
+    <string name="text_no_drives_atm">Trenutno nema vožnji</string>
+    <string name="button_offer_lift">Ponudi prevoz</string>
 </resources>

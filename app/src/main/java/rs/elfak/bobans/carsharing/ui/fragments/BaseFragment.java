@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.ui.fragments;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,19 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
 public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseView<M>, P extends BasePresenter<V, I>>
         extends MvpLceFragment<FrameLayout, M, V, P>
         implements IBaseView<M> {
+
+    protected Typeface fontRegular;
+    protected Typeface fontMedium;
+    protected Typeface fontBold;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        fontRegular = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Regular.ttf");
+        fontMedium = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf");
+        fontBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Bold.ttf");
+    }
 
     @Nullable
     @Override
@@ -72,4 +86,15 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
         }
     }
 
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
+    }
+
+    @Override
+    public void showNoInternetConnection() {
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).showNoInternetConnection();
+        }
+    }
 }

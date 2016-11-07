@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -10,7 +11,10 @@ import android.widget.FrameLayout;
 
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceActivity;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rs.elfak.bobans.carsharing.R;
+import rs.elfak.bobans.carsharing.api.ApiError;
+import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
 import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.ui.dialogs.GenericErrorDialog;
@@ -73,9 +77,26 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        GenericErrorDialog dialog = new GenericErrorDialog(this, R.string.server_error_generic, null);
-        dialog.setCancelable(false);
-        dialog.show();
+        if (e instanceof HttpException) {
+            ApiError error = ApiManager.parseError(((HttpException) e).response());
+            switch (error.getCode()) {
+                case 401: { // unauthorized
+                    startActivity(new Intent(this, LoginEmailActivity.class));
+                    finish();
+                    break;
+                }
+
+                default: {
+                    GenericErrorDialog dialog = new GenericErrorDialog(this, R.string.server_error_generic, null);
+                    dialog.setCancelable(false);
+                    dialog.show();
+                }
+            }
+        } else {
+            GenericErrorDialog dialog = new GenericErrorDialog(this, R.string.server_error_generic, null);
+            dialog.setCancelable(false);
+            dialog.show();
+        }
     }
 
     @Override

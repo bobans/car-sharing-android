@@ -21,6 +21,7 @@ import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.HomeInteractor;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.HomePresenter;
+import rs.elfak.bobans.carsharing.ui.fragments.SharedDrivesFragment;
 import rs.elfak.bobans.carsharing.utils.PictureUtils;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IHomeView;
@@ -55,7 +56,9 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
         initView();
 
         if (savedInstanceState == null) {
-            // TODO show home fragment
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_home, SharedDrivesFragment.newInstance())
+                    .commit();
         }
     }
 
