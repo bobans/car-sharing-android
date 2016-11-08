@@ -56,4 +56,11 @@
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="text_no_drives_atm">No shared drives at the moment</string>
     <string name="button_offer_lift">Offer a lift</string>
+    <string name="abbreviation_monday">M</string>
+    <string name="abbreviation_tuesday">T</string>
+    <string name="abbreviation_wednesday">W</string>
+    <string name="abbreviation_thursday">T</string>
+    <string name="abbreviation_friday">F</string>
+    <string name="abbreviation_saturday">S</string>
+    <string name="abbreviation_sunday">S</string>
 </resources>

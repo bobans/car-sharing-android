@@ -17,4 +17,9 @@ public class DateTimeUtils {
         return dtf.print(date);
     }
 
+    public static String printMediumDateTime(DateTime date) {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd MMM yyyy HH:mm");
+        return dtf.print(date);
+    }
+
 }

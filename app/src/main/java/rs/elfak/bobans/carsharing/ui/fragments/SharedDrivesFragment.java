@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -31,9 +33,11 @@ import rs.elfak.bobans.carsharing.views.ISharedDrivesView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, SharedDrivesInteractor, ISharedDrivesView, SharedDrivesPresenter> implements ISharedDrivesView, SwipeRefreshLayout.OnRefreshListener {
+public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, SharedDrivesInteractor, ISharedDrivesView, SharedDrivesPresenter> implements ISharedDrivesView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     @BindView(R.id.swipe_refresh_shared_drives) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.filter_container) ViewGroup filterContainer;
+    @BindView(R.id.image_view_filter) ImageView ivFilter;
     @BindView(R.id.recycler_view_shared_drives) RecyclerView recyclerView;
     @BindView(R.id.no_drives_container) ViewGroup noDrivesContainer;
     @BindView(R.id.text_view_no_shared_drives) TextView tvNoDrives;
@@ -79,9 +83,11 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
         if (recyclerView.getAdapter().getItemCount() == 0) {
             noDrivesContainer.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+            filterContainer.setVisibility(View.GONE);
         } else {
             noDrivesContainer.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
+            filterContainer.setVisibility(View.VISIBLE);
         }
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -94,6 +100,7 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
     private void initView() {
         setFonts();
         initRecyclerView();
+        ivFilter.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         if (SessionManager.getInstance().getUser() != null && SessionManager.getInstance().getUser().getUserType() != User.TYPE_DRIVER) {
             btnCreateDrive.setVisibility(View.GONE);
@@ -133,4 +140,14 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
         getPresenter().loadSharedDrives(true);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_view_filter: {
+                // TODO filter click
+                Toast.makeText(getContext(), "Filter", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+    }
 }

@@ -46,6 +46,7 @@
     <Button
         android:id="@+id/button_positive"
         android:text="@string/ok"
+        android:textSize="@dimen/dialog_button_text_size"
         android:layout_marginLeft="@dimen/layout_side_margin"
         android:layout_marginRight="@dimen/layout_side_margin"
         android:layout_marginBottom="@dimen/layout_control_space"
@@ -55,6 +56,7 @@
     <Button
         android:id="@+id/button_negative"
         android:text="@string/cancel"
+        android:textSize="@dimen/dialog_button_text_size"
         android:layout_marginLeft="@dimen/layout_side_margin"
         android:layout_marginRight="@dimen/layout_side_margin"
         android:layout_marginBottom="@dimen/layout_bottom_margin"

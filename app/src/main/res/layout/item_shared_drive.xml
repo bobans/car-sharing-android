@@ -1,19 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:padding="@dimen/item_padding">
 
-        <TextView
-            android:id="@+id/text_view_from_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/image_view_user_photo"
+            android:background="@color/colorDivider"
+            android:src="@drawable/ic_user_placeholder"
+            android:layout_width="@dimen/shared_drive_picture_size"
+            android:layout_height="@dimen/shared_drive_picture_size"
+            android:contentDescription="@string/content_description_user_photo" />
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/layout_control_space"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_view_route"
+                tools:text="Nis - Vranje"
+                android:textSize="@dimen/item_primary_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_view_name"
+                android:textSize="@dimen/item_secondary_text_size"
+                tools:text="Boban Stajic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_view_car"
+                android:textSize="@dimen/item_secondary_text_size"
+                tools:text="Renault Laguna (2001)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_view_date"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    tools:text="11 Nov 2016 18:00"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_monday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_tuesday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_tuesday"
+                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_wednesday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_wednesday"
+                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_thursday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_thursday"
+                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_friday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_friday"
+                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_saturday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_saturday"
+                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_view_repetition_sunday"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    android:textColor="@color/repetition_day_text_color"
+                    android:text="@string/abbreviation_sunday"
+                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

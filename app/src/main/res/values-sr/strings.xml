@@ -57,4 +57,11 @@
     <string name="error_no_internet_connection">Nema internet konekcije</string>
     <string name="text_no_drives_atm">Trenutno nema vožnji</string>
     <string name="button_offer_lift">Ponudi prevoz</string>
+    <string name="abbreviation_monday">P</string>
+    <string name="abbreviation_tuesday">U</string>
+    <string name="abbreviation_wednesday">S</string>
+    <string name="abbreviation_thursday">Č</string>
+    <string name="abbreviation_friday">P</string>
+    <string name="abbreviation_saturday">S</string>
+    <string name="abbreviation_sunday">N</string>
 </resources>

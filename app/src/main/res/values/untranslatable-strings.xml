@@ -2,6 +2,7 @@
 <resources>
 
     <string name="integer_range" translatable="false">%d - %d</string>
-    <string name="from_to" translatable="false">%s - %s</string>
+    <string name="route" translatable="false">%s - %s</string>
+    <string name="car" translatable="false">%s %s (%d)</string>
 
 </resources>
