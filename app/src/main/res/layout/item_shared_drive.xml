@@ -64,62 +64,76 @@
                 <TextView
                     android:id="@+id/text_view_repetition_monday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_monday"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/text_view_repetition_tuesday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_tuesday"
-                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/text_view_repetition_wednesday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_wednesday"
-                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/text_view_repetition_thursday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_thursday"
-                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/text_view_repetition_friday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_friday"
-                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/text_view_repetition_saturday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_saturday"
-                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/text_view_repetition_sunday"
                     android:textSize="@dimen/item_secondary_text_size"
-                    android:textColor="@color/repetition_day_text_color"
+                    android:textColor="@color/colorTextWhite"
                     android:text="@string/abbreviation_sunday"
-                    android:layout_marginLeft="@dimen/layout_control_space"
+                    android:background="@drawable/abbreviation_day_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

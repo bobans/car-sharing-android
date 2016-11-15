@@ -116,7 +116,7 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new SharedDrivesAdapter());
+        recyclerView.setAdapter(new SharedDrivesAdapter(getContext()));
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {

@@ -1,5 +1,7 @@
 package rs.elfak.bobans.carsharing.ui.adapters;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,15 @@ import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
 
 public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, SharedDrivesAdapter.ViewHolder> {
 
+    private Typeface fontRegular;
+    private Typeface fontMedium;
+
+    public SharedDrivesAdapter(Context context) {
+        super();
+
+        fontRegular = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
+        fontMedium = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Medium.ttf");
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,6 +41,8 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         SharedDrive drive = getItemAt(position);
+
+        setFonts(holder);
 
         holder.route.setText(holder.itemView.getContext().getString(R.string.route, drive.getDeparture(), drive.getDestination()));
         holder.name.setText(drive.getUser().getName());
@@ -45,6 +58,20 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
             holder.saturday.setActivated(repeatDays.contains("U"));
             holder.sunday.setActivated(repeatDays.contains("S"));
         }
+    }
+
+    private void setFonts(ViewHolder holder) {
+        holder.route.setTypeface(fontMedium);
+        holder.name.setTypeface(fontRegular);
+        holder.car.setTypeface(fontRegular);
+        holder.date.setTypeface(fontRegular);
+        holder.monday.setTypeface(fontMedium);
+        holder.tuesday.setTypeface(fontMedium);
+        holder.wednesday.setTypeface(fontMedium);
+        holder.thursday.setTypeface(fontMedium);
+        holder.friday.setTypeface(fontMedium);
+        holder.saturday.setTypeface(fontMedium);
+        holder.sunday.setTypeface(fontMedium);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

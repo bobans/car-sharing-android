@@ -9,6 +9,7 @@
     <color name="colorButtonText">#ffffff</color>
     <color name="colorButtonPressed">#4FC3F7</color>
     <color name="colorButtonDisabled">#9E9E9E</color>
+    <color name="colorDisabled">#9E9E9E</color>
     <color name="colorDivider">#9E9E9E</color>
 
     <!-- Splash Screen -->
