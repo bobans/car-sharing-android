@@ -64,4 +64,7 @@
     <string name="abbreviation_friday">P</string>
     <string name="abbreviation_saturday">S</string>
     <string name="abbreviation_sunday">N</string>
+    <string name="drive_price_total">%.2f RSD ukupno</string>
+    <string name="drive_price_per_passenger">%.2f RSD po putniku</string>
+    <string name="text_no_stops">Bez usputnih zaustavljanja</string>
 </resources>

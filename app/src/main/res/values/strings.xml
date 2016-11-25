@@ -63,4 +63,7 @@
     <string name="abbreviation_friday">F</string>
     <string name="abbreviation_saturday">S</string>
     <string name="abbreviation_sunday">S</string>
+    <string name="drive_price_total">%.2f RSD total</string>
+    <string name="drive_price_per_passenger">%.2f RSD per passenger</string>
+    <string name="text_no_stops">No stops</string>
 </resources>
