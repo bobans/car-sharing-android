@@ -6,6 +6,7 @@ import java.util.List;
 
 import rs.elfak.bobans.carsharing.interactors.SharedDrivesInteractor;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
+import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
 import rs.elfak.bobans.carsharing.views.ISharedDrivesView;
 import rx.Observer;
 
@@ -77,4 +78,13 @@ public class SharedDrivesPresenter extends BasePresenter<ISharedDrivesView, Shar
         });
     }
 
+    public void onSharedDriveClick(SharedDrive sharedDrive) {
+        // TODO show shared drive
+    }
+
+    public void onCreateDriveClick() {
+        if (isViewAttached()) {
+            getView().navigateToActivityForResult(1, CreateSharedDriveActivity.class, null);
+        }
+    }
 }

@@ -1,5 +1,8 @@
 package rs.elfak.bobans.carsharing.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -10,12 +13,12 @@ import java.util.List;
  *
  * @author Boban Stajic<bobanstajic@gmail.com>
  */
-public class User {
+public class User implements Parcelable {
 
     public static final int TYPE_PASSENGER = 1;
     public static final int TYPE_DRIVER = 2;
 
-    private transient long id;
+    private long id;
     private String username;
     private String email;
     private String name;
@@ -27,8 +30,59 @@ public class User {
     private List<Car> cars;
 
     public User() {
-        cars = new ArrayList<>();
+        this.id = -1;
+        this.cars = new ArrayList<>();
     }
+
+    protected User(Parcel in) {
+        id = in.readLong();
+        username = in.readString();
+        email = in.readString();
+        name = in.readString();
+        photoUrl = in.readString();
+        city = in.readString();
+        long birthMillis = in.readLong();
+        if (birthMillis > 0) {
+            birthDate = new DateTime(birthMillis);
+        }
+        long driverLicenseMillis = in.readLong();
+        if (driverLicenseMillis > 0) {
+            driverLicenseDate = new DateTime(driverLicenseMillis);
+        }
+        userType = in.readInt();
+        cars = in.createTypedArrayList(Car.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(username);
+        dest.writeString(email);
+        dest.writeString(name);
+        dest.writeString(photoUrl);
+        dest.writeString(city);
+        dest.writeLong(birthDate != null ? birthDate.getMillis() : 0);
+        dest.writeLong(driverLicenseDate != null ? driverLicenseDate.getMillis() : 0);
+        dest.writeInt(userType);
+        dest.writeTypedList(cars);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public long getId() {
         return id;

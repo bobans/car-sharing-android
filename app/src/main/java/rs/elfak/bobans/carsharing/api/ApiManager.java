@@ -48,7 +48,7 @@ public class ApiManager {
                 .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
                 .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL_LIVE)
+                .baseUrl(ApiConstants.BASE_URL_LOCAL)
                 .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))

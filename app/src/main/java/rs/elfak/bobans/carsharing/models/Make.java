@@ -14,6 +14,7 @@ public class Make implements Parcelable {
     private String title;
 
     public Make() {
+        this.id = -1;
     }
 
     protected Make(Parcel in) {

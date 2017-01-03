@@ -1,21 +1,52 @@
 package rs.elfak.bobans.carsharing.models;
 
+import android.os.Parcel;
+
 /**
  * Created by Boban Stajic.
  *
  * @author Boban Stajic<bobanstajic@gmail.com>
  */
-public class DrivePreferences {
+@SuppressWarnings("WeakerAccess")
+public class DrivePreferences extends DrivePreferencesDAO {
 
     public static final int FLAG_NEGATIVE = -1;
     public static final int FLAG_NEUTRAL = 0;
     public static final int FLAG_POSITIVE = 1;
 
-    private transient long id;
-    private int music;
-    private int pets;
-    private int smoking;
-    private int talk;
+    private long id;
+
+    public DrivePreferences() {
+        this.id = -1;
+    }
+
+    protected DrivePreferences(Parcel in) {
+        super(in);
+        id = in.readLong();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<DrivePreferences> CREATOR = new Creator<DrivePreferences>() {
+        @Override
+        public DrivePreferences createFromParcel(Parcel in) {
+            return new DrivePreferences(in);
+        }
+
+        @Override
+        public DrivePreferences[] newArray(int size) {
+            return new DrivePreferences[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -23,38 +54,6 @@ public class DrivePreferences {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getMusic() {
-        return music;
-    }
-
-    public void setMusic(int music) {
-        this.music = music;
-    }
-
-    public int getPets() {
-        return pets;
-    }
-
-    public void setPets(int pets) {
-        this.pets = pets;
-    }
-
-    public int getSmoking() {
-        return smoking;
-    }
-
-    public void setSmoking(int smoking) {
-        this.smoking = smoking;
-    }
-
-    public int getTalk() {
-        return talk;
-    }
-
-    public void setTalk(int talk) {
-        this.talk = talk;
     }
 
 }

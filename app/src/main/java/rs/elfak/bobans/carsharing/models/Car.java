@@ -10,12 +10,13 @@ import android.os.Parcelable;
  */
 public class Car implements Parcelable {
 
-    private transient long id;
+    private long id;
     private Model model;
     private int year;
     private String registrationPlates;
 
     public Car() {
+        this.id = -1;
     }
 
     protected Car(Parcel in) {

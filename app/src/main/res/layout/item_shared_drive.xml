@@ -37,12 +37,12 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
 
                 <ImageView
                     android:id="@+id/image_view_preference_music"
                     android:src="@drawable/ic_drive_preference_music"
-                    android:tint="@color/drive_preference_tint"
                     android:layout_width="12dp"
                     android:layout_height="12dp" />
 
@@ -50,7 +50,6 @@
                     android:id="@+id/image_view_preference_pets"
                     android:layout_marginLeft="5dp"
                     android:src="@drawable/ic_drive_preference_pets"
-                    android:tint="@color/drive_preference_tint"
                     android:layout_width="12dp"
                     android:layout_height="12dp" />
 
@@ -58,7 +57,6 @@
                     android:id="@+id/image_view_preference_smoking"
                     android:layout_marginLeft="5dp"
                     android:src="@drawable/ic_drive_preference_smoking"
-                    android:tint="@color/drive_preference_tint"
                     android:layout_width="12dp"
                     android:layout_height="12dp" />
 
@@ -66,9 +64,26 @@
                     android:id="@+id/image_view_preference_talk"
                     android:layout_marginLeft="5dp"
                     android:src="@drawable/ic_drive_preference_talk"
-                    android:tint="@color/drive_preference_tint"
                     android:layout_width="12dp"
                     android:layout_height="12dp" />
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp" />
+
+                <ImageView
+                    android:src="@drawable/ic_people"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp" />
+
+                <TextView
+                    android:id="@+id/text_view_seats"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="@dimen/item_secondary_text_size"
+                    tools:text="4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -171,39 +186,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:id="@+id/expand_container"
-        android:layout_marginLeft="@dimen/item_shared_drive_expander_left_margin"
-        android:padding="@dimen/item_padding"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_view_name"
-            android:textSize="@dimen/item_secondary_text_size"
-            tools:text="Boban Stajic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/text_view_car"
-            android:textSize="@dimen/item_secondary_text_size"
-            tools:text="Renault Laguna (2001)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/text_view_stops"
-            tools:text="Leskovac, Grdelica, Vladičin Han"
-            android:textSize="@dimen/item_secondary_text_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

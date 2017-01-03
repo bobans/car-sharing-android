@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_preference_status_positive"
+        android:title="@string/preference_positive" />
+
+    <item android:id="@+id/action_preference_status_neutral"
+        android:title="@string/preference_neutral" />
+
+    <item android:id="@+id/action_preference_status_negative"
+        android:title="@string/preference_negative" />
+
+</menu>

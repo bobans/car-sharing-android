@@ -113,7 +113,16 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // TODO navigation item selected
+        if (drawerLayout.isDrawerOpen(navigationView)) {
+            drawerLayout.closeDrawers();
+        }
         switch (item.getItemId()) {
+            case R.id.action_drives: {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_home, SharedDrivesFragment.newInstance())
+                        .commit();
+                return true;
+            }
 
             default: {
                 return false;

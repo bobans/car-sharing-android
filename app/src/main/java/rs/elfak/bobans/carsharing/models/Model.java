@@ -15,6 +15,7 @@ public class Model implements Parcelable {
     private String title;
 
     public Model() {
+        this.id = -1;
     }
 
     protected Model(Parcel in) {

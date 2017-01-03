@@ -6,4 +6,9 @@
         <item>@string/user_type_driver</item>
     </string-array>
 
+    <string-array name="price_types">
+        <item>@string/price_type_by_person</item>
+        <item>@string/price_type_total</item>
+    </string-array>
+
 </resources>

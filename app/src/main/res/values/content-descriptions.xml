@@ -9,5 +9,4 @@
     <string name="content_description_close_drawer">Close Drawer</string>
     <string name="content_description_user_photo">User photo</string>
     <string name="content_description_logout_icon">Logout icon</string>
-    <string name="content_description_filter">Filter icon</string>
 </resources>

@@ -169,4 +169,21 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         dialog.show();
     }
 
+    @Override
+    public void navigateToActivity(Class activityClass, Bundle extras) {
+        Intent intent = new Intent(this, activityClass);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToActivityForResult(int requestCode, Class activityClass, Bundle extras) {
+        Intent intent = new Intent(this, activityClass);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivityForResult(intent, requestCode);
+    }
 }

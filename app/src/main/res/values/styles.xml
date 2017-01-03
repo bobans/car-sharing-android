@@ -79,4 +79,14 @@
         <item name="android:textColor">@color/colorTextError</item>
     </style>
 
+    <style name="AppTheme.TextAppearance.Label" parent="TextAppearance.AppCompat.Caption" >
+        <item name="colorAccent">@color/colorTextLabel</item>
+        <item name="android:textColorPrimary">@color/colorTextLabel</item>
+        <item name="android:textColorSecondary">@color/colorTextLabel</item>
+    </style>
+
+    <style name="AppTheme.Dialog.DateTimePicker" >
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

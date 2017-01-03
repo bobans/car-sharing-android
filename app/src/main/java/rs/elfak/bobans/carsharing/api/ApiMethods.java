@@ -2,6 +2,7 @@ package rs.elfak.bobans.carsharing.api;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -9,10 +10,12 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.Make;
 import rs.elfak.bobans.carsharing.models.Model;
 import rs.elfak.bobans.carsharing.models.Registration;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
+import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
 import rx.Observable;
@@ -46,4 +49,9 @@ public interface ApiMethods {
     @GET(ApiConstants.SHARED_DRIVES)
     Observable<List<SharedDrive>> getSharedDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
 
+    @GET(ApiConstants.CARS)
+    Observable<List<Car>> getCars(@Header("Authorization") String token);
+
+    @POST(ApiConstants.SHARED_DRIVES)
+    Observable<ResponseBody> createSharedDrive(@Header("Authorization") String token, @Body SharedDriveDAO sharedDrive);
 }

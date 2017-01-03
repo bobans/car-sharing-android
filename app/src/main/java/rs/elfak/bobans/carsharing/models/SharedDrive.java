@@ -1,24 +1,47 @@
 package rs.elfak.bobans.carsharing.models;
 
-import java.util.List;
+import android.os.Parcel;
 
 /**
  * Created by Boban Stajic.
  *
  * @author Boban Stajic<bobanstajic@gmail.com
  */
+public class SharedDrive extends SharedDriveDAO {
 
-public class SharedDrive {
+    private long id;
 
-    private transient long id;
-    private User user;
-    private Car car;
-    private String departure;
-    private String destination;
-    private List<String> stops;
-    private DrivePreferences preferences;
-    private DriveTime time;
-    private DrivePrice price;
+    public SharedDrive() {
+        this.id = -1;
+    }
+
+    protected SharedDrive(Parcel in) {
+        super(in);
+        id = in.readLong();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<SharedDrive> CREATOR = new Creator<SharedDrive>() {
+        @Override
+        public SharedDrive createFromParcel(Parcel in) {
+            return new SharedDrive(in);
+        }
+
+        @Override
+        public SharedDrive[] newArray(int size) {
+            return new SharedDrive[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -26,70 +49,6 @@ public class SharedDrive {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public String getDeparture() {
-        return departure;
-    }
-
-    public void setDeparture(String departure) {
-        this.departure = departure;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public List<String> getStops() {
-        return stops;
-    }
-
-    public void setStops(List<String> stops) {
-        this.stops = stops;
-    }
-
-    public DrivePreferences getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(DrivePreferences preferences) {
-        this.preferences = preferences;
-    }
-
-    public DriveTime getTime() {
-        return time;
-    }
-
-    public void setTime(DriveTime time) {
-        this.time = time;
-    }
-
-    public DrivePrice getPrice() {
-        return price;
-    }
-
-    public void setPrice(DrivePrice price) {
-        this.price = price;
     }
 
 }

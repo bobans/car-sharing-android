@@ -4,17 +4,21 @@
     <color name="colorPrimaryDark">#01579B</color>
     <color name="colorAccent">#FF5722</color>
     <color name="colorText">#424242</color>
+    <color name="colorTextLabel">#939393</color>
     <color name="colorTextError">#D32F2F</color>
     <color name="colorButton">#039BE5</color>
     <color name="colorButtonText">#ffffff</color>
     <color name="colorButtonPressed">#4FC3F7</color>
     <color name="colorButtonDisabled">#9E9E9E</color>
     <color name="colorDisabled">#9E9E9E</color>
-    <color name="colorDivider">#9E9E9E</color>
+    <color name="colorDivider">#E0E0E0</color>
 
     <!-- Splash Screen -->
     <color name="colorAccentSplashScreen">#FF5722</color>
     <color name="colorPrimarySplashScreen">#000000</color>
     <color name="colorPrimaryDarkSplashScreen">#000000</color>
     <color name="colorTextWhite">#ffffff</color>
+    <color name="colorPreferencePositive">#00E576</color>
+    <color name="colorPreferenceNegative">#EE5451</color>
+    <color name="colorPreferenceNeutral">#B2B2B2</color>
 </resources>

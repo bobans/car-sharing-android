@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
@@ -24,16 +26,25 @@ import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<SharedDrive, SharedDrivesAdapter.ViewHolder> {
+public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, SharedDrivesAdapter.ViewHolder> {
 
     private Typeface fontRegular;
     private Typeface fontMedium;
+    private OnSharedDriveClickListener onSharedDriveClickListener;
 
     public SharedDrivesAdapter(Context context) {
-        super();
+        this(context, null);
+    }
+
+    public SharedDrivesAdapter(Context context, List<SharedDrive> items) {
+        super(items);
 
         fontRegular = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
         fontMedium = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Medium.ttf");
+    }
+
+    public void setOnSharedDriveClickListener(OnSharedDriveClickListener onSharedDriveClickListener) {
+        this.onSharedDriveClickListener = onSharedDriveClickListener;
     }
 
     @Override
@@ -48,8 +59,6 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
         setFonts(holder);
 
         holder.route.setText(holder.itemView.getContext().getString(R.string.route, drive.getDeparture(), drive.getDestination()));
-        holder.name.setText(drive.getUser().getName());
-        holder.car.setText(holder.itemView.getContext().getString(R.string.car, drive.getCar().getModel().getMake().getTitle(), drive.getCar().getModel().getTitle(), drive.getCar().getYear()));
         holder.date.setText(DateTimeUtils.printMediumDateTime(drive.getTime().getDepartureTime()));
         if (drive.getTime().isRepeat()) {
             String repeatDays = drive.getTime().getRepeatDays();
@@ -60,12 +69,14 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
             holder.friday.setActivated(repeatDays.contains("F"));
             holder.saturday.setActivated(repeatDays.contains("U"));
             holder.sunday.setActivated(repeatDays.contains("S"));
-        }
-
-        if (position == getSelection()) {
-            holder.expand.setVisibility(View.VISIBLE);
         } else {
-            holder.expand.setVisibility(View.GONE);
+            holder.monday.setActivated(false);
+            holder.tuesday.setActivated(false);
+            holder.wednesday.setActivated(false);
+            holder.thursday.setActivated(false);
+            holder.friday.setActivated(false);
+            holder.saturday.setActivated(false);
+            holder.sunday.setActivated(false);
         }
 
         setPreferenceState(drive.getPreferences().getMusic(), holder.preferenceMusic);
@@ -85,29 +96,13 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
             }
         }
 
-        if (drive.getStops().size() > 0) {
-            boolean first = true;
-            holder.stops.setText("");
-            for (String stop : drive.getStops()) {
-                if (first) {
-                    first = false;
-                } else {
-                    holder.stops.append(", ");
-                }
-                holder.stops.append(stop);
-            }
-        } else {
-            holder.stops.setText(R.string.text_no_stops);
-        }
+        holder.seats.setText(String.valueOf(drive.getSeats() - drive.getPassengers().size()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                if (position == getSelection()) {
-                    setSelection(-1);
-                } else {
-                    setSelection(position);
+                if (onSharedDriveClickListener != null) {
+                    onSharedDriveClickListener.onSharedDriveClick(SharedDrivesAdapter.this, holder.getAdapterPosition(), getItemAt(holder.getAdapterPosition()));
                 }
             }
         });
@@ -117,19 +112,19 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
         switch (preferenceState) {
             case DrivePreferences.FLAG_POSITIVE: {
                 view.setActivated(true);
-                view.setEnabled(true);
+                view.setSelected(true);
                 break;
             }
 
             case DrivePreferences.FLAG_NEGATIVE: {
                 view.setActivated(false);
-                view.setEnabled(false);
+                view.setSelected(true);
                 break;
             }
 
             case DrivePreferences.FLAG_NEUTRAL: {
                 view.setActivated(false);
-                view.setEnabled(true);
+                view.setSelected(false);
                 break;
             }
         }
@@ -137,8 +132,6 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
 
     private void setFonts(ViewHolder holder) {
         holder.route.setTypeface(fontMedium);
-        holder.name.setTypeface(fontRegular);
-        holder.car.setTypeface(fontRegular);
         holder.date.setTypeface(fontRegular);
         holder.monday.setTypeface(fontMedium);
         holder.tuesday.setTypeface(fontMedium);
@@ -147,6 +140,11 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
         holder.friday.setTypeface(fontMedium);
         holder.saturday.setTypeface(fontMedium);
         holder.sunday.setTypeface(fontMedium);
+        holder.seats.setTypeface(fontRegular);
+    }
+
+    public interface OnSharedDriveClickListener {
+        void onSharedDriveClick(SharedDrivesAdapter adapter, int position, SharedDrive sharedDrive);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -166,10 +164,7 @@ public class SharedDrivesAdapter extends SelectableRecyclerViewArrayAdapter<Shar
         @BindView(R.id.text_view_repetition_friday) TextView friday;
         @BindView(R.id.text_view_repetition_saturday) TextView saturday;
         @BindView(R.id.text_view_repetition_sunday) TextView sunday;
-        @BindView(R.id.expand_container) ViewGroup expand;
-        @BindView(R.id.text_view_name) TextView name;
-        @BindView(R.id.text_view_car) TextView car;
-        @BindView(R.id.text_view_stops) TextView stops;
+        @BindView(R.id.text_view_seats) TextView seats;
 
         public ViewHolder(View itemView) {
             super(itemView);

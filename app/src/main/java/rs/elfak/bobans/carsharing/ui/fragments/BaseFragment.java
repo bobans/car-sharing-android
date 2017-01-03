@@ -1,9 +1,12 @@
 package rs.elfak.bobans.carsharing.ui.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +63,15 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
         loadingView.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        activity.setTitle(getTitleResId());
+    }
+
+    protected abstract @StringRes int getTitleResId();
+
     @NonNull
     protected abstract View onCreateView(LayoutInflater inflater, ViewGroup container);
 
@@ -97,4 +109,23 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
             ((BaseActivity) getActivity()).showNoInternetConnection();
         }
     }
+
+    @Override
+    public void navigateToActivity(Class activityClass, Bundle extras) {
+        Intent intent = new Intent(getContext(), activityClass);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToActivityForResult(int requestCode, Class activityClass, Bundle extras) {
+        Intent intent = new Intent(getContext(), activityClass);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivityForResult(intent, requestCode);
+    }
+
 }
