@@ -18,6 +18,7 @@ import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
+import rs.elfak.bobans.carsharing.models.UserDAO;
 import rx.Observable;
 
 /**
@@ -38,7 +39,7 @@ public interface ApiMethods {
     Observable<User> getUser(@Header("Authorization") String token);
 
     @POST(ApiConstants.USERS_CREATE)
-    Observable<Response<Void>> createUser(@Header("Authorization") String token, @Body User user);
+    Observable<Response<Void>> createUser(@Header("Authorization") String token, @Body UserDAO user);
 
     @GET(ApiConstants.MAKES)
     Observable<List<Make>> getMakes(@Header("Authorization") String token);

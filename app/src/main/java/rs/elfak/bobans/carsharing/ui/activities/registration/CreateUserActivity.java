@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.joda.time.DateTime;
 
@@ -32,7 +31,9 @@ import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.registration.CreateUserInteractor;
 import rs.elfak.bobans.carsharing.models.Car;
+import rs.elfak.bobans.carsharing.models.CarDAO;
 import rs.elfak.bobans.carsharing.models.User;
+import rs.elfak.bobans.carsharing.models.UserDAO;
 import rs.elfak.bobans.carsharing.presenters.registration.CreateUserPresenter;
 import rs.elfak.bobans.carsharing.ui.activities.BaseActivity;
 import rs.elfak.bobans.carsharing.ui.activities.HomeActivity;
@@ -40,9 +41,9 @@ import rs.elfak.bobans.carsharing.ui.activities.LoginEmailActivity;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
 import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
 import rs.elfak.bobans.carsharing.ui.views.CarViewHolder;
-import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
+import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
 
 /**
@@ -166,7 +167,7 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
         switch (requestCode) {
             case REQUEST_CREATE_CAR: {
                 if (resultCode == RESULT_OK) {
-                    Car car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
+                    CarDAO car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
                     CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
                     holder.attachToView(carsContainer);
                     registerForContextMenu(holder.getItemView());
@@ -225,8 +226,8 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
         }
     }
 
-    private User createUser() {
-        User user = new User();
+    private UserDAO createUser() {
+        UserDAO user = new UserDAO();
         user.setName(etName.getText().toString());
         user.setEmail(etEmail.getText().toString());
         user.setCity(etCity.getText().toString());
@@ -235,11 +236,11 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
         if (user.getUserType() == User.TYPE_DRIVER) {
             user.setDriverLicenseDate((DateTime) etDriverLicense.getTag());
             for (int i=0; i<carsContainer.getChildCount(); i++) {
-                user.addCar((Car) carsContainer.getChildAt(i).getTag());
+                user.addCar((CarDAO) carsContainer.getChildAt(i).getTag());
             }
         } else {
             user.setDriverLicenseDate(null);
-            user.setCars(new ArrayList<Car>());
+            user.setCars(new ArrayList<CarDAO>());
         }
         return user;
     }

@@ -1,37 +1,29 @@
 package rs.elfak.bobans.carsharing.models;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * Created by Boban Stajic.
  *
  * @author Boban Stajic<bobanstajic@gmail.com>
  */
-public class Car implements Parcelable {
+public class Car extends CarDAO {
 
     private long id;
-    private Model model;
-    private int year;
-    private String registrationPlates;
 
     public Car() {
         this.id = -1;
     }
 
     protected Car(Parcel in) {
+        super(in);
         id = in.readLong();
-        model = in.readParcelable(Model.class.getClassLoader());
-        year = in.readInt();
-        registrationPlates = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
         dest.writeLong(id);
-        dest.writeParcelable(model, flags);
-        dest.writeInt(year);
-        dest.writeString(registrationPlates);
     }
 
     @Override
@@ -57,30 +49,6 @@ public class Car implements Parcelable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Model getModel() {
-        return model;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getRegistrationPlates() {
-        return registrationPlates;
-    }
-
-    public void setRegistrationPlates(String registrationPlates) {
-        this.registrationPlates = registrationPlates;
     }
 
 }

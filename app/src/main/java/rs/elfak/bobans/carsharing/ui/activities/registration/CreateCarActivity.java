@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.registration.CreateCarInteractor;
 import rs.elfak.bobans.carsharing.models.Car;
+import rs.elfak.bobans.carsharing.models.CarDAO;
 import rs.elfak.bobans.carsharing.models.Make;
 import rs.elfak.bobans.carsharing.models.Model;
 import rs.elfak.bobans.carsharing.presenters.registration.CreateCarPresenter;
@@ -54,7 +55,7 @@ public class CreateCarActivity extends BaseActivity<Object, CreateCarInteractor,
     @BindView(R.id.edit_text_plates) EditText etPlates;
     @BindView(R.id.button_create_car) Button btnCreate;
 
-    private Car car;
+    private CarDAO car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +164,7 @@ public class CreateCarActivity extends BaseActivity<Object, CreateCarInteractor,
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                    Car car = createCar();
+                    CarDAO car = createCar();
                     Intent data = new Intent();
                     data.putExtra(EXTRA_CAR, car);
                     setResult(RESULT_OK, data);
@@ -174,8 +175,8 @@ public class CreateCarActivity extends BaseActivity<Object, CreateCarInteractor,
         }
     }
 
-    private Car createCar() {
-        Car car = new Car();
+    private CarDAO createCar() {
+        CarDAO car = new CarDAO();
         car.setModel((Model) spModel.getSelectedItem());
         car.setYear(Integer.parseInt(etYear.getText().toString()));
         car.setRegistrationPlates(etPlates.getText().toString());

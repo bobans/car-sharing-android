@@ -8,6 +8,7 @@ import rs.elfak.bobans.carsharing.api.ApiError;
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.interactors.registration.CreateUserInteractor;
 import rs.elfak.bobans.carsharing.models.User;
+import rs.elfak.bobans.carsharing.models.UserDAO;
 import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
@@ -26,7 +27,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
         return new CreateUserInteractor();
     }
 
-    public void createUser(final User user) {
+    public void createUser(final UserDAO user) {
         if (isViewAttached()) {
             getView().showLoading(false);
         }
@@ -68,7 +69,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
             public void onNext(Response<Void> voidResponse) {
                 switch (voidResponse.code()) {
                     case 201: {
-                        SessionManager.getInstance().setUser(user);
+                        getUser();
                         if (isViewAttached()) {
                             getView().showContent();
                             getView().showMain();
@@ -93,4 +94,58 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
             }
         });
     }
+
+    private void getUser() {
+        getInteractor().getUser(new Observer<User>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof HttpException) {
+                    ApiError error = ApiManager.parseError(((HttpException) e).response());
+                    switch (error.getCode()) {
+                        case 404: {
+                            if (isViewAttached()) {
+                                getView().showError(e, false);
+                            }
+                            break;
+                        }
+
+                        default: {
+                            if (isViewAttached()) {
+                                getView().showError(e, false);
+                                getView().showContent();
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    if (isViewAttached()) {
+                        getView().showError(e, false);
+                        getView().showContent();
+                    }
+                }
+            }
+
+            @Override
+            public void onNext(User user) {
+                if (user != null) {
+                    SessionManager.getInstance().setUser(user);
+                    if (isViewAttached()) {
+                        getView().showContent();
+                        getView().showMain();
+                    }
+                } else {
+                    if (isViewAttached()) {
+                        getView().showContent();
+                        getView().showError(new Exception("User null"), false);
+                    }
+                }
+            }
+        });
+    }
+
 }

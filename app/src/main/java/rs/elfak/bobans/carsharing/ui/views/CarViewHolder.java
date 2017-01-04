@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.models.Car;
+import rs.elfak.bobans.carsharing.models.CarDAO;
 
 /**
  * Created by Boban Stajic.
@@ -29,7 +30,7 @@ public class CarViewHolder {
     private Typeface fontRegular;
     private Typeface fontMedium;
 
-    public CarViewHolder(LayoutInflater inflater, ViewGroup parent, Car car) {
+    public CarViewHolder(LayoutInflater inflater, ViewGroup parent, CarDAO car) {
         itemView = inflater.inflate(R.layout.item_car, parent, false);
 
         fontRegular = Typeface.createFromAsset(inflater.getContext().getAssets(), "fonts/Roboto-Regular.ttf");
@@ -40,7 +41,7 @@ public class CarViewHolder {
         bindView(car);
     }
 
-    private void bindView(Car car) {
+    private void bindView(CarDAO car) {
         tvMake.setTypeface(fontMedium);
         tvModel.setTypeface(fontRegular);
         tvPlates.setTypeface(fontMedium);
