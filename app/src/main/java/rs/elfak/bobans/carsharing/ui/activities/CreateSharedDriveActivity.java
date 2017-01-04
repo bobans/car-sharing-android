@@ -34,14 +34,12 @@ import rs.elfak.bobans.carsharing.models.DrivePreferences;
 import rs.elfak.bobans.carsharing.models.DrivePreferencesDAO;
 import rs.elfak.bobans.carsharing.models.DrivePrice;
 import rs.elfak.bobans.carsharing.models.DrivePriceDAO;
-import rs.elfak.bobans.carsharing.models.DriveTime;
 import rs.elfak.bobans.carsharing.models.DriveTimeDAO;
-import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.presenters.CreateSharedDrivePresenter;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
-import rs.elfak.bobans.carsharing.views.CreateSharedDriveView;
+import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
 
 /**
  * Created by Boban Stajic.
@@ -49,7 +47,7 @@ import rs.elfak.bobans.carsharing.views.CreateSharedDriveView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class CreateSharedDriveActivity extends BaseActivity<Object, CreateSharedDriveInteractor, CreateSharedDriveView, CreateSharedDrivePresenter> implements CreateSharedDriveView, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class CreateSharedDriveActivity extends BaseActivity<Object, CreateSharedDriveInteractor, ICreateSharedDriveView, CreateSharedDrivePresenter> implements ICreateSharedDriveView, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.text_input_departure) TextInputLayout tiDeparture;

@@ -46,6 +46,10 @@
             android:label="@string/title_activity_create_shared_drive"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.activities.ViewSharedDriveActivity"
+            android:label="@string/title_activity_view_shared_drive"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -96,4 +96,6 @@
     <string name="preference_neutral">Neutralno</string>
     <string name="preference_negative">Nikako</string>
     <string name="title_fragment_shared_drives">Vožnje</string>
+    <string name="title_activity_view_shared_drive">Vožnja</string>
+    <string name="action_delete">Izbriši</string>
 </resources>

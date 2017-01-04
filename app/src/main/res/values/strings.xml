@@ -96,4 +96,6 @@
     <string name="preference_neutral">Neutral</string>
     <string name="preference_negative">Negative</string>
     <string name="title_fragment_shared_drives">Drives</string>
+    <string name="title_activity_view_shared_drive">Shared Drive</string>
+    <string name="action_delete">Delete</string>
 </resources>

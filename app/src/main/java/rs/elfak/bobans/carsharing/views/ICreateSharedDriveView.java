@@ -12,7 +12,7 @@ import rs.elfak.bobans.carsharing.models.Car;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public interface CreateSharedDriveView extends IBaseView<Object> {
+public interface ICreateSharedDriveView extends IBaseView<Object> {
     /**
      * Shows date picker.
      *

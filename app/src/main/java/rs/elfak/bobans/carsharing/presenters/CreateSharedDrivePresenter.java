@@ -9,9 +9,8 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.CreateSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.Car;
-import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
-import rs.elfak.bobans.carsharing.views.CreateSharedDriveView;
+import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
 import rx.Observer;
 
 /**
@@ -20,7 +19,7 @@ import rx.Observer;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class CreateSharedDrivePresenter extends BasePresenter<CreateSharedDriveView, CreateSharedDriveInteractor> {
+public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDriveView, CreateSharedDriveInteractor> {
 
     private static final int REQUEST_DATE = 9001;
     private static final int REQUEST_DEPARTURE_TIME = 9002;
