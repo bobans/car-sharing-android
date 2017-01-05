@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,7 +31,534 @@
             android:orientation="vertical"
             android:padding="@dimen/layout_side_margin">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/layout_control_space_small"
+                    android:layout_marginRight="@dimen/layout_control_space_small"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_departure"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_departure"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_departure"
+                            android:inputType="none"
+                            tools:text="Nis" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
+                    android:layout_marginStart="@dimen/layout_control_space_small"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_destination"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_destination"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_departure"
+                            android:inputType="none"
+                            tools:text="Vranje" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/layout_control_space_small"
+                    android:layout_marginRight="@dimen/layout_control_space_small"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_car"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_car"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_car"
+                            android:inputType="none"
+                            tools:text="Renault Laguna (2001)" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
+                    android:layout_marginStart="@dimen/layout_control_space_small"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_seats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_seats"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_seats"
+                            android:inputType="none"
+                            tools:text="3" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_view_preference_music"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/layout_control_space_small"
+                        android:layout_marginRight="@dimen/layout_control_space_small"
+                        android:layout_weight="1"
+                        android:drawableEnd="@drawable/ic_drive_preference_music"
+                        android:drawableRight="@drawable/ic_drive_preference_music"
+                        android:text="@string/preference_music"
+                        android:textColor="@color/text_color_drive_preference"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_preference_talk"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space_small"
+                        android:layout_marginStart="@dimen/layout_control_space_small"
+                        android:layout_weight="1"
+                        android:drawableEnd="@drawable/ic_drive_preference_talk"
+                        android:drawableRight="@drawable/ic_drive_preference_talk"
+                        android:text="@string/preference_talking"
+                        android:textColor="@color/text_color_drive_preference"
+                        android:textSize="@dimen/text_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_control_space"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_view_preference_pets"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/layout_control_space_small"
+                        android:layout_marginRight="@dimen/layout_control_space_small"
+                        android:layout_weight="1"
+                        android:drawableEnd="@drawable/ic_drive_preference_pets"
+                        android:drawableRight="@drawable/ic_drive_preference_pets"
+                        android:text="@string/preference_pets"
+                        android:textColor="@color/text_color_drive_preference"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_preference_smoking"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space_small"
+                        android:layout_marginStart="@dimen/layout_control_space_small"
+                        android:layout_weight="1"
+                        android:drawableEnd="@drawable/ic_drive_preference_smoking"
+                        android:drawableRight="@drawable/ic_drive_preference_smoking"
+                        android:text="@string/preference_smoking"
+                        android:textColor="@color/text_color_drive_preference"
+                        android:textSize="@dimen/text_size" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/layout_control_space"
+                    android:background="@color/colorDivider" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:layout_marginEnd="@dimen/layout_control_space_small"
+                android:layout_marginRight="@dimen/layout_control_space_small"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                    <EditText
+                        android:id="@+id/edit_text_date"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/label_date"
+                        android:inputType="date"
+                        android:nextFocusDown="@+id/edit_text_departure_time"
+                        tools:text="Dec 30, 2016" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/repetition_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_control_space"
+                    android:layout_marginBottom="@dimen/layout_control_space"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_monday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space"
+                        android:layout_marginStart="@dimen/layout_control_space"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_tuesday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space"
+                        android:layout_marginStart="@dimen/layout_control_space"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_wednesday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space"
+                        android:layout_marginStart="@dimen/layout_control_space"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_thursday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space"
+                        android:layout_marginStart="@dimen/layout_control_space"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_friday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space"
+                        android:layout_marginStart="@dimen/layout_control_space"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_saturday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                    <TextView
+                        android:id="@+id/text_view_repetition_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_control_space"
+                        android:layout_marginStart="@dimen/layout_control_space"
+                        android:background="@drawable/abbreviation_day_background_large"
+                        android:gravity="center"
+                        android:text="@string/abbreviation_sunday"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="@dimen/item_primary_text_size" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/layout_control_space_small"
+                    android:layout_marginRight="@dimen/layout_control_space_small"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_departure_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_departure_time"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_departure_time"
+                            android:inputType="time"
+                            android:nextFocusDown="@+id/edit_text_arrival_time"
+                            tools:text="18:00" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
+                    android:layout_marginStart="@dimen/layout_control_space_small"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_arrival_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_arrival_time"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_arrival_time"
+                            android:inputType="time"
+                            tools:text="18:00" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/layout_control_space_small"
+                    android:layout_marginRight="@dimen/layout_control_space_small"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_price"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_price"
+                            android:inputType="time"
+                            tools:text="1.500" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/layout_control_space_small"
+                    android:layout_marginStart="@dimen/layout_control_space_small"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_price_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                        <EditText
+                            android:id="@+id/edit_text_price_type"
+                            style="@style/AppTheme.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/label_price_type"
+                            android:inputType="none"
+                            tools:text="By person" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

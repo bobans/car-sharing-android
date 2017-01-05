@@ -25,4 +25,9 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         return new ViewSharedDriveInteractor();
     }
 
+    public void loadSharedDrive() {
+        if (isViewAttached() && sharedDrive != null) {
+            getView().setData(sharedDrive);
+        }
+    }
 }
