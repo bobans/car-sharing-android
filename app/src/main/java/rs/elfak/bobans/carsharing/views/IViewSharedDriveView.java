@@ -8,4 +8,5 @@ import rs.elfak.bobans.carsharing.models.SharedDrive;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 public interface IViewSharedDriveView extends IBaseView<SharedDrive> {
+    void deleteSuccessful();
 }

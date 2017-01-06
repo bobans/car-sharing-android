@@ -26,7 +26,6 @@ import rs.elfak.bobans.carsharing.views.IBaseView;
  *
  * @author Boban Stajic<bobanstajic@gmail.com
  */
-
 public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseView<M>, P extends BasePresenter<V, I>>
         extends MvpLceActivity<FrameLayout, M, V, P>
         implements IBaseView<M> {
@@ -186,4 +185,5 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         }
         startActivityForResult(intent, requestCode);
     }
+
 }

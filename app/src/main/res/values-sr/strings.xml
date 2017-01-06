@@ -98,4 +98,7 @@
     <string name="title_fragment_shared_drives">Vožnje</string>
     <string name="title_activity_view_shared_drive">Vožnja</string>
     <string name="action_delete">Izbriši</string>
+    <string name="prompt_delete_shared_drive">Da li želite da izbrišete vožnju?</string>
+    <string name="prompt_answer_yes">Da</string>
+    <string name="prompt_answer_no">Ne</string>
 </resources>

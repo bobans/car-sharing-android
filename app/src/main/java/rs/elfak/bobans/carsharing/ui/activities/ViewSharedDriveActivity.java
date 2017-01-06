@@ -1,8 +1,10 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -146,7 +148,17 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
             }
 
             case R.id.action_delete: {
-                // TODO on delete click
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage(R.string.prompt_delete_shared_drive)
+                        .setPositiveButton(R.string.prompt_answer_yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                getPresenter().deleteSharedDrive();
+                            }
+                        })
+                        .setNegativeButton(R.string.prompt_answer_no, null)
+                        .show();
                 return true;
             }
 
@@ -239,4 +251,9 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         getPresenter().loadSharedDrive();
     }
 
+    @Override
+    public void deleteSuccessful() {
+        setResult(RESULT_OK);
+        finish();
+    }
 }
