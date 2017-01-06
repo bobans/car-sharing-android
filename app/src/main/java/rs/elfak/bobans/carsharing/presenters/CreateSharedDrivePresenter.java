@@ -9,6 +9,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.CreateSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.Car;
+import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
 import rx.Observer;
@@ -24,6 +25,12 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
     private static final int REQUEST_DATE = 9001;
     private static final int REQUEST_DEPARTURE_TIME = 9002;
     private static final int REQUEST_ARRIVAL_TIME = 9003;
+
+    private SharedDrive sharedDrive;
+
+    public CreateSharedDrivePresenter(SharedDrive sharedDrive) {
+        this.sharedDrive = sharedDrive;
+    }
 
     @NonNull
     @Override
@@ -109,14 +116,18 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
             @Override
             public void onNext(List<Car> cars) {
                 if (isViewAttached()) {
-                    getView().setCars(cars);
+                    Car selected = null;
+                    if (sharedDrive != null) {
+                        selected = sharedDrive.getCar();
+                    }
+                    getView().setCars(cars, selected);
                     getView().showContent();
                 }
             }
         });
     }
 
-    public void createDrive(SharedDriveDAO sharedDrive) {
+    private void createDrive(SharedDriveDAO sharedDrive) {
         if (isViewAttached()) {
             getView().showLoading(false);
         }
@@ -142,5 +153,63 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
                 }
             }
         });
+    }
+
+    private void updateDrive(final SharedDrive sharedDrive) {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().updateSharedDrive(sharedDrive, new Observer<ResponseBody>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (isViewAttached()) {
+                    getView().showError(e, false);
+                    getView().showContent();
+                }
+            }
+
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().sharedDriveUpdated(sharedDrive);
+                }
+            }
+        });
+    }
+
+    public void onDoneClicked(SharedDriveDAO sharedDrive) {
+        if (this.sharedDrive != null) {
+            this.sharedDrive.setDeparture(sharedDrive.getDeparture());
+            this.sharedDrive.setDestination(sharedDrive.getDestination());
+            this.sharedDrive.setStops(sharedDrive.getStops());
+            this.sharedDrive.setCar(sharedDrive.getCar());
+            this.sharedDrive.setSeats(sharedDrive.getSeats());
+            this.sharedDrive.getPreferences().setMusic(sharedDrive.getPreferences().getMusic());
+            this.sharedDrive.getPreferences().setTalk(sharedDrive.getPreferences().getTalk());
+            this.sharedDrive.getPreferences().setPets(sharedDrive.getPreferences().getPets());
+            this.sharedDrive.getPreferences().setSmoking(sharedDrive.getPreferences().getSmoking());
+            this.sharedDrive.getTime().setDate(sharedDrive.getTime().getDate());
+            this.sharedDrive.getTime().setRepeat(sharedDrive.getTime().isRepeat());
+            this.sharedDrive.getTime().setRepeatDays(sharedDrive.getTime().getRepeatDays());
+            this.sharedDrive.getTime().setDepartureTime(sharedDrive.getTime().getDepartureTime());
+            this.sharedDrive.getTime().setArrivalTime(sharedDrive.getTime().getArrivalTime());
+            this.sharedDrive.getPrice().setPrice(sharedDrive.getPrice().getPrice());
+            this.sharedDrive.getPrice().setType(sharedDrive.getPrice().getType());
+            updateDrive(this.sharedDrive);
+        } else {
+            createDrive(sharedDrive);
+        }
+    }
+
+    public void loadSharedDrive() {
+        if (sharedDrive != null && isViewAttached()) {
+            getView().setData(sharedDrive);
+        }
     }
 }

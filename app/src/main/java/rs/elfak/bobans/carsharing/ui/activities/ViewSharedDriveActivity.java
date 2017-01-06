@@ -1,6 +1,7 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -143,7 +144,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
             }
 
             case R.id.action_edit: {
-                // TODO on edit click
+                getPresenter().onEditClick();
                 return true;
             }
 
@@ -255,5 +256,23 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     public void deleteSuccessful() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1: {
+                setResult(resultCode);
+                if (resultCode == RESULT_OK) {
+                    setData((SharedDrive) data.getParcelableExtra(CreateSharedDriveActivity.EXTRA_SHARED_DRIVE));
+                }
+                break;
+            }
+
+            default: {
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+            }
+        }
     }
 }

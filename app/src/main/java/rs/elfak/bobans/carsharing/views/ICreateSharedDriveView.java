@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 import java.util.List;
 
 import rs.elfak.bobans.carsharing.models.Car;
+import rs.elfak.bobans.carsharing.models.SharedDrive;
 
 /**
  * Created by Boban Stajic.
@@ -12,7 +13,7 @@ import rs.elfak.bobans.carsharing.models.Car;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public interface ICreateSharedDriveView extends IBaseView<Object> {
+public interface ICreateSharedDriveView extends IBaseView<SharedDrive> {
     /**
      * Shows date picker.
      *
@@ -54,11 +55,17 @@ public interface ICreateSharedDriveView extends IBaseView<Object> {
      * Sets user's cars.
      *
      * @param cars
+     * @param selected
      */
-    void setCars(List<Car> cars);
+    void setCars(List<Car> cars, Car selected);
 
     /**
      * Shared drive is successfully created.
      */
     void sharedDriveCreated();
+
+    /**
+     * Shared drive is successfully updated.
+     */
+    void sharedDriveUpdated(SharedDrive sharedDrive);
 }

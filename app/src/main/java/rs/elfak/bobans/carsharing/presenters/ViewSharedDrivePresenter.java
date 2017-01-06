@@ -1,10 +1,12 @@
 package rs.elfak.bobans.carsharing.presenters;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.ViewSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
+import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
 import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
 import rx.Observer;
 
@@ -59,5 +61,13 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
                 }
             }
         });
+    }
+
+    public void onEditClick() {
+        if (isViewAttached()) {
+            Bundle extras = new Bundle();
+            extras.putParcelable(CreateSharedDriveActivity.EXTRA_SHARED_DRIVE, sharedDrive);
+            getView().navigateToActivityForResult(1, CreateSharedDriveActivity.class, extras);
+        }
     }
 }

@@ -34,4 +34,11 @@ public class CreateSharedDriveInteractor extends BaseInteractor {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
+
+    public void updateSharedDrive(SharedDrive sharedDrive, Observer<ResponseBody> observer) {
+        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().updateSharedDrive(SessionManager.getInstance().getToken(), sharedDrive);
+        response.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
 }

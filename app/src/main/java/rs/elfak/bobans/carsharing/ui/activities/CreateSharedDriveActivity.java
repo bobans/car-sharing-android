@@ -2,6 +2,7 @@ package rs.elfak.bobans.carsharing.ui.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -23,6 +24,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,6 +37,7 @@ import rs.elfak.bobans.carsharing.models.DrivePreferencesDAO;
 import rs.elfak.bobans.carsharing.models.DrivePrice;
 import rs.elfak.bobans.carsharing.models.DrivePriceDAO;
 import rs.elfak.bobans.carsharing.models.DriveTimeDAO;
+import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.presenters.CreateSharedDrivePresenter;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
@@ -47,7 +50,9 @@ import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class CreateSharedDriveActivity extends BaseActivity<Object, CreateSharedDriveInteractor, ICreateSharedDriveView, CreateSharedDrivePresenter> implements ICreateSharedDriveView, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateSharedDriveInteractor, ICreateSharedDriveView, CreateSharedDrivePresenter> implements ICreateSharedDriveView, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+
+    public static final String EXTRA_SHARED_DRIVE = "EXTRA_SHARED_DRIVE";
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.text_input_departure) TextInputLayout tiDeparture;
@@ -84,6 +89,7 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
 
     private DateTimeFormatter datePrinter;
     private DateTimeFormatter timePrinter;
+    private DecimalFormat pricePrinter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +100,9 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
 
         datePrinter = DateTimeFormat.forPattern("MMM dd, YYYY");
         timePrinter = DateTimeFormat.forPattern("HH:mm");
+        pricePrinter = (DecimalFormat) DecimalFormat.getInstance();
+        pricePrinter.setMinimumFractionDigits(0);
+        pricePrinter.setMaximumFractionDigits(1);
 
         initView();
 
@@ -172,43 +181,8 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
 
             case R.id.action_save: {
                 if (checkInput()) {
-                    SharedDriveDAO sharedDrive = new SharedDriveDAO();
-                    sharedDrive.setDeparture(etDeparture.getText().toString());
-                    sharedDrive.setDestination(etDestination.getText().toString());
-                    // TODO stops
-                    sharedDrive.setCar((Car) spCar.getSelectedItem());
-                    sharedDrive.setSeats(Integer.parseInt(etSeats.getText().toString()));
-                    DrivePreferencesDAO drivePreferences = new DrivePreferencesDAO();
-                    drivePreferences.setMusic(getDrivePreference(tvPreferenceMusic));
-                    drivePreferences.setTalk(getDrivePreference(tvPreferenceTalk));
-                    drivePreferences.setPets(getDrivePreference(tvPreferencePets));
-                    drivePreferences.setSmoking(getDrivePreference(tvPreferenceSmoking));
-                    sharedDrive.setPreferences(drivePreferences);
-                    DriveTimeDAO driveTime = new DriveTimeDAO();
-                    driveTime.setDate((DateTime) etDate.getTag());
-                    driveTime.setRepeat(cbRepeat.isChecked());
-                    if (cbRepeat.isChecked()) {
-                        driveTime.setRepeatDays(createRepeatDays());
-                    }
-                    driveTime.setDepartureTime((DateTime) etDepartureTime.getTag());
-                    driveTime.setArrivalTime((DateTime) etArrivalTime.getTag());
-                    sharedDrive.setTime(driveTime);
-                    DrivePriceDAO drivePrice = new DrivePriceDAO();
-                    switch (spPriceType.getSelectedItemPosition()) {
-                        case 0: {
-                            drivePrice.setType(DrivePrice.PRICE_PER_PASSENGER);
-                            break;
-                        }
-
-                        case 1: {
-                            drivePrice.setType(DrivePrice.PRICE_TOTAL);
-                            break;
-                        }
-                    }
-                    drivePrice.setPrice(Double.parseDouble(etPrice.getText().toString()));
-                    sharedDrive.setPrice(drivePrice);
-                    sharedDrive.setUser(SessionManager.getInstance().getUser());
-                    getPresenter().createDrive(sharedDrive);
+                    SharedDriveDAO sharedDrive = createSharedDriveDAO();
+                    getPresenter().onDoneClicked(sharedDrive);
                 }
                 return true;
             }
@@ -217,6 +191,47 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
                 return super.onOptionsItemSelected(item);
             }
         }
+    }
+
+    @NonNull
+    private SharedDriveDAO createSharedDriveDAO() {
+        SharedDriveDAO sharedDrive = new SharedDriveDAO();
+        sharedDrive.setDeparture(etDeparture.getText().toString());
+        sharedDrive.setDestination(etDestination.getText().toString());
+        // TODO stops
+        sharedDrive.setCar((Car) spCar.getSelectedItem());
+        sharedDrive.setSeats(Integer.parseInt(etSeats.getText().toString()));
+        DrivePreferencesDAO drivePreferences = new DrivePreferencesDAO();
+        drivePreferences.setMusic(getDrivePreference(tvPreferenceMusic));
+        drivePreferences.setTalk(getDrivePreference(tvPreferenceTalk));
+        drivePreferences.setPets(getDrivePreference(tvPreferencePets));
+        drivePreferences.setSmoking(getDrivePreference(tvPreferenceSmoking));
+        sharedDrive.setPreferences(drivePreferences);
+        DriveTimeDAO driveTime = new DriveTimeDAO();
+        driveTime.setDate((DateTime) etDate.getTag());
+        driveTime.setRepeat(cbRepeat.isChecked());
+        if (cbRepeat.isChecked()) {
+            driveTime.setRepeatDays(createRepeatDays());
+        }
+        driveTime.setDepartureTime((DateTime) etDepartureTime.getTag());
+        driveTime.setArrivalTime((DateTime) etArrivalTime.getTag());
+        sharedDrive.setTime(driveTime);
+        DrivePriceDAO drivePrice = new DrivePriceDAO();
+        switch (spPriceType.getSelectedItemPosition()) {
+            case 0: {
+                drivePrice.setType(DrivePrice.PRICE_PER_PASSENGER);
+                break;
+            }
+
+            case 1: {
+                drivePrice.setType(DrivePrice.PRICE_TOTAL);
+                break;
+            }
+        }
+        drivePrice.setPrice(Double.parseDouble(etPrice.getText().toString()));
+        sharedDrive.setPrice(drivePrice);
+        sharedDrive.setUser(SessionManager.getInstance().getUser());
+        return sharedDrive;
     }
 
     private String createRepeatDays() {
@@ -290,17 +305,68 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
     @NonNull
     @Override
     public CreateSharedDrivePresenter createPresenter() {
-        return new CreateSharedDrivePresenter();
+        SharedDrive sharedDrive = null;
+        if (getIntent() != null) {
+            sharedDrive = getIntent().getParcelableExtra(EXTRA_SHARED_DRIVE);
+        }
+        return new CreateSharedDrivePresenter(sharedDrive);
     }
 
     @Override
-    public void setData(Object data) {
+    public void setData(SharedDrive data) {
+        etDeparture.setText(data.getDeparture());
+        etDestination.setText(data.getDestination());
+        etSeats.setText(String.valueOf(data.getSeats()));
+        setPreference(tvPreferenceMusic, data.getPreferences().getMusic());
+        setPreference(tvPreferenceTalk, data.getPreferences().getTalk());
+        setPreference(tvPreferencePets, data.getPreferences().getPets());
+        setPreference(tvPreferenceSmoking, data.getPreferences().getSmoking());
+        etDate.setText(datePrinter.print(data.getTime().getDate()));
+        etDate.setTag(data.getTime().getDate());
+        etDepartureTime.setText(timePrinter.print(data.getTime().getDepartureTime()));
+        etDepartureTime.setTag(data.getTime().getDepartureTime());
+        etArrivalTime.setText(timePrinter.print(data.getTime().getArrivalTime()));
+        etArrivalTime.setTag(data.getTime().getArrivalTime());
+        etPrice.setText(pricePrinter.format(data.getPrice().getPrice()));
+        switch (data.getPrice().getType()) {
+            case DrivePrice.PRICE_PER_PASSENGER: {
+                spPriceType.setSelection(0);
+                break;
+            }
 
+            case DrivePrice.PRICE_TOTAL: {
+                spPriceType.setSelection(1);
+                break;
+            }
+        }
+    }
+
+    private void setPreference(View preference, int setting) {
+        switch (setting) {
+            case DrivePreferences.FLAG_POSITIVE: {
+                preference.setActivated(true);
+                preference.setSelected(true);
+                break;
+            }
+
+            case DrivePreferences.FLAG_NEGATIVE: {
+                preference.setActivated(false);
+                preference.setSelected(true);
+                break;
+            }
+
+            case DrivePreferences.FLAG_NEUTRAL: {
+                preference.setActivated(false);
+                preference.setSelected(false);
+                break;
+            }
+        }
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
         getPresenter().loadCars(pullToRefresh);
+        getPresenter().loadSharedDrive();
     }
 
     @Override
@@ -420,7 +486,7 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
     }
 
     @Override
-    public void setCars(List<Car> cars) {
+    public void setCars(List<Car> cars, Car selected) {
         FontArrayAdapter<Car> adapter = new FontArrayAdapter<Car>(this, R.layout.spinner_item, cars, fontMedium) {
             @NonNull
             @Override
@@ -455,11 +521,26 @@ public class CreateSharedDriveActivity extends BaseActivity<Object, CreateShared
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropdownFont(fontMedium);
         spCar.setAdapter(adapter);
+        if (selected != null) {
+            for (int i = 0; i < spCar.getAdapter().getCount(); i++) {
+                if (selected.getId() == ((Car) spCar.getAdapter().getItem(i)).getId()) {
+                    spCar.setSelection(i);
+                }
+            }
+        }
     }
 
     @Override
     public void sharedDriveCreated() {
         setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void sharedDriveUpdated(SharedDrive sharedDrive) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_SHARED_DRIVE, sharedDrive);
+        setResult(RESULT_OK, data);
         finish();
     }
 

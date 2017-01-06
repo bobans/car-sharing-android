@@ -57,6 +57,9 @@ public interface ApiMethods {
     @POST(ApiConstants.SHARED_DRIVES)
     Observable<ResponseBody> createSharedDrive(@Header("Authorization") String token, @Body SharedDriveDAO sharedDrive);
 
+    @POST(ApiConstants.SHARED_DRIVES)
+    Observable<ResponseBody> updateSharedDrive(@Header("Authorization") String token, @Body SharedDrive sharedDrive);
+
     @DELETE(ApiConstants.SHARED_DRIVES_ID)
     Observable<ResponseBody> deleteSharedDrive(@Header("Authorization") String token, @Path("id") long id);
 }
