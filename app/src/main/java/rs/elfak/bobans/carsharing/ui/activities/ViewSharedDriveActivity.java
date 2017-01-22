@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
  *
  * @author Boban Stajic<bobanstajic@gmail.com
  */
-public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewSharedDriveInteractor, IViewSharedDriveView, ViewSharedDrivePresenter> implements IViewSharedDriveView {
+public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewSharedDriveInteractor, IViewSharedDriveView, ViewSharedDrivePresenter> implements IViewSharedDriveView, View.OnClickListener {
 
     public static final String EXTRA_SHARED_DRIVE = "EXTRA_SHARED_DRIVE";
 
@@ -70,12 +71,16 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     @BindView(R.id.edit_text_price) EditText etPrice;
     @BindView(R.id.text_input_price_type) TextInputLayout tiPriceType;
     @BindView(R.id.edit_text_price_type) EditText etPriceType;
+    @BindView(R.id.button_request_ride) Button btnRequestRide;
 
     @BindColor(R.color.colorDivider) int colorDivider;
 
     private DateTimeFormatter datePrinter;
     private DateTimeFormatter timePrinter;
     private DecimalFormat pricePrinter;
+
+    private boolean isOwner = false;
+    private boolean isPassenger = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +106,8 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setFonts();
+
+        btnRequestRide.setOnClickListener(this);
     }
 
     private void setFonts() {
@@ -126,11 +133,14 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         etPrice.setTypeface(fontMedium);
         tiPriceType.setTypeface(fontRegular);
         etPriceType.setTypeface(fontMedium);
+        btnRequestRide.setTypeface(fontMedium);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_view_shared_drive, menu);
+        if (isOwner) {
+            getMenuInflater().inflate(R.menu.activity_view_shared_drive, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -249,11 +259,36 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        getPresenter().loadSharedDrive();
+        getPresenter().loadData();
     }
 
     @Override
     public void deleteSuccessful() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void setIsOwner(boolean isOwner) {
+        this.isOwner = isOwner;
+        invalidateOptionsMenu();
+        btnRequestRide.setVisibility(isOwner ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
+    public void requestSuccessful() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void setIsPassenger(boolean isPassenger) {
+        this.isPassenger = isPassenger;
+        btnRequestRide.setText(isOwner || isPassenger ? R.string.button_cancel_ride_request : R.string.button_request_a_ride);
+    }
+
+    @Override
+    public void requestCanceled() {
         setResult(RESULT_OK);
         finish();
     }
@@ -271,6 +306,20 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
 
             default: {
                 super.onActivityResult(requestCode, resultCode, data);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_request_ride: {
+                if (!isPassenger) {
+                    getPresenter().requestARide();
+                } else {
+                    getPresenter().cancelRideRequest();
+                }
                 break;
             }
         }

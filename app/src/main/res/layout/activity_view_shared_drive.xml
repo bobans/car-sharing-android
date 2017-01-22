@@ -560,6 +560,15 @@
 
             </LinearLayout>
 
+            <Button
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:id="@+id/button_request_ride"
+                android:text="@string/button_request_a_ride"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -195,6 +195,12 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
     }
 
     @Override
+    public void showContent() {
+        super.showContent();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
     public void onRefresh() {
         ((SharedDrivesAdapter) recyclerView.getAdapter()).clear();
         loadData(true);

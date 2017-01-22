@@ -101,4 +101,6 @@
     <string name="prompt_delete_shared_drive">Are you sure you want to delete shared drive?</string>
     <string name="prompt_answer_yes">Yes</string>
     <string name="prompt_answer_no">No</string>
+    <string name="button_request_a_ride">Request a ride</string>
+    <string name="button_cancel_ride_request">Cancel request</string>
 </resources>

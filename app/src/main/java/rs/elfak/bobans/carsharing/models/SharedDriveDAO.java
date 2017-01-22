@@ -22,7 +22,7 @@ public class SharedDriveDAO implements Parcelable {
     private DriveTimeDAO time;
     private DrivePriceDAO price;
     private int seats;
-    private List<User> passengers;
+    private List<Passenger> passengers;
 
     public SharedDriveDAO() {
     }
@@ -37,7 +37,7 @@ public class SharedDriveDAO implements Parcelable {
         time = in.readParcelable(DriveTime.class.getClassLoader());
         price = in.readParcelable(DrivePrice.class.getClassLoader());
         seats = in.readInt();
-        passengers = in.createTypedArrayList(User.CREATOR);
+        passengers = in.createTypedArrayList(Passenger.CREATOR);
     }
 
     @Override
@@ -143,11 +143,11 @@ public class SharedDriveDAO implements Parcelable {
         this.seats = seats;
     }
 
-    public List<User> getPassengers() {
+    public List<Passenger> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(List<User> passengers) {
+    public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
     }
 

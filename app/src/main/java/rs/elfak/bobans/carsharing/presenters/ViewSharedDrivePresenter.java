@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.ViewSharedDriveInteractor;
+import rs.elfak.bobans.carsharing.models.Passenger;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
 import rx.Observer;
 
@@ -29,9 +31,17 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         return new ViewSharedDriveInteractor();
     }
 
-    public void loadSharedDrive() {
+    public void loadData() {
         if (isViewAttached() && sharedDrive != null) {
             getView().setData(sharedDrive);
+            getView().setIsOwner(sharedDrive.getUser().getId() == SessionManager.getInstance().getUser().getId());
+            boolean isPassenger = false;
+            for (Passenger passenger : sharedDrive.getPassengers()) {
+                if (passenger.getUser().getId() == SessionManager.getInstance().getUser().getId()) {
+                    isPassenger = true;
+                }
+            }
+            getView().setIsPassenger(isPassenger);
         }
     }
 
@@ -69,5 +79,63 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
             extras.putParcelable(CreateSharedDriveActivity.EXTRA_SHARED_DRIVE, sharedDrive);
             getView().navigateToActivityForResult(1, CreateSharedDriveActivity.class, extras);
         }
+    }
+
+    public void requestARide() {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().requestARide(sharedDrive.getId(), new Observer<ResponseBody>() {
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().showError(e, false);
+                }
+            }
+
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                if (isViewAttached()) {
+                    getView().requestSuccessful();
+                    getView().showContent();
+                }
+            }
+        });
+    }
+
+    public void cancelRideRequest() {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().cancelRideRequest(sharedDrive.getId(), new Observer<ResponseBody>() {
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().showError(e, false);
+                }
+            }
+
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                if (isViewAttached()) {
+                    getView().requestCanceled();
+                    getView().showContent();
+                }
+            }
+        });
     }
 }

@@ -101,4 +101,6 @@
     <string name="prompt_delete_shared_drive">Da li želite da izbrišete vožnju?</string>
     <string name="prompt_answer_yes">Da</string>
     <string name="prompt_answer_no">Ne</string>
+    <string name="button_request_a_ride">Zatraži vožnju</string>
+    <string name="button_cancel_ride_request">Otkaži vožnju</string>
 </resources>

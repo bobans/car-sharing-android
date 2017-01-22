@@ -22,4 +22,17 @@ public class ViewSharedDriveInteractor extends BaseInteractor {
                 .subscribe(observer);
     }
 
+    public void requestARide(long id, Observer<ResponseBody> observer) {
+        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().requestARide(SessionManager.getInstance().getToken(), id);
+        response.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    public void cancelRideRequest(long id, Observer<ResponseBody> observer) {
+        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().cancelRideRequest(SessionManager.getInstance().getToken(), id);
+        response.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
 }
