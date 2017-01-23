@@ -66,6 +66,6 @@ public interface ApiMethods {
     @POST(ApiConstants.SHARED_DRIVES_REQUEST)
     Observable<ResponseBody> requestARide(@Header("Authorization") String token, @Path("id") long id);
 
-    @POST(ApiConstants.SHARED_DRIVES_CANCEL_REQUEST)
+    @DELETE(ApiConstants.SHARED_DRIVES_REQUEST)
     Observable<ResponseBody> cancelRideRequest(@Header("Authorization") String token, @Path("id") long id);
 }

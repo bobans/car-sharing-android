@@ -23,7 +23,6 @@ class ApiConstants {
     static final String SHARED_DRIVES = "drives";
     static final String SHARED_DRIVES_ID = "drives/{id}";
     static final String SHARED_DRIVES_REQUEST = "drives/{id}/request";
-    static final String SHARED_DRIVES_CANCEL_REQUEST = "drives/{id}/request/cancel";
 
     static final String CARS = "cars";
 }
