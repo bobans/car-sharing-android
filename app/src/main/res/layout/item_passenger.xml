@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <View
+            android:id="@+id/passenger_status"
+            android:layout_width="3dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/image_view_user_photo"
+            android:background="@color/colorDivider"
+            android:src="@drawable/ic_user_placeholder"
+            android:layout_margin="@dimen/item_padding"
+            android:layout_width="@dimen/passenger_picture_size"
+            android:layout_height="@dimen/passenger_picture_size"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/text_view_name"
+            android:layout_margin="@dimen/item_padding"
+            tools:text="Boban Stajic"
+            android:textSize="@dimen/item_primary_text_size"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/image_button_reject"
+            style="?attr/actionButtonStyle"
+            android:src="@drawable/ic_clear_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null" />
+
+        <ImageButton
+            android:id="@+id/image_button_accept"
+            style="?attr/actionButtonStyle"
+            android:src="@drawable/ic_done_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+</LinearLayout>

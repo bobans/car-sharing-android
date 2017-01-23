@@ -103,4 +103,6 @@
     <string name="prompt_answer_no">Ne</string>
     <string name="button_request_a_ride">Zatraži vožnju</string>
     <string name="button_cancel_ride_request">Otkaži vožnju</string>
+    <string name="open">Otvori</string>
+    <string name="close">Zatvori</string>
 </resources>

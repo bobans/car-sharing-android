@@ -16,23 +16,19 @@ import rx.schedulers.Schedulers;
 public class ViewSharedDriveInteractor extends BaseInteractor {
 
     public void deleteSharedDrive(long id, Observer<ResponseBody> observer) {
-        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().deleteSharedDrive(SessionManager.getInstance().getToken(), id);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+        subscribe(ApiManager.getInstance().getApiMethods().deleteSharedDrive(SessionManager.getInstance().getToken(), id), observer);
     }
 
     public void requestARide(long id, Observer<ResponseBody> observer) {
-        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().requestARide(SessionManager.getInstance().getToken(), id);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+        subscribe(ApiManager.getInstance().getApiMethods().requestARide(SessionManager.getInstance().getToken(), id), observer);
     }
 
     public void cancelRideRequest(long id, Observer<ResponseBody> observer) {
-        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().cancelRideRequest(SessionManager.getInstance().getToken(), id);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+        subscribe(ApiManager.getInstance().getApiMethods().cancelRideRequest(SessionManager.getInstance().getToken(), id), observer);
     }
+
+    public void updateRideRequest(long driveId, long passengerId, int status, Observer<ResponseBody> observer) {
+        subscribe(ApiManager.getInstance().getApiMethods().updateRideRequest(SessionManager.getInstance().getToken(), driveId, passengerId, status), observer);
+    }
+
 }

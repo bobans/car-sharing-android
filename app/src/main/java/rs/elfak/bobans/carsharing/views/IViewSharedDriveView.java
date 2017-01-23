@@ -13,4 +13,5 @@ public interface IViewSharedDriveView extends IBaseView<SharedDrive> {
     void requestSuccessful();
     void setIsPassenger(boolean isPassenger);
     void requestCanceled();
+    void requestUpdated(int adapterPosition, int status);
 }

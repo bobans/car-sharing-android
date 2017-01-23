@@ -9,6 +9,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rs.elfak.bobans.carsharing.models.Car;
@@ -64,8 +65,12 @@ public interface ApiMethods {
     Observable<ResponseBody> deleteSharedDrive(@Header("Authorization") String token, @Path("id") long id);
 
     @POST(ApiConstants.SHARED_DRIVES_REQUEST)
-    Observable<ResponseBody> requestARide(@Header("Authorization") String token, @Path("id") long id);
+    Observable<ResponseBody> requestARide(@Header("Authorization") String token, @Path("driveId") long driveId);
 
     @DELETE(ApiConstants.SHARED_DRIVES_REQUEST)
-    Observable<ResponseBody> cancelRideRequest(@Header("Authorization") String token, @Path("id") long id);
+    Observable<ResponseBody> cancelRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId);
+
+    @PUT(ApiConstants.SHARED_DRIVES_UPDATE_REQUEST)
+    Observable<ResponseBody> updateRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId, @Path("passengerId") long passengerId, @Path("status") int status);
+    
 }

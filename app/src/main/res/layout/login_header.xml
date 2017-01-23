@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/content_description_header_image"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/header" />
 
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:contentDescription="@string/content_description_logo_image"
+        android:contentDescription="@null"
         android:src="@drawable/logo" />
 
 </FrameLayout>

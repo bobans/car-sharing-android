@@ -103,4 +103,6 @@
     <string name="prompt_answer_no">No</string>
     <string name="button_request_a_ride">Request a ride</string>
     <string name="button_cancel_ride_request">Cancel request</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

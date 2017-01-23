@@ -26,6 +26,15 @@ public abstract class RecyclerViewArrayAdapter<T, VH extends RecyclerView.ViewHo
         }
     }
 
+    public void setItems(List<T> items) {
+        if (items != null) {
+            this.items = items;
+        } else {
+            this.items.clear();
+        }
+        notifyDataSetChanged();
+    }
+
     public void addItem(T item) {
         if (item != null) {
             this.items.add(item);

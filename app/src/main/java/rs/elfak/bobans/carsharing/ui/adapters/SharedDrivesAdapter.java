@@ -81,6 +81,7 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
             }
         }
         holder.route.setText(holder.itemView.getContext().getString(R.string.route, drive.getDeparture(), drive.getDestination()));
+        holder.requestIndicator.setVisibility(drive.hasRequest() ? View.VISIBLE : View.GONE);
         holder.date.setText(DateTimeUtils.printMediumDateTime(drive.getTime().getDepartureTime()));
         if (drive.getTime().isRepeat()) {
             String repeatDays = drive.getTime().getRepeatDays();
@@ -174,6 +175,7 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
         @BindView(R.id.drive_status) View status;
         @BindView(R.id.image_view_user_photo) ImageView Photo;
         @BindView(R.id.text_view_route) TextView route;
+        @BindView(R.id.image_view_request_indicator) ImageView requestIndicator;
         @BindView(R.id.image_view_preference_music) ImageView preferenceMusic;
         @BindView(R.id.image_view_preference_pets) ImageView preferencePets;
         @BindView(R.id.image_view_preference_smoking) ImageView preferenceSmoking;

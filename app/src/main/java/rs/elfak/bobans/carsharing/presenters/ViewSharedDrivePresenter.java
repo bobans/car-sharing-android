@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.ViewSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.Passenger;
+import rs.elfak.bobans.carsharing.models.PassengerDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
@@ -138,4 +139,33 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
             }
         });
     }
+
+    public void updateRideRequest(final int adapterPosition, long passengerId, final int status) {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().updateRideRequest(sharedDrive.getId(), passengerId, status, new Observer<ResponseBody>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().showError(e, false);
+                }
+            }
+
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                if (isViewAttached()) {
+                    getView().requestUpdated(adapterPosition, status);
+                    getView().showContent();
+                }
+            }
+        });
+    }
+
 }

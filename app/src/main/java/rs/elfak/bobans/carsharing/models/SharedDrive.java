@@ -71,4 +71,13 @@ public class SharedDrive extends SharedDriveDAO {
         return seats;
     }
 
+    public boolean hasRequest() {
+        for (Passenger passenger : getPassengers()) {
+            if (passenger.getStatus() == PassengerDAO.STATUS_REQUESTED) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

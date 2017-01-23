@@ -29,5 +29,7 @@
     <dimen name="fab_margin">10dp</dimen>
     <dimen name="label_text_size">12sp</dimen>
     <dimen name="text_size">14sp</dimen>
+    <dimen name="passenger_picture_size">40dp</dimen>
+    <dimen name="shared_drive_indicator_size">7dp</dimen>
 
 </resources>

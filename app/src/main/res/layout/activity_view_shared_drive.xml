@@ -20,7 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -560,6 +560,14 @@
 
             </LinearLayout>
 
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:id="@+id/recycler_view_passengers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
             <Button
                 android:layout_marginTop="@dimen/layout_control_space"
                 android:id="@+id/button_request_ride"
@@ -571,6 +579,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

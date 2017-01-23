@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -27,8 +30,11 @@ import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.ViewSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.DrivePreferences;
 import rs.elfak.bobans.carsharing.models.DrivePrice;
+import rs.elfak.bobans.carsharing.models.Passenger;
+import rs.elfak.bobans.carsharing.models.PassengerDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.presenters.ViewSharedDrivePresenter;
+import rs.elfak.bobans.carsharing.ui.adapters.PassengersAdapter;
 import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
 
 /**
@@ -36,7 +42,7 @@ import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
  *
  * @author Boban Stajic<bobanstajic@gmail.com
  */
-public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewSharedDriveInteractor, IViewSharedDriveView, ViewSharedDrivePresenter> implements IViewSharedDriveView, View.OnClickListener {
+public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewSharedDriveInteractor, IViewSharedDriveView, ViewSharedDrivePresenter> implements IViewSharedDriveView, View.OnClickListener, PassengersAdapter.OnPassengerClickListener {
 
     public static final String EXTRA_SHARED_DRIVE = "EXTRA_SHARED_DRIVE";
 
@@ -71,6 +77,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     @BindView(R.id.edit_text_price) EditText etPrice;
     @BindView(R.id.text_input_price_type) TextInputLayout tiPriceType;
     @BindView(R.id.edit_text_price_type) EditText etPriceType;
+    @BindView(R.id.recycler_view_passengers) RecyclerView recyclerViewPassengers;
     @BindView(R.id.button_request_ride) Button btnRequestRide;
 
     @BindColor(R.color.colorDivider) int colorDivider;
@@ -106,6 +113,13 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setFonts();
+
+        recyclerViewPassengers.setHasFixedSize(true);
+        recyclerViewPassengers.setNestedScrollingEnabled(false);
+        recyclerViewPassengers.setLayoutManager(new LinearLayoutManager(this));
+        PassengersAdapter adapter = new PassengersAdapter();
+        adapter.setOnClickListener(this);
+        recyclerViewPassengers.setAdapter(adapter);
 
         btnRequestRide.setOnClickListener(this);
     }
@@ -223,6 +237,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
                 break;
             }
         }
+        ((PassengersAdapter) recyclerViewPassengers.getAdapter()).setItems(data.getPassengers());
     }
 
     private void setRepetition(String repeatDays) {
@@ -272,6 +287,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     public void setIsOwner(boolean isOwner) {
         this.isOwner = isOwner;
         invalidateOptionsMenu();
+        recyclerViewPassengers.setVisibility(isOwner ? View.VISIBLE : View.GONE);
         btnRequestRide.setVisibility(isOwner ? View.GONE : View.VISIBLE);
     }
 
@@ -291,6 +307,22 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     public void requestCanceled() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void requestUpdated(int adapterPosition, int status) {
+        setResult(RESULT_OK);
+        ((PassengersAdapter) recyclerViewPassengers.getAdapter()).setPassengerStatus(adapterPosition, status);
+        switch (status) {
+            case PassengerDAO.STATUS_ACCEPTED: {
+                etSeats.setText(String.valueOf(Integer.parseInt(etSeats.getText().toString()) - 1));
+                break;
+            }
+            case PassengerDAO.STATUS_REJECTED: {
+                etSeats.setText(String.valueOf(Integer.parseInt(etSeats.getText().toString()) + 1));
+                break;
+            }
+        }
     }
 
     @Override
@@ -324,4 +356,21 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
             }
         }
     }
+
+    @Override
+    public void onPassengerClicked(int position, Passenger passenger) {
+        // TODO show passenger info activity
+        Toast.makeText(this, "Passenger " + passenger.getUser().getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPassengerAccepted(int position, Passenger passenger) {
+        getPresenter().updateRideRequest(position, passenger.getId(), PassengerDAO.STATUS_ACCEPTED);
+    }
+
+    @Override
+    public void onPassengerRejected(int position, Passenger passenger) {
+        getPresenter().updateRideRequest(position, passenger.getId(), PassengerDAO.STATUS_REJECTED);
+    }
+
 }

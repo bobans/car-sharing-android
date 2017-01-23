@@ -16,7 +16,7 @@
             android:src="@android:drawable/ic_dialog_alert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/content_description_alert_icon"/>
+            android:contentDescription="@null"/>
 
     </LinearLayout>
 

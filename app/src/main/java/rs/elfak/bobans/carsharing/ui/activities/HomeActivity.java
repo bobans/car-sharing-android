@@ -49,7 +49,7 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
 
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.content_description_open_drawer, R.string.content_description_close_drawer);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
