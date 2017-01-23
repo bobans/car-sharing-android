@@ -51,4 +51,24 @@ public class SharedDrive extends SharedDriveDAO {
         this.id = id;
     }
 
+    public int userPassengerStatus(long userId) {
+        int result = -2;
+        for (Passenger passenger : getPassengers()) {
+            if (passenger.getUser().getId() == userId) {
+                result = passenger.getStatus();
+            }
+        }
+        return result;
+    }
+
+    public int getAvailableSeats() {
+        int seats = getSeats();
+        for (Passenger passenger : getPassengers()) {
+            if (passenger.getStatus() == PassengerDAO.STATUS_ACCEPTED) {
+                seats--;
+            }
+        }
+        return seats;
+    }
+
 }

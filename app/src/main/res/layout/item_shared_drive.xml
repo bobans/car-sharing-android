@@ -9,20 +9,25 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="@dimen/item_padding">
+        android:gravity="center_vertical">
+
+        <View
+            android:id="@+id/drive_status"
+            android:layout_width="3dp"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/image_view_user_photo"
             android:background="@color/colorDivider"
             android:src="@drawable/ic_user_placeholder"
+            android:layout_margin="@dimen/item_padding"
             android:layout_width="@dimen/shared_drive_picture_size"
             android:layout_height="@dimen/shared_drive_picture_size"
             android:contentDescription="@string/content_description_user_photo" />
 
         <LinearLayout
-            android:layout_marginLeft="@dimen/layout_control_space"
             android:orientation="vertical"
+            android:padding="@dimen/item_padding"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content">

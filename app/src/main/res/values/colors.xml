@@ -18,7 +18,11 @@
     <color name="colorPrimarySplashScreen">#000000</color>
     <color name="colorPrimaryDarkSplashScreen">#000000</color>
     <color name="colorTextWhite">#ffffff</color>
+    <!-- Shared Drive -->
     <color name="colorPreferencePositive">#00E576</color>
     <color name="colorPreferenceNegative">#EE5451</color>
     <color name="colorPreferenceNeutral">#B2B2B2</color>
+    <color name="colorDriveRequested">#0277BD</color>
+    <color name="colorDriveAccepted">#00E576</color>
+    <color name="colorDriveRejected">#D32F2F</color>
 </resources>

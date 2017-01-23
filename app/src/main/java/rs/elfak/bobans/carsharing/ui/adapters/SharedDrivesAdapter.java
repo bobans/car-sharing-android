@@ -2,6 +2,7 @@ package rs.elfak.bobans.carsharing.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,12 @@ import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.models.DrivePreferences;
 import rs.elfak.bobans.carsharing.models.DrivePrice;
+import rs.elfak.bobans.carsharing.models.Passenger;
+import rs.elfak.bobans.carsharing.models.PassengerDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.utils.CarSharingApplication;
 import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 
 /**
  * Created by Boban Stajic.
@@ -58,6 +62,24 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
 
         setFonts(holder);
 
+        switch (drive.userPassengerStatus(SessionManager.getInstance().getUser().getId())) {
+            case PassengerDAO.STATUS_REQUESTED: {
+                holder.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.colorDriveRequested));
+                break;
+            }
+            case PassengerDAO.STATUS_ACCEPTED: {
+                holder.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.colorDriveAccepted));
+                break;
+            }
+            case PassengerDAO.STATUS_REJECTED: {
+                holder.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.colorDriveRejected));
+                break;
+            }
+            default: {
+                holder.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), android.R.color.transparent));
+                break;
+            }
+        }
         holder.route.setText(holder.itemView.getContext().getString(R.string.route, drive.getDeparture(), drive.getDestination()));
         holder.date.setText(DateTimeUtils.printMediumDateTime(drive.getTime().getDepartureTime()));
         if (drive.getTime().isRepeat()) {
@@ -96,7 +118,7 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
             }
         }
 
-        holder.seats.setText(String.valueOf(drive.getSeats() - drive.getPassengers().size()));
+        holder.seats.setText(String.valueOf(drive.getAvailableSeats()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +171,7 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.drive_status) View status;
         @BindView(R.id.image_view_user_photo) ImageView Photo;
         @BindView(R.id.text_view_route) TextView route;
         @BindView(R.id.image_view_preference_music) ImageView preferenceMusic;
