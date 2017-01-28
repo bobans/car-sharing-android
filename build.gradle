@@ -32,10 +32,17 @@ ext {
     keyAlias = gradleProperties.getProperty("keyAlias")
     keyPassword = gradleProperties.getProperty("keyPassword")
 
+    // compile options
     compileSdkVersion = 24
     buildToolsVersion = '24.0.2'
     minSdkVersion = 16
     targetSdkVersion = 24
+
+    // version
+    versionCode = 1
+    versionName = '1.0'
+
+    // dependencies
     supportLibVersion = '24.2.0'
     mosbyVersion = '2.0.1'
     retrofitVersion = '2.1.0'
