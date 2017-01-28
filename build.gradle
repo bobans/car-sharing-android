@@ -23,7 +23,15 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+Properties gradleProperties = new Properties();
+gradleProperties.load(new FileInputStream("signing/gradle.properties"))
+
 ext {
+    // signing credentials
+    storePassword = gradleProperties.getProperty("storePassword")
+    keyAlias = gradleProperties.getProperty("keyAlias")
+    keyPassword = gradleProperties.getProperty("keyPassword")
+
     compileSdkVersion = 24
     buildToolsVersion = '24.0.2'
     minSdkVersion = 16

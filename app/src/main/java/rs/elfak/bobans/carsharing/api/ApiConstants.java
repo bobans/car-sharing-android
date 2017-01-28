@@ -1,15 +1,15 @@
 package rs.elfak.bobans.carsharing.api;
 
+import rs.elfak.bobans.carsharing.BuildConfig;
+
 /**
  * Created by Boban Stajic.
  *
  * @author Boban Stajic<bobanstajic@gmail.com
  */
-
 class ApiConstants {
 
-    static final String BASE_URL_LOCAL = "http://192.168.1.4:8080/";
-    static final String BASE_URL_LIVE = "https://car-sharing.herokuapp.com/";
+    static final String BASE_URL = BuildConfig.BASE_URL;
 
     static final String LOGIN = "login";
     static final String REGISTER = "register";

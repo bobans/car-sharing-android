@@ -21,7 +21,6 @@ import rs.elfak.bobans.carsharing.utils.DateTimeSerializer;
  *
  * @author Boban Stajic<bobanstajic@gmail.com
  */
-
 public class ApiManager {
 
     private static ApiManager instance;
@@ -48,7 +47,7 @@ public class ApiManager {
                 .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
                 .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL_LOCAL)
+                .baseUrl(ApiConstants.BASE_URL)
                 .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))

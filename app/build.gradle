@@ -12,10 +12,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+    signingConfigs {
         release {
+            storeFile file("../signing/release.jks")
+            storePassword rootProject.storePassword
+            keyAlias rootProject.keyAlias
+            keyPassword rootProject.keyPassword
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        local {
+            buildConfigField 'String', 'BASE_URL', '"http://192.168.1.4:8080/"'
+        }
+        heroku {
+            buildConfigField 'String', 'BASE_URL', '"https://car-sharing.herokuapp.com/"'
         }
     }
 }
