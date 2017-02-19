@@ -19,4 +19,8 @@ public class HomePresenter extends BasePresenter<IHomeView, HomeInteractor> {
         return new HomeInteractor();
     }
 
+    public void unregisterFCM() {
+        getInteractor().unregisterFCM();
+    }
+
 }

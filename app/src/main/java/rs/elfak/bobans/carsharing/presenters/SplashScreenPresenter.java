@@ -11,6 +11,7 @@ import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
+import rs.elfak.bobans.carsharing.utils.firebase.FirebaseInstanceIdService;
 import rs.elfak.bobans.carsharing.views.ISplashScreenView;
 import rx.Observer;
 
@@ -69,6 +70,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
             public void onNext(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
                 getUser();
+                FirebaseInstanceIdService.sendTokenUpdate();
             }
         });
     }

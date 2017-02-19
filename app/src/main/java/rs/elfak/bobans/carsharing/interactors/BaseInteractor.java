@@ -18,4 +18,5 @@ public abstract class BaseInteractor {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
+
 }

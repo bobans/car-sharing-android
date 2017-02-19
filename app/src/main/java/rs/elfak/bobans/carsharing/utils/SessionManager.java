@@ -11,6 +11,7 @@ import rs.elfak.bobans.carsharing.models.User;
 public class SessionManager {
 
     public static final String KEY_TOKEN = "KEY_TOKEN";
+    public static final String KEY_FIREBASE_ID = "KEY_FIREBASE_ID";
 
     private static SessionManager instance;
 
@@ -23,6 +24,7 @@ public class SessionManager {
 
     private String token;
     private User user;
+    private String fisebaseToken;
 
     private SessionManager() {
 
@@ -48,9 +50,21 @@ public class SessionManager {
         this.user = user;
     }
 
+    public String getFisebaseToken() {
+        if (fisebaseToken == null) {
+            fisebaseToken = SharedPreferencesUtils.getInstance().getPrefString(KEY_FIREBASE_ID);
+        }
+        return fisebaseToken;
+    }
+
+    public void setFisebaseToken(String fisebaseToken) {
+        this.fisebaseToken = fisebaseToken;
+    }
+
     public void clearData() {
         token = null;
         user = null;
+        fisebaseToken = null;
     }
 
 }

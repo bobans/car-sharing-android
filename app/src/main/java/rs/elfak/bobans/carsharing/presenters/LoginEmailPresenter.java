@@ -9,6 +9,7 @@ import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
+import rs.elfak.bobans.carsharing.utils.firebase.FirebaseInstanceIdService;
 import rs.elfak.bobans.carsharing.views.ILoginEmailView;
 import rx.Observer;
 
@@ -67,6 +68,7 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
             public void onNext(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
                 getUser();
+                FirebaseInstanceIdService.sendTokenUpdate();
             }
         });
     }

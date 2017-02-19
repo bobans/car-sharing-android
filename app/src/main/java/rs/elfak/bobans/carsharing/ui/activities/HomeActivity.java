@@ -134,6 +134,7 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_view_logout: {
+                getPresenter().unregisterFCM();
                 SessionManager.getInstance().setToken(null);
                 Intent intent = new Intent(this, LoginEmailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -143,4 +144,5 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
             }
         }
     }
+
 }

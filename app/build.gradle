@@ -77,4 +77,9 @@ dependencies {
     // Butter Knife
     compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
+
+    // Firebase
+    compile "com.google.firebase:firebase-messaging:$rootProject.firebaseVersion"
 }
+
+apply plugin: 'com.google.gms.google-services'

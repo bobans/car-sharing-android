@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "602306291819",
+    "firebase_url": "https://car-sharing-8d013.firebaseio.com",
+    "project_id": "car-sharing-8d013",
+    "storage_bucket": "car-sharing-8d013.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602306291819:android:5c0c543a9a315101",
+        "android_client_info": {
+          "package_name": "rs.elfak.bobans.carsharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602306291819-lts6mkrbdt6rdk3vi7vtbsf065mkkk3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rs.elfak.bobans.carsharing",
+            "certificate_hash": "76CD59B0136B511285D697148DE6E7183F297B77"
+          }
+        },
+        {
+          "client_id": "602306291819-48p17n3blitfahv4fvnk6rbs4fo82rvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3hhCcYXEAIKs-FCb2wBMWqnB1Ggs052w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602306291819-48p17n3blitfahv4fvnk6rbs4fo82rvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

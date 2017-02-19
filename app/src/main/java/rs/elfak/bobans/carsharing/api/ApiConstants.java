@@ -26,4 +26,7 @@ class ApiConstants {
     static final String SHARED_DRIVES_UPDATE_REQUEST = "drives/{driveId}/request/{passengerId}/{status}";
 
     static final String CARS = "cars";
+
+    static final String FCM_REGISTER = "fcm/register";
+    static final String FCM_UNREGISTER = "fcm/unregister";
 }
