@@ -25,22 +25,13 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
     public static void sendTokenUpdate() {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        // Get saved InstanceID token.
-        String oldToken = SessionManager.getInstance().getFisebaseToken();
-        if (oldToken != null && !oldToken.isEmpty()) {
-            if (refreshedToken == null || oldToken.compareTo(refreshedToken) != 0) {
-                Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().unregisterFCM(SessionManager.getInstance().getToken(), new FirebaseToken(oldToken));
-                response.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe();
-            }
-        }
+        // Get device id
+        String deviceId = FirebaseInstanceId.getInstance().getId();
         if (refreshedToken != null && !refreshedToken.isEmpty()) {
-            Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().registerFCM(SessionManager.getInstance().getToken(), new FirebaseToken(refreshedToken));
-            response.subscribeOn(Schedulers.io())
+            Observable<ResponseBody> register = ApiManager.getInstance().getApiMethods().registerFCM(SessionManager.getInstance().getToken(), new FirebaseToken(deviceId, refreshedToken));
+            register.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe();
-            SessionManager.getInstance().setFisebaseToken(refreshedToken);
         }
     }
 

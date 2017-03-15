@@ -28,5 +28,5 @@ class ApiConstants {
     static final String CARS = "cars";
 
     static final String FCM_REGISTER = "fcm/register";
-    static final String FCM_UNREGISTER = "fcm/unregister";
+    static final String FCM_UNREGISTER = "fcm/unregister/{device_id}";
 }

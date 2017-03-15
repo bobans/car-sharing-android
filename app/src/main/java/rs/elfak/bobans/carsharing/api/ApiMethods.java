@@ -77,6 +77,6 @@ public interface ApiMethods {
     @POST(ApiConstants.FCM_REGISTER)
     Observable<ResponseBody> registerFCM(@Header("Authorization") String token, @Body FirebaseToken firebaseToken);
 
-    @POST(ApiConstants.FCM_UNREGISTER)
-    Observable<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Body FirebaseToken firebaseToken);
+    @DELETE(ApiConstants.FCM_UNREGISTER)
+    Observable<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Path("device_id") String deviceId);
 }
