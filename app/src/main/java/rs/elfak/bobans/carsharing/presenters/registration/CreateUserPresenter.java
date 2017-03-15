@@ -12,7 +12,7 @@ import rs.elfak.bobans.carsharing.models.UserDAO;
 import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -31,12 +31,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().createUser(user, new Observer<Response<Void>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().createUser(user, new SingleSubscriber<Response<Void>>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {
@@ -66,7 +61,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
             }
 
             @Override
-            public void onNext(Response<Void> voidResponse) {
+            public void onSuccess(Response<Void> voidResponse) {
                 switch (voidResponse.code()) {
                     case 201: {
                         getUser();
@@ -96,12 +91,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
     }
 
     private void getUser() {
-        getInteractor().getUser(new Observer<User>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getUser(new SingleSubscriber<User>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {
@@ -131,7 +121,7 @@ public class CreateUserPresenter extends BasePresenter<ICreateUserView, CreateUs
             }
 
             @Override
-            public void onNext(User user) {
+            public void onSuccess(User user) {
                 if (user != null) {
                     SessionManager.getInstance().setUser(user);
                     if (isViewAttached()) {

@@ -10,7 +10,7 @@ import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
 import rs.elfak.bobans.carsharing.ui.activities.ViewSharedDriveActivity;
 import rs.elfak.bobans.carsharing.views.ISharedDrivesView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -32,12 +32,7 @@ public class SharedDrivesPresenter extends BasePresenter<ISharedDrivesView, Shar
         if (isViewAttached()) {
             getView().showLoading(pullToRefresh);
         }
-        getInteractor().getSharedDrives(0, PAGE_SIZE, new Observer<List<SharedDrive>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getSharedDrives(0, PAGE_SIZE, new SingleSubscriber<List<SharedDrive>>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -47,7 +42,7 @@ public class SharedDrivesPresenter extends BasePresenter<ISharedDrivesView, Shar
             }
 
             @Override
-            public void onNext(List<SharedDrive> sharedDrives) {
+            public void onSuccess(List<SharedDrive> sharedDrives) {
                 if (isViewAttached()) {
                     getView().setData(sharedDrives);
                     getView().showContent();
@@ -58,12 +53,7 @@ public class SharedDrivesPresenter extends BasePresenter<ISharedDrivesView, Shar
 
     public void loadSharedDrives(int page) {
         int offset = page * PAGE_SIZE;
-        getInteractor().getSharedDrives(offset, PAGE_SIZE, new Observer<List<SharedDrive>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getSharedDrives(offset, PAGE_SIZE, new SingleSubscriber<List<SharedDrive>>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -72,7 +62,7 @@ public class SharedDrivesPresenter extends BasePresenter<ISharedDrivesView, Shar
             }
 
             @Override
-            public void onNext(List<SharedDrive> sharedDrives) {
+            public void onSuccess(List<SharedDrive> sharedDrives) {
                 if (isViewAttached()) {
                     getView().setData(sharedDrives);
                 }

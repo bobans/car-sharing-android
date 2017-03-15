@@ -22,7 +22,7 @@ import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
-import rx.Observable;
+import rx.Single;
 
 /**
  * Created by Boban Stajic.
@@ -33,50 +33,50 @@ import rx.Observable;
 public interface ApiMethods {
 
     @POST(ApiConstants.LOGIN)
-    Observable<Token> login(@Header("Authorization") String token);
+    Single<Token> login(@Header("Authorization") String token);
 
     @POST(ApiConstants.REGISTER)
-    Observable<Token> register(@Body Registration registration);
+    Single<Token> register(@Body Registration registration);
 
     @GET(ApiConstants.USERS_ME)
-    Observable<User> getUser(@Header("Authorization") String token);
+    Single<User> getUser(@Header("Authorization") String token);
 
     @POST(ApiConstants.USERS_CREATE)
-    Observable<Response<Void>> createUser(@Header("Authorization") String token, @Body UserDAO user);
+    Single<Response<Void>> createUser(@Header("Authorization") String token, @Body UserDAO user);
 
     @GET(ApiConstants.MAKES)
-    Observable<List<Make>> getMakes(@Header("Authorization") String token);
+    Single<List<Make>> getMakes(@Header("Authorization") String token);
 
     @GET(ApiConstants.MODELS)
-    Observable<List<Model>> getModels(@Header("Authorization") String token, @Path("makeId") long makeId);
+    Single<List<Model>> getModels(@Header("Authorization") String token, @Path("makeId") long makeId);
 
     @GET(ApiConstants.SHARED_DRIVES)
-    Observable<List<SharedDrive>> getSharedDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
+    Single<List<SharedDrive>> getSharedDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
 
     @GET(ApiConstants.CARS)
-    Observable<List<Car>> getCars(@Header("Authorization") String token);
+    Single<List<Car>> getCars(@Header("Authorization") String token);
 
     @POST(ApiConstants.SHARED_DRIVES)
-    Observable<ResponseBody> createSharedDrive(@Header("Authorization") String token, @Body SharedDriveDAO sharedDrive);
+    Single<ResponseBody> createSharedDrive(@Header("Authorization") String token, @Body SharedDriveDAO sharedDrive);
 
     @POST(ApiConstants.SHARED_DRIVES)
-    Observable<ResponseBody> updateSharedDrive(@Header("Authorization") String token, @Body SharedDrive sharedDrive);
+    Single<ResponseBody> updateSharedDrive(@Header("Authorization") String token, @Body SharedDrive sharedDrive);
 
     @DELETE(ApiConstants.SHARED_DRIVES_ID)
-    Observable<ResponseBody> deleteSharedDrive(@Header("Authorization") String token, @Path("id") long id);
+    Single<ResponseBody> deleteSharedDrive(@Header("Authorization") String token, @Path("id") long id);
 
     @POST(ApiConstants.SHARED_DRIVES_REQUEST)
-    Observable<ResponseBody> requestARide(@Header("Authorization") String token, @Path("driveId") long driveId);
+    Single<ResponseBody> requestARide(@Header("Authorization") String token, @Path("driveId") long driveId);
 
     @DELETE(ApiConstants.SHARED_DRIVES_REQUEST)
-    Observable<ResponseBody> cancelRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId);
+    Single<ResponseBody> cancelRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId);
 
     @PUT(ApiConstants.SHARED_DRIVES_UPDATE_REQUEST)
-    Observable<ResponseBody> updateRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId, @Path("passengerId") long passengerId, @Path("status") int status);
+    Single<ResponseBody> updateRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId, @Path("passengerId") long passengerId, @Path("status") int status);
 
     @PUT(ApiConstants.FCM_REGISTER)
-    Observable<ResponseBody> registerFCM(@Header("Authorization") String token, @Body FirebaseToken firebaseToken);
+    Single<ResponseBody> registerFCM(@Header("Authorization") String token, @Body FirebaseToken firebaseToken);
 
     @DELETE(ApiConstants.FCM_UNREGISTER)
-    Observable<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Path("device_id") String deviceId);
+    Single<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Path("device_id") String deviceId);
 }

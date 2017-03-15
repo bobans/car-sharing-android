@@ -9,7 +9,7 @@ import rs.elfak.bobans.carsharing.models.Make;
 import rs.elfak.bobans.carsharing.models.Model;
 import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.views.registration.ICreateCarView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -29,12 +29,7 @@ public class CreateCarPresenter extends BasePresenter<ICreateCarView, CreateCarI
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().getMakes(new Observer<List<Make>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getMakes(new SingleSubscriber<List<Make>>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -44,7 +39,7 @@ public class CreateCarPresenter extends BasePresenter<ICreateCarView, CreateCarI
             }
 
             @Override
-            public void onNext(List<Make> makes) {
+            public void onSuccess(List<Make> makes) {
                 if (isViewAttached()) {
                     getView().setMakes(makes);
                     getView().showContent();
@@ -57,12 +52,7 @@ public class CreateCarPresenter extends BasePresenter<ICreateCarView, CreateCarI
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().getModels(makeId, new Observer<List<Model>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getModels(makeId, new SingleSubscriber<List<Model>>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -72,7 +62,7 @@ public class CreateCarPresenter extends BasePresenter<ICreateCarView, CreateCarI
             }
 
             @Override
-            public void onNext(List<Model> models) {
+            public void onSuccess(List<Model> models) {
                 if (isViewAttached()) {
                     getView().setModels(models);
                     getView().showContent();

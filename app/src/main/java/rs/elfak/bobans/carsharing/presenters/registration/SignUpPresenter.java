@@ -11,7 +11,7 @@ import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.presenters.BasePresenter;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.registration.ISignUpView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -32,12 +32,7 @@ public class SignUpPresenter extends BasePresenter<ISignUpView, SignUpInteractor
             getView().showLoading(false);
         }
         Registration registration = new Registration(username, password);
-        getInteractor().register(registration, new Observer<Token>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().register(registration, new SingleSubscriber<Token>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {
@@ -66,7 +61,7 @@ public class SignUpPresenter extends BasePresenter<ISignUpView, SignUpInteractor
             }
 
             @Override
-            public void onNext(Token token) {
+            public void onSuccess(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
                 if (isViewAttached()) {
                     getView().showContent();

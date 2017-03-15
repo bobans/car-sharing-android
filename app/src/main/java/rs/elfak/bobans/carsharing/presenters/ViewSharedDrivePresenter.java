@@ -6,12 +6,11 @@ import android.support.annotation.NonNull;
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.ViewSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.Passenger;
-import rs.elfak.bobans.carsharing.models.PassengerDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -50,12 +49,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().deleteSharedDrive(sharedDrive.getId(), new Observer<ResponseBody>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().deleteSharedDrive(sharedDrive.getId(), new SingleSubscriber<ResponseBody>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -65,7 +59,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onSuccess(ResponseBody responseBody) {
                 if (isViewAttached()) {
                     getView().deleteSuccessful();
                     getView().showContent();
@@ -86,13 +80,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().requestARide(sharedDrive.getId(), new Observer<ResponseBody>() {
-
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().requestARide(sharedDrive.getId(), new SingleSubscriber<ResponseBody>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -102,7 +90,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onSuccess(ResponseBody responseBody) {
                 if (isViewAttached()) {
                     getView().requestSuccessful();
                     getView().showContent();
@@ -115,13 +103,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().cancelRideRequest(sharedDrive.getId(), new Observer<ResponseBody>() {
-
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().cancelRideRequest(sharedDrive.getId(), new SingleSubscriber<ResponseBody>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -131,7 +113,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onSuccess(ResponseBody responseBody) {
                 if (isViewAttached()) {
                     getView().requestCanceled();
                     getView().showContent();
@@ -144,12 +126,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().updateRideRequest(sharedDrive.getId(), passengerId, status, new Observer<ResponseBody>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().updateRideRequest(sharedDrive.getId(), passengerId, status, new SingleSubscriber<ResponseBody>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -159,7 +136,7 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onSuccess(ResponseBody responseBody) {
                 if (isViewAttached()) {
                     getView().requestUpdated(adapterPosition, status);
                     getView().showContent();

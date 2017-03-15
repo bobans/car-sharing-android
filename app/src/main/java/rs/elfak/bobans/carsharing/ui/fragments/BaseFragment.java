@@ -64,6 +64,13 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        getPresenter().onDestroy();
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 

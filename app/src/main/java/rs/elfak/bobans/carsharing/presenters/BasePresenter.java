@@ -28,4 +28,8 @@ public abstract class BasePresenter<V extends IBaseView, I extends BaseInteracto
         return interactor;
     }
 
+    public void onDestroy() {
+        interactor.onDestroy();
+    }
+
 }

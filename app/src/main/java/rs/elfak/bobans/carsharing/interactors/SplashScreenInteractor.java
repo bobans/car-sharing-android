@@ -3,10 +3,7 @@ package rs.elfak.bobans.carsharing.interactors;
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.models.Token;
 import rs.elfak.bobans.carsharing.models.User;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -16,17 +13,12 @@ import rx.schedulers.Schedulers;
 
 public class SplashScreenInteractor extends BaseInteractor {
 
-    public void login(String token, Observer<Token> observer) {
-        Observable<Token> response = ApiManager.getInstance().getApiMethods().login(token);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+    public void login(String token, SingleSubscriber<Token> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().login(token), subscriber);
     }
 
-    public void getUser(String token, Observer<User> observer) {
-        Observable<User> response = ApiManager.getInstance().getApiMethods().getUser(token);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+    public void getUser(String token, SingleSubscriber<User> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().getUser(token), subscriber);
     }
+
 }

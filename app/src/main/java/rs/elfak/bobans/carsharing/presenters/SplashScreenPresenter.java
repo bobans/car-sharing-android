@@ -13,7 +13,7 @@ import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.utils.firebase.FirebaseInstanceIdService;
 import rs.elfak.bobans.carsharing.views.ISplashScreenView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -34,12 +34,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
     public void login() {
         startTime = System.currentTimeMillis();
         String authentication = SessionManager.getInstance().getToken();
-        getInteractor().login(authentication, new Observer<Token>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().login(authentication, new SingleSubscriber<Token>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {
@@ -67,7 +62,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
             }
 
             @Override
-            public void onNext(Token token) {
+            public void onSuccess(Token token) {
                 SessionManager.getInstance().setToken(token.getToken());
                 getUser();
                 FirebaseInstanceIdService.sendTokenUpdate();
@@ -76,12 +71,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
     }
 
     private void getUser() {
-        getInteractor().getUser(SessionManager.getInstance().getToken(), new Observer<User>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getUser(SessionManager.getInstance().getToken(), new SingleSubscriber<User>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {
@@ -109,7 +99,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
             }
 
             @Override
-            public void onNext(User user) {
+            public void onSuccess(User user) {
                 if (user != null) {
                     SessionManager.getInstance().setUser(user);
                     delayAndShowMain();

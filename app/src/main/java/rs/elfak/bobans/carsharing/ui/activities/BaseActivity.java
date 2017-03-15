@@ -64,6 +64,13 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        getPresenter().onDestroy();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
 

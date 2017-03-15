@@ -12,7 +12,7 @@ import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
-import rx.Observer;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -99,12 +99,7 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
         if (isViewAttached()) {
             getView().showLoading(pullToRefresh);
         }
-        getInteractor().getCars(new Observer<List<Car>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().getCars(new SingleSubscriber<List<Car>>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -114,7 +109,7 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
             }
 
             @Override
-            public void onNext(List<Car> cars) {
+            public void onSuccess(List<Car> cars) {
                 if (isViewAttached()) {
                     Car selected = null;
                     if (sharedDrive != null) {
@@ -131,12 +126,7 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().createSharedDrive(sharedDrive, new Observer<ResponseBody>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().createSharedDrive(sharedDrive, new SingleSubscriber<ResponseBody>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -146,7 +136,7 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onSuccess(ResponseBody responseBody) {
                 if (isViewAttached()) {
                     getView().showContent();
                     getView().sharedDriveCreated();
@@ -159,12 +149,7 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().updateSharedDrive(sharedDrive, new Observer<ResponseBody>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
+        getInteractor().updateSharedDrive(sharedDrive, new SingleSubscriber<ResponseBody>() {
             @Override
             public void onError(Throwable e) {
                 if (isViewAttached()) {
@@ -174,7 +159,7 @@ public class CreateSharedDrivePresenter extends BasePresenter<ICreateSharedDrive
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onSuccess(ResponseBody responseBody) {
                 if (isViewAttached()) {
                     getView().showContent();
                     getView().sharedDriveUpdated(sharedDrive);

@@ -8,10 +8,7 @@ import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -21,24 +18,16 @@ import rx.schedulers.Schedulers;
 
 public class CreateSharedDriveInteractor extends BaseInteractor {
 
-    public void getCars(Observer<List<Car>> observer) {
-        Observable<List<Car>> response = ApiManager.getInstance().getApiMethods().getCars(SessionManager.getInstance().getToken());
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+    public void getCars(SingleSubscriber<List<Car>> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().getCars(SessionManager.getInstance().getToken()), subscriber);
     }
 
-    public void createSharedDrive(SharedDriveDAO sharedDrive, Observer<ResponseBody> observer) {
-        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().createSharedDrive(SessionManager.getInstance().getToken(), sharedDrive);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+    public void createSharedDrive(SharedDriveDAO sharedDrive, SingleSubscriber<ResponseBody> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().createSharedDrive(SessionManager.getInstance().getToken(), sharedDrive), subscriber);
     }
 
-    public void updateSharedDrive(SharedDrive sharedDrive, Observer<ResponseBody> observer) {
-        Observable<ResponseBody> response = ApiManager.getInstance().getApiMethods().updateSharedDrive(SessionManager.getInstance().getToken(), sharedDrive);
-        response.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+    public void updateSharedDrive(SharedDrive sharedDrive, SingleSubscriber<ResponseBody> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().updateSharedDrive(SessionManager.getInstance().getToken(), sharedDrive), subscriber);
     }
+
 }
