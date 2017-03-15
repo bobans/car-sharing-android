@@ -74,7 +74,7 @@ public interface ApiMethods {
     @PUT(ApiConstants.SHARED_DRIVES_UPDATE_REQUEST)
     Observable<ResponseBody> updateRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId, @Path("passengerId") long passengerId, @Path("status") int status);
 
-    @POST(ApiConstants.FCM_REGISTER)
+    @PUT(ApiConstants.FCM_REGISTER)
     Observable<ResponseBody> registerFCM(@Header("Authorization") String token, @Body FirebaseToken firebaseToken);
 
     @DELETE(ApiConstants.FCM_UNREGISTER)
