@@ -59,7 +59,11 @@ public class SplashScreenActivity extends BaseActivity<Object, SplashScreenInter
 
     @Override
     public void showMain() {
-        startActivity(new Intent(this, HomeActivity.class));
+        Intent intent = new Intent(this, HomeActivity.class);
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            intent.putExtras(getIntent().getExtras());
+        }
+        startActivity(intent);
         finish();
     }
 

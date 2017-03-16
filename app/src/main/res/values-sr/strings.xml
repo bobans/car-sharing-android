@@ -105,4 +105,10 @@
     <string name="button_cancel_ride_request">Otkaži vožnju</string>
     <string name="open">Otvori</string>
     <string name="close">Zatvori</string>
+    <string name="notification_title_ride_requested">Drive request</string>
+    <string name="notification_content_ride_requested">%1$s je zatražio vožnju %2$s</string>
+    <string name="notification_ticker_ride_requested">Novi zahtev za vožnjom</string>
+    <string name="notification_ticker_ride_request_canceled">Vožnja je otkazana</string>
+    <string name="notification_title_ride_request_canceled">Vožnja otkazana</string>
+    <string name="notification_content_ride_request_canceled">%1$s je otkazao vožnju %2$s</string>
 </resources>

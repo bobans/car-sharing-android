@@ -53,6 +53,9 @@ public interface ApiMethods {
     @GET(ApiConstants.SHARED_DRIVES)
     Single<List<SharedDrive>> getSharedDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
 
+    @GET(ApiConstants.SHARED_DRIVES_ID)
+    Single<SharedDrive> getSharedDrive(@Header("Authorization") String token, @Path("id") long driveId);
+
     @GET(ApiConstants.CARS)
     Single<List<Car>> getCars(@Header("Authorization") String token);
 

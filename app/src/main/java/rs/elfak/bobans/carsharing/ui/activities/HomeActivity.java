@@ -34,6 +34,8 @@ import rs.elfak.bobans.carsharing.views.IHomeView;
 
 public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView, HomePresenter> implements IHomeView, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    public static final String EXTRA_SHOW_DRIVE = "EXTRA_SHOW_DRIVE";
+
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.navigation_view) NavigationView navigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -59,6 +61,11 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_home, SharedDrivesFragment.newInstance())
                     .commit();
+        }
+
+        if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_DRIVE)) {
+            long driveId = getIntent().getLongExtra(EXTRA_SHOW_DRIVE, -1);
+            getPresenter().loadDrive(driveId);
         }
     }
 

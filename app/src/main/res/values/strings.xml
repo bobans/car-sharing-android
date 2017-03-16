@@ -105,4 +105,10 @@
     <string name="button_cancel_ride_request">Cancel request</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="notification_title_ride_requested">Drive request</string>
+    <string name="notification_content_ride_requested">%1$s has requested a ride %2$s</string>
+    <string name="notification_ticker_ride_requested">New drive request</string>
+    <string name="notification_ticker_ride_request_canceled">Drive request canceled</string>
+    <string name="notification_title_ride_request_canceled">Drive request canceled</string>
+    <string name="notification_content_ride_request_canceled">%1$s has canceled ride request %2$s</string>
 </resources>
