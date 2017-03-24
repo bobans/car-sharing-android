@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -72,6 +73,7 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     private void initView() {
         populateHeader(navigationView.getHeaderView(0));
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getHeaderView(0).findViewById(R.id.navigation_view_header).setOnClickListener(this);
 
         ivLogout.setOnClickListener(this);
     }
@@ -120,20 +122,40 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // TODO navigation item selected
-        if (drawerLayout.isDrawerOpen(navigationView)) {
-            drawerLayout.closeDrawers();
-        }
         switch (item.getItemId()) {
             case R.id.action_drives: {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_home, SharedDrivesFragment.newInstance())
-                        .commit();
+                replaceFragment(SharedDrivesFragment.newInstance());
                 return true;
             }
 
             default: {
                 return false;
             }
+        }
+    }
+
+    private void replaceFragment(final Fragment fragment) {
+        if (drawerLayout.isDrawerOpen(navigationView)) {
+            drawerLayout.addDrawerListener(new CloseDrawerListener() {
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    drawerLayout.removeDrawerListener(this);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_home, fragment)
+                            .commit();
+                }
+            });
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_home);
+            if (currentFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .remove(currentFragment)
+                        .commit();
+            }
+            drawerLayout.closeDrawers();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_home, fragment)
+                    .commit();
         }
     }
 
@@ -149,7 +171,21 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
                 startActivity(intent);
                 break;
             }
+
+            case R.id.navigation_view_header: {
+                navigateToActivity(ProfileActivity.class, null);
+                break;
+            }
         }
+    }
+
+    private static abstract class CloseDrawerListener implements DrawerLayout.DrawerListener {
+        @Override
+        public void onDrawerSlide(View drawerView, float slideOffset) {}
+        @Override
+        public void onDrawerOpened(View drawerView) {}
+        @Override
+        public void onDrawerStateChanged(int newState) {}
     }
 
 }

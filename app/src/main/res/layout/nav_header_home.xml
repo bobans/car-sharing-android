@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/view_container"
+    android:id="@+id/navigation_view_header"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:gravity="bottom"
@@ -12,6 +12,7 @@
         android:id="@+id/img_header_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@null"
         android:scaleType="fitXY"
         android:src="@drawable/nav_header_background" />
 
@@ -19,37 +20,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/status_bar_size"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="@dimen/layout_side_margin" >
+        android:orientation="horizontal"
+        android:padding="@dimen/layout_side_margin">
 
         <ImageView
             android:id="@+id/image_view_photo"
-            tools:src="@drawable/ic_user_placeholder"
             android:layout_width="@dimen/nav_header_photo_size"
             android:layout_height="@dimen/nav_header_photo_size"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            tools:src="@drawable/ic_user_placeholder" />
 
         <LinearLayout
-            android:layout_marginLeft="@dimen/layout_control_space"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_control_space"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_view_name"
-                tools:text="Boban Stajic"
-                android:textColor="@color/colorTextWhite"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
+                tools:text="Boban Stajic" />
 
             <TextView
                 android:id="@+id/text_view_email"
-                tools:text="bobanstajic@gmail.com"
-                android:textColor="@color/colorTextWhite"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
+                tools:text="bobanstajic@gmail.com" />
 
         </LinearLayout>
 
