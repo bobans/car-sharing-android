@@ -111,4 +111,5 @@
     <string name="notification_ticker_ride_request_canceled">Vožnja je otkazana</string>
     <string name="notification_title_ride_request_canceled">Vožnja otkazana</string>
     <string name="notification_content_ride_request_canceled">%1$s je otkazao vožnju %2$s</string>
+    <string name="title_activity_profile">Korisnički profil</string>
 </resources>
