@@ -272,6 +272,9 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
     private void setEditable(boolean editable) {
         this.editable = editable;
 
+        etBirthDate.setEnabled(editable);
+        etBirthDate.setFocusable(editable);
+        etBirthDate.setFocusableInTouchMode(editable);
         etName.setEnabled(editable);
         etName.setFocusable(editable);
         etName.setFocusableInTouchMode(editable);
@@ -281,9 +284,6 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
         etCity.setEnabled(editable);
         etCity.setFocusable(editable);
         etCity.setFocusableInTouchMode(editable);
-        etBirthDate.setEnabled(editable);
-        etBirthDate.setFocusable(editable);
-        etBirthDate.setFocusableInTouchMode(editable);
         spUserType.setEnabled(editable);
         etDriverLicense.setEnabled(editable);
         etDriverLicense.setFocusable(editable);

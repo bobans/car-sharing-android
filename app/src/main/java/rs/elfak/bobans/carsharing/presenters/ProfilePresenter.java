@@ -49,12 +49,12 @@ public class ProfilePresenter extends BasePresenter<IProfileView, ProfileInterac
         if (isViewAttached()) {
             getView().showLoading(false);
         }
-        getInteractor().updateUser(user, new SingleSubscriber<Response<Void>>() {
+        getInteractor().updateUser(user, new SingleSubscriber<User>() {
             @Override
-            public void onSuccess(Response<Void> value) {
+            public void onSuccess(User value) {
                 if (isViewAttached()) {
                     getView().showContent();
-                    getView().finishActivity();
+                    getView().setData(value);
                 }
             }
 

@@ -1,6 +1,5 @@
 package rs.elfak.bobans.carsharing.interactors;
 
-import retrofit2.Response;
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
@@ -18,8 +17,7 @@ public class ProfileInteractor extends BaseInteractor {
         subscribe(ApiManager.getInstance().getApiMethods().getUser(SessionManager.getInstance().getToken()), subscriber);
     }
 
-    public void updateUser(UserDAO user, SingleSubscriber<Response<Void>> subscriber) {
-        // TODO update user on server
-        subscriber.onSuccess(Response.<Void>success(null));
+    public void updateUser(UserDAO user, SingleSubscriber<User> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().updateUser(SessionManager.getInstance().getToken(), user), subscriber);
     }
 }

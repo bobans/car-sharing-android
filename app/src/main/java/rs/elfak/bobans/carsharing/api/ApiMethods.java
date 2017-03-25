@@ -41,8 +41,11 @@ public interface ApiMethods {
     @GET(ApiConstants.USERS_ME)
     Single<User> getUser(@Header("Authorization") String token);
 
-    @POST(ApiConstants.USERS_CREATE)
+    @POST(ApiConstants.USERS)
     Single<Response<Void>> createUser(@Header("Authorization") String token, @Body UserDAO user);
+
+    @PUT(ApiConstants.USERS)
+    Single<User> updateUser(@Header("Authorization") String token, @Body UserDAO user);
 
     @GET(ApiConstants.MAKES)
     Single<List<Make>> getMakes(@Header("Authorization") String token);
