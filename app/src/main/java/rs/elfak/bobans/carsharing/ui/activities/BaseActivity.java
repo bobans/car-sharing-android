@@ -193,4 +193,9 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
         startActivityForResult(intent, requestCode);
     }
 
+    @Override
+    public void finishActivity() {
+        finish();
+    }
+
 }

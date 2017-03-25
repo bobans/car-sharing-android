@@ -135,4 +135,10 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
         startActivityForResult(intent, requestCode);
     }
 
+    @Override
+    public void finishActivity() {
+        if (getActivity() instanceof IBaseView) {
+            ((IBaseView) getActivity()).finishActivity();
+        }
+    }
 }

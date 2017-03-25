@@ -14,4 +14,5 @@ public interface IBaseView<M> extends MvpLceView<M> {
     void showNoInternetConnection();
     void navigateToActivity(Class activityClass, Bundle extras);
     void navigateToActivityForResult(int requestCode, Class activityClass, Bundle extras);
+    void finishActivity();
 }

@@ -2,8 +2,12 @@ package rs.elfak.bobans.carsharing.presenters;
 
 import android.support.annotation.NonNull;
 
+import retrofit2.Response;
 import rs.elfak.bobans.carsharing.interactors.ProfileInteractor;
+import rs.elfak.bobans.carsharing.models.User;
+import rs.elfak.bobans.carsharing.models.UserDAO;
 import rs.elfak.bobans.carsharing.views.IProfileView;
+import rx.SingleSubscriber;
 
 /**
  * Created by Boban Stajic.
@@ -18,4 +22,49 @@ public class ProfilePresenter extends BasePresenter<IProfileView, ProfileInterac
         return new ProfileInteractor();
     }
 
+    public void getMyProfile() {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().getMyProfile(new SingleSubscriber<User>() {
+            @Override
+            public void onSuccess(User value) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().setData(value);
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                if (isViewAttached()) {
+                    getView().showError(error, false);
+                    getView().showContent();
+                }
+            }
+        });
+    }
+
+    public void updateUser(UserDAO user) {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().updateUser(user, new SingleSubscriber<Response<Void>>() {
+            @Override
+            public void onSuccess(Response<Void> value) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().finishActivity();
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                if (isViewAttached()) {
+                    getView().showError(error, false);
+                    getView().showContent();
+                }
+            }
+        });
+    }
 }

@@ -112,4 +112,5 @@
     <string name="notification_title_ride_request_canceled">Drive request canceled</string>
     <string name="notification_content_ride_request_canceled">%1$s has canceled ride request %2$s</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="label_select_image">Select image</string>
 </resources>
