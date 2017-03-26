@@ -2,14 +2,17 @@ package rs.elfak.bobans.carsharing.api;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rs.elfak.bobans.carsharing.models.Car;
@@ -20,6 +23,7 @@ import rs.elfak.bobans.carsharing.models.Registration;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.models.Token;
+import rs.elfak.bobans.carsharing.models.UploadPhotoResponse;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
 import rx.Single;
@@ -46,6 +50,10 @@ public interface ApiMethods {
 
     @PUT(ApiConstants.USERS)
     Single<User> updateUser(@Header("Authorization") String token, @Body UserDAO user);
+
+    @Multipart
+    @POST(ApiConstants.USERS_UPLOAD_PHOTO)
+    Single<UploadPhotoResponse> uploadPhoto(@Header("Authorization") String token, @Part MultipartBody.Part file);
 
     @GET(ApiConstants.MAKES)
     Single<List<Make>> getMakes(@Header("Authorization") String token);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,7 @@ public abstract class BaseActivity<M, I extends BaseInteractor, V extends IBaseV
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
+        Log.e(getClass().getSimpleName(), e.getMessage(), e);
         if (e instanceof HttpException) {
             ApiError error = ApiManager.parseError(((HttpException) e).response());
             switch (error.getCode()) {

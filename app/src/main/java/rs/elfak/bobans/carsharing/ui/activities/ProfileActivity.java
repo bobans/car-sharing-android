@@ -6,13 +6,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,11 +32,13 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.MediaType;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.ProfileInteractor;
 import rs.elfak.bobans.carsharing.models.Car;
@@ -156,7 +161,6 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                setResult(RESULT_CANCELED);
                 finish();
                 return true;
             }
@@ -179,6 +183,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(etName.getWindowToken(), 0);
 
+                    setResult(RESULT_OK);
                     getPresenter().updateUser(createUser());
                 }
                 return true;
@@ -247,7 +252,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
 
     @Override
     public void setData(User data) {
-        PictureUtils.loadImage(data.getPhotoUrl(), new CropCircleTransformation(this), R.drawable.ic_user_placeholder_dark, ivPhoto);
+        setUserPhoto(data.getPhotoUrl());
         etName.setText(data.getName());
         etEmail.setText(data.getEmail());
         etCity.setText(data.getCity());
@@ -428,11 +433,27 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
 
             case REQUEST_PICK_PHOTO: {
                 if (resultCode == RESULT_OK) {
-                    Log.i(ProfileActivity.class.getSimpleName(), "Picked photo: " + data);
+                    Uri uri = data.getData();
+                    String mimeType = getContentResolver().getType(uri);
+                    setResult(RESULT_OK);
+                    getPresenter().uploadPhoto(new File(getPathFromUri(uri)), MediaType.parse(mimeType));
                 }
                 break;
             }
         }
+    }
+
+    public String getPathFromUri(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+
+        CursorLoader cursorLoader = new CursorLoader(this, contentUri, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
+
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        if (cursor.moveToFirst()) {
+            return cursor.getString(column_index);
+        }
+        return contentUri.getPath();
     }
 
     @Override
@@ -505,6 +526,15 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
                 break;
             }
         }
+    }
+
+    @Override
+    public void updatePhoto(String url) {
+        setUserPhoto(url);
+    }
+
+    private void setUserPhoto(String url) {
+        PictureUtils.loadImage(url, new CropCircleTransformation(this), R.drawable.ic_user_placeholder_dark, ivPhoto);
     }
 
 }

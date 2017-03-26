@@ -2,10 +2,16 @@ package rs.elfak.bobans.carsharing.presenters;
 
 import android.support.annotation.NonNull;
 
-import retrofit2.Response;
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import rs.elfak.bobans.carsharing.interactors.ProfileInteractor;
+import rs.elfak.bobans.carsharing.models.UploadPhotoResponse;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IProfileView;
 import rx.SingleSubscriber;
 
@@ -63,6 +69,32 @@ public class ProfilePresenter extends BasePresenter<IProfileView, ProfileInterac
                 if (isViewAttached()) {
                     getView().showError(error, false);
                     getView().showContent();
+                }
+            }
+        });
+    }
+
+    public void uploadPhoto(File file, MediaType mediaType) {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        RequestBody requestFile = RequestBody.create(mediaType, file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        getInteractor().uploadPhoto(body, new SingleSubscriber<UploadPhotoResponse>() {
+            @Override
+            public void onSuccess(UploadPhotoResponse value) {
+                SessionManager.getInstance().getUser().setPhotoUrl(value.getUrl());
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().updatePhoto(value.getUrl());
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().showError(error, false);
                 }
             }
         });

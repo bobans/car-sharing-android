@@ -1,6 +1,8 @@
 package rs.elfak.bobans.carsharing.interactors;
 
+import okhttp3.MultipartBody;
 import rs.elfak.bobans.carsharing.api.ApiManager;
+import rs.elfak.bobans.carsharing.models.UploadPhotoResponse;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
@@ -19,5 +21,9 @@ public class ProfileInteractor extends BaseInteractor {
 
     public void updateUser(UserDAO user, SingleSubscriber<User> subscriber) {
         subscribe(ApiManager.getInstance().getApiMethods().updateUser(SessionManager.getInstance().getToken(), user), subscriber);
+    }
+
+    public void uploadPhoto(MultipartBody.Part body, SingleSubscriber<UploadPhotoResponse> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().uploadPhoto(SessionManager.getInstance().getToken(), body), subscriber);
     }
 }

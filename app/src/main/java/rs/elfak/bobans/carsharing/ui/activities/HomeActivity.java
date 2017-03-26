@@ -37,6 +37,8 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
 
     public static final String EXTRA_SHOW_DRIVE = "EXTRA_SHOW_DRIVE";
 
+    public static final int REQUEST_PROFILE = 1;
+
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.navigation_view) NavigationView navigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -173,8 +175,23 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
             }
 
             case R.id.navigation_view_header: {
-                navigateToActivity(ProfileActivity.class, null);
+                navigateToActivityForResult(REQUEST_PROFILE, ProfileActivity.class, null);
                 break;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_PROFILE: {
+                if (resultCode == RESULT_OK) {
+                    populateHeader(navigationView.getHeaderView(0));
+                }
+            }
+
+            default: {
+                super.onActivityResult(requestCode, resultCode, data);
             }
         }
     }

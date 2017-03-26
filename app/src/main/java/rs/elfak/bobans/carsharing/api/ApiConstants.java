@@ -16,6 +16,7 @@ class ApiConstants {
 
     static final String USERS_ME = "users/me";
     static final String USERS = "users";
+    static final String USERS_UPLOAD_PHOTO = "users/upload-photo";
 
     static final String MAKES = "makes";
     static final String MODELS = "makes/{makeId}/models";

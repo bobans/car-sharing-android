@@ -19,8 +19,9 @@
 
             <ImageView
                 android:id="@+id/image_view_user_photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_marginBottom="@dimen/layout_side_margin"
+                android:layout_width="@dimen/profile_photo_size"
+                android:layout_height="@dimen/profile_photo_size"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_user_placeholder_dark" />

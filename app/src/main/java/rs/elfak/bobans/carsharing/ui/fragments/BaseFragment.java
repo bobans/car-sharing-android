@@ -86,21 +86,21 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        if (getActivity() != null) {
+        if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).showError(e, pullToRefresh);
         }
     }
 
     @Override
     public void showLoading(boolean pullToRefresh) {
-        if (getActivity() != null) {
+        if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).showLoading(pullToRefresh);
         }
     }
 
     @Override
     public void showContent() {
-        if (getActivity() != null) {
+        if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).showContent();
         }
     }
@@ -112,7 +112,7 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
 
     @Override
     public void showNoInternetConnection() {
-        if (getActivity() != null) {
+        if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).showNoInternetConnection();
         }
     }

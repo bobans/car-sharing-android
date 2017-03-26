@@ -8,4 +8,5 @@ import rs.elfak.bobans.carsharing.models.User;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 public interface IProfileView extends IBaseView<User> {
+    void updatePhoto(String url);
 }
