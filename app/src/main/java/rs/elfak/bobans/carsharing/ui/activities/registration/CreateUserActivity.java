@@ -30,7 +30,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.registration.CreateUserInteractor;
-import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.CarDAO;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
@@ -52,7 +51,7 @@ import rs.elfak.bobans.carsharing.views.registration.ICreateUserView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class CreateUserActivity extends BaseActivity<Object, CreateUserInteractor, ICreateUserView, CreateUserPresenter> implements ICreateUserView, View.OnClickListener, View.OnFocusChangeListener, AdapterView.OnItemSelectedListener, View.OnLongClickListener {
+public class CreateUserActivity extends BaseActivity<Object, CreateUserInteractor, ICreateUserView, CreateUserPresenter> implements ICreateUserView, View.OnClickListener, View.OnFocusChangeListener, AdapterView.OnItemSelectedListener {
 
     private static final int REQUEST_CREATE_CAR = 1;
     private static final int REQUEST_EDIT_CAR = 2;
@@ -171,26 +170,25 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
                     CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
                     holder.attachToView(carsContainer);
                     registerForContextMenu(holder.getItemView());
-                    holder.getItemView().setOnLongClickListener(this);
                 }
                 break;
             }
 
             case REQUEST_EDIT_CAR: {
                 if (resultCode == RESULT_OK) {
-                    Car car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
+                    CarDAO car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
                     CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
                     View editing = (View) carsContainer.getTag();
                     for (int i=0; i<carsContainer.getChildCount(); i++) {
                         if (editing.equals(carsContainer.getChildAt(i))) {
                             carsContainer.removeViewAt(i);
                             holder.attachToView(carsContainer, i);
-                            carsContainer.setTag(null);
                         }
                     }
                     registerForContextMenu(holder.getItemView());
-                    holder.getItemView().setOnLongClickListener(this);
                 }
+                carsContainer.setTag(null);
+                break;
             }
         }
     }
@@ -199,6 +197,7 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.car_context, menu);
+        carsContainer.setTag(v);
     }
 
     @Override
@@ -206,7 +205,7 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
         switch (item.getItemId()) {
             case R.id.action_edit: {
                 View view = (View) carsContainer.getTag();
-                Car car = (Car) view.getTag();
+                CarDAO car = (CarDAO) view.getTag();
                 Intent intent = new Intent(this, CreateCarActivity.class);
                 intent.putExtra(CreateCarActivity.EXTRA_CAR, car);
                 startActivityForResult(intent, REQUEST_EDIT_CAR);
@@ -380,10 +379,4 @@ public class CreateUserActivity extends BaseActivity<Object, CreateUserInteracto
 
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        carsContainer.setTag(v);
-        v.showContextMenu();
-        return true;
-    }
 }

@@ -41,7 +41,6 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.MediaType;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.ProfileInteractor;
-import rs.elfak.bobans.carsharing.models.Car;
 import rs.elfak.bobans.carsharing.models.CarDAO;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
@@ -262,6 +261,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
             spUserType.setSelection(1);
             etDriverLicense.setTag(data.getDriverLicenseDate());
             etDriverLicense.setText(DateTimeUtils.printLongDate(data.getDriverLicenseDate()));
+            carsContainer.removeAllViews();
             for (CarDAO car : data.getCars()) {
                 CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
                 holder.attachToView(carsContainer);
@@ -415,19 +415,19 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
 
             case REQUEST_EDIT_CAR: {
                 if (resultCode == RESULT_OK) {
-                    Car car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
+                    CarDAO car = data.getParcelableExtra(CreateCarActivity.EXTRA_CAR);
                     CarViewHolder holder = new CarViewHolder(LayoutInflater.from(this), carsContainer, car);
                     View editing = (View) carsContainer.getTag();
                     for (int i=0; i<carsContainer.getChildCount(); i++) {
                         if (editing.equals(carsContainer.getChildAt(i))) {
                             carsContainer.removeViewAt(i);
                             holder.attachToView(carsContainer, i);
-                            carsContainer.setTag(null);
                         }
                     }
                     registerForContextMenu(holder.getItemView());
                     holder.getItemView().setOnLongClickListener(this);
                 }
+                carsContainer.setTag(null);
                 break;
             }
 
@@ -460,6 +460,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.car_context, menu);
+        carsContainer.setTag(v);
     }
 
     @Override
@@ -467,7 +468,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
         switch (item.getItemId()) {
             case R.id.action_edit: {
                 View view = (View) carsContainer.getTag();
-                Car car = (Car) view.getTag();
+                CarDAO car = (CarDAO) view.getTag();
                 Intent intent = new Intent(this, CreateCarActivity.class);
                 intent.putExtra(CreateCarActivity.EXTRA_CAR, car);
                 startActivityForResult(intent, REQUEST_EDIT_CAR);
