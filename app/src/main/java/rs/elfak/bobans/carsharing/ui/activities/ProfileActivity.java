@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.ProfileInteractor;
 import rs.elfak.bobans.carsharing.models.Car;
@@ -45,6 +46,7 @@ import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
 import rs.elfak.bobans.carsharing.ui.views.CarViewHolder;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
+import rs.elfak.bobans.carsharing.utils.PictureUtils;
 import rs.elfak.bobans.carsharing.utils.textwatchers.ClearErrorTextWatcher;
 import rs.elfak.bobans.carsharing.views.IProfileView;
 
@@ -245,6 +247,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
 
     @Override
     public void setData(User data) {
+        PictureUtils.loadImage(data.getPhotoUrl(), new CropCircleTransformation(this), R.drawable.ic_user_placeholder_dark, ivPhoto);
         etName.setText(data.getName());
         etEmail.setText(data.getEmail());
         etCity.setText(data.getCity());
