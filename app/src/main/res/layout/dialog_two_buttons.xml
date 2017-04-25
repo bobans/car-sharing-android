@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="260dp"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:background="@color/colorPrimaryDark"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center" >
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/image_view_icon"
-            android:src="@android:drawable/ic_dialog_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            android:src="@android:drawable/ic_dialog_info" />
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="130dp" >
+        android:minHeight="130dp">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_margin="@dimen/layout_side_margin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_side_margin"
+            android:gravity="center_vertical"
+            android:minHeight="98dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_view_message"
-                tools:text="There is some info"
-                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/item_primary_text_size"
+                tools:text="There is some info" />
 
         </LinearLayout>
 
@@ -45,22 +48,22 @@
 
     <Button
         android:id="@+id/button_positive"
-        android:text="@string/ok"
-        android:textSize="@dimen/dialog_button_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_marginBottom="@dimen/layout_control_space"
         android:layout_marginLeft="@dimen/layout_side_margin"
         android:layout_marginRight="@dimen/layout_side_margin"
-        android:layout_marginBottom="@dimen/layout_control_space"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_button_height" />
+        android:text="@string/ok"
+        android:textSize="@dimen/dialog_button_text_size" />
 
     <Button
         android:id="@+id/button_negative"
-        android:text="@string/cancel"
-        android:textSize="@dimen/dialog_button_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_marginBottom="@dimen/layout_bottom_margin"
         android:layout_marginLeft="@dimen/layout_side_margin"
         android:layout_marginRight="@dimen/layout_side_margin"
-        android:layout_marginBottom="@dimen/layout_bottom_margin"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_button_height" />
+        android:text="@string/cancel"
+        android:textSize="@dimen/dialog_button_text_size" />
 
 </LinearLayout>

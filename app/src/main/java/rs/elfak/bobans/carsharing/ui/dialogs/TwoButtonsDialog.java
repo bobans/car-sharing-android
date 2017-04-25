@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -22,6 +23,7 @@ import rs.elfak.bobans.carsharing.R;
 
 public class TwoButtonsDialog extends BaseDialog implements View.OnClickListener {
 
+    @BindView(R.id.image_view_icon) ImageView ivIcon;
     @BindView(R.id.text_view_message) TextView tvMessage;
     @BindView(R.id.button_positive) Button btnPositive;
     @BindView(R.id.button_negative) Button btnNegative;
@@ -57,6 +59,7 @@ public class TwoButtonsDialog extends BaseDialog implements View.OnClickListener
         btnPositive.setTypeface(fontMedium);
         btnNegative.setTypeface(fontMedium);
 
+        ivIcon.setImageResource(icon);
         tvMessage.setText(message);
         if (positiveButtonText != null) {
             btnPositive.setText(positiveButtonText);
