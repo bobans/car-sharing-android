@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Car Sharing</string>
-    <string name="text_splash_screen_headline">Car Sharing</string>
+    <string name="app_name">Drive Together</string>
+    <string name="text_splash_screen_headline">Drive Together</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="button_login">Login</string>

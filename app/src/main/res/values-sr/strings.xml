@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Deljenje Vožnje</string>
-    <string name="text_splash_screen_headline">Deljenje Vožnje</string>
+    <string name="app_name">Drive Together</string>
+    <string name="text_splash_screen_headline">Drive Together</string>
     <string name="hint_username">Korisničko ime</string>
     <string name="hint_password">Šifra</string>
     <string name="button_login">Prijavi se</string>
