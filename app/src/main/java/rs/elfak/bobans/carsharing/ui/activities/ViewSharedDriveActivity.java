@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +34,7 @@ import rs.elfak.bobans.carsharing.models.PassengerDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.presenters.ViewSharedDrivePresenter;
 import rs.elfak.bobans.carsharing.ui.adapters.PassengersAdapter;
+import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
 import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
 
 /**
@@ -173,17 +173,17 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
             }
 
             case R.id.action_delete: {
-                new AlertDialog.Builder(this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(R.string.prompt_delete_shared_drive)
-                        .setPositiveButton(R.string.prompt_answer_yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                getPresenter().deleteSharedDrive();
-                            }
-                        })
-                        .setNegativeButton(R.string.prompt_answer_no, null)
-                        .show();
+                new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.prompt_delete_shared_drive, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
+                        getPresenter().deleteSharedDrive();
+                    }
+
+                    @Override
+                    public void onNegativeButtonClick(DialogInterface dialogInterface, View view) {
+
+                    }
+                }).show();
                 return true;
             }
 
