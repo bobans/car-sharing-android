@@ -113,4 +113,6 @@
     <string name="notification_content_ride_request_canceled">%1$s je otkazao vožnju %2$s</string>
     <string name="title_activity_profile">Korisnički profil</string>
     <string name="label_select_image">Izaberi sliku</string>
+    <string name="action_my_drives">Moje vožnje</string>
+    <string name="logout_prompt">Jeste li sigurni da želite da se izlogujete?</string>
 </resources>

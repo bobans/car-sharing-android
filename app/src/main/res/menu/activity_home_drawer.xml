@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_drives"
         android:title="@string/action_drives" />
 
+    <item android:id="@+id/action_my_drives"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/action_my_drives" />
+
     <item
         android:id="@+id/footer_spacer_1"
         android:checkable="false"

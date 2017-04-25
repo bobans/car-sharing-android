@@ -1,5 +1,6 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.HomeInteractor;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.HomePresenter;
+import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
 import rs.elfak.bobans.carsharing.ui.fragments.SharedDrivesFragment;
 import rs.elfak.bobans.carsharing.utils.PictureUtils;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
@@ -130,6 +132,11 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
                 return true;
             }
 
+            case R.id.action_my_drives: {
+                // TODO show my drives fragment
+                return true;
+            }
+
             default: {
                 return false;
             }
@@ -165,12 +172,22 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_view_logout: {
-                getPresenter().unregisterFCM();
-                SessionManager.getInstance().setToken(null);
-                Intent intent = new Intent(this, LoginEmailActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.logout_prompt, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
+                        getPresenter().unregisterFCM();
+                        SessionManager.getInstance().setToken(null);
+                        Intent intent = new Intent(HomeActivity.this, LoginEmailActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onNegativeButtonClick(DialogInterface dialogInterface, View view) {
+
+                    }
+                }).show();
                 break;
             }
 
