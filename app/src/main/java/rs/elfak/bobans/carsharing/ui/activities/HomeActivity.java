@@ -172,7 +172,7 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.image_view_logout: {
-                new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.logout_prompt, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
+                new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.prompt_logout, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
                     @Override
                     public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
                         getPresenter().unregisterFCM();

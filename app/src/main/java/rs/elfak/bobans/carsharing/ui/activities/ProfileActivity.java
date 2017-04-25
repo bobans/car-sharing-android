@@ -47,6 +47,7 @@ import rs.elfak.bobans.carsharing.models.UserDAO;
 import rs.elfak.bobans.carsharing.presenters.ProfilePresenter;
 import rs.elfak.bobans.carsharing.ui.activities.registration.CreateCarActivity;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
+import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
 import rs.elfak.bobans.carsharing.ui.views.CarViewHolder;
 import rs.elfak.bobans.carsharing.utils.Constants;
 import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
@@ -186,6 +187,25 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
                     getPresenter().updateUser(createUser());
                 }
                 return true;
+            }
+
+            case R.id.action_change_password: {
+                // TODO show change password activity
+                return true;
+            }
+
+            case R.id.action_delete_account: {
+                new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.prompt_delete_account, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
+                        // TODO delete account
+                    }
+
+                    @Override
+                    public void onNegativeButtonClick(DialogInterface dialogInterface, View view) {
+
+                    }
+                }).show();
             }
 
             default: {
