@@ -198,7 +198,7 @@ public class ProfileActivity extends BaseActivity<User, ProfileInteractor, IProf
                 new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.prompt_delete_account, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
                     @Override
                     public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
-                        // TODO delete account
+                        getPresenter().deleteAccount();
                     }
 
                     @Override

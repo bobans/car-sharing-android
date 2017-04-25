@@ -99,4 +99,27 @@ public class ProfilePresenter extends BasePresenter<IProfileView, ProfileInterac
             }
         });
     }
+
+    public void deleteAccount() {
+        if (isViewAttached()) {
+            getView().showLoading(false);
+        }
+        getInteractor().deleteAccount(new SingleSubscriber<Void>() {
+            @Override
+            public void onSuccess(Void value) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    // TODO logout
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                if (isViewAttached()) {
+                    getView().showContent();
+                    getView().showError(error, false);
+                }
+            }
+        });
+    }
 }

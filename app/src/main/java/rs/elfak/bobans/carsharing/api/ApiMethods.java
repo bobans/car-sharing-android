@@ -51,6 +51,9 @@ public interface ApiMethods {
     @PUT(ApiConstants.USERS)
     Single<User> updateUser(@Header("Authorization") String token, @Body UserDAO user);
 
+    @DELETE(ApiConstants.USERS)
+    Single<Void> deleteUser(@Header("Authorization") String token);
+
     @Multipart
     @POST(ApiConstants.USERS_UPLOAD_PHOTO)
     Single<UploadPhotoResponse> uploadPhoto(@Header("Authorization") String token, @Part MultipartBody.Part file);

@@ -26,4 +26,9 @@ public class ProfileInteractor extends BaseInteractor {
     public void uploadPhoto(MultipartBody.Part body, SingleSubscriber<UploadPhotoResponse> subscriber) {
         subscribe(ApiManager.getInstance().getApiMethods().uploadPhoto(SessionManager.getInstance().getToken(), body), subscriber);
     }
+
+    public void deleteAccount(SingleSubscriber<Void> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().deleteUser(SessionManager.getInstance().getToken()), subscriber);
+    }
+
 }
