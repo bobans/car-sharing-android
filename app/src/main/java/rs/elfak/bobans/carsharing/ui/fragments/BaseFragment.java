@@ -127,6 +127,17 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
     }
 
     @Override
+    public void navigateToActivityClearStack(Class activityClass, Bundle extras) {
+        Intent intent = new Intent(getContext(), activityClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        startActivity(intent);
+    }
+
+    @Override
     public void navigateToActivityForResult(int requestCode, Class activityClass, Bundle extras) {
         Intent intent = new Intent(getContext(), activityClass);
         if (extras != null) {

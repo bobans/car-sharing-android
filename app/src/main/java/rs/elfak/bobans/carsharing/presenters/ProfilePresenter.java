@@ -11,6 +11,7 @@ import rs.elfak.bobans.carsharing.interactors.ProfileInteractor;
 import rs.elfak.bobans.carsharing.models.UploadPhotoResponse;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
+import rs.elfak.bobans.carsharing.ui.activities.LoginEmailActivity;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IProfileView;
 import rx.SingleSubscriber;
@@ -109,7 +110,8 @@ public class ProfilePresenter extends BasePresenter<IProfileView, ProfileInterac
             public void onSuccess(Void value) {
                 if (isViewAttached()) {
                     getView().showContent();
-                    // TODO logout
+                    SessionManager.getInstance().setToken(null);
+                    getView().navigateToActivityClearStack(LoginEmailActivity.class, null);
                 }
             }
 
