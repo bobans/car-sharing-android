@@ -24,6 +24,7 @@ import rs.elfak.bobans.carsharing.interactors.HomeInteractor;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.HomePresenter;
 import rs.elfak.bobans.carsharing.ui.dialogs.TwoButtonsDialog;
+import rs.elfak.bobans.carsharing.ui.fragments.MyDrivesFragment;
 import rs.elfak.bobans.carsharing.ui.fragments.SharedDrivesFragment;
 import rs.elfak.bobans.carsharing.utils.PictureUtils;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
@@ -133,7 +134,7 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
             }
 
             case R.id.action_my_drives: {
-                // TODO show my drives fragment
+                replaceFragment(MyDrivesFragment.newInstance());
                 return true;
             }
 

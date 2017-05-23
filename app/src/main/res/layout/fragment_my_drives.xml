@@ -33,7 +33,7 @@
 
                 <TextView
                     android:id="@+id/text_view_no_shared_drives"
-                    android:text="@string/text_no_drives_atm"
+                    android:text="@string/text_no_my_drives"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

@@ -118,4 +118,6 @@
     <string name="action_change_password">Promeni lozinku</string>
     <string name="action_delete_account">Izbriši nalog</string>
     <string name="prompt_delete_account">Jeste li sigurni da želite da izbrišete nalog? Ne možete da ga povratite ponovo.</string>
+    <string name="text_no_my_drives">Trenutno nemate vožnji</string>
+    <string name="title_fragment_my_drives">Moje vožnje</string>
 </resources>

@@ -96,4 +96,7 @@ public interface ApiMethods {
 
     @DELETE(ApiConstants.FCM_UNREGISTER)
     Single<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Path("device_id") String deviceId);
+
+    @GET(ApiConstants.SHARED_DRIVES_ME)
+    Single<List<SharedDrive>> getMyDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
 }

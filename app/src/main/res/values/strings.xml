@@ -118,4 +118,6 @@
     <string name="action_change_password">Change password</string>
     <string name="action_delete_account">Delete account</string>
     <string name="prompt_delete_account">Are you sure you want to delete account? You can\'t restore it later.</string>
+    <string name="text_no_my_drives">You don\'t have any drive</string>
+    <string name="title_fragment_my_drives">My Drives</string>
 </resources>
