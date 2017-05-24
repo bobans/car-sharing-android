@@ -22,7 +22,7 @@ class ApiConstants {
     static final String MODELS = "makes/{makeId}/models";
 
     static final String SHARED_DRIVES = "drives";
-    static final String SHARED_DRIVES_ME = "drives/me";
+    static final String SHARED_DRIVES_ME = "drives/user/me";
     static final String SHARED_DRIVES_ID = "drives/{id}";
     static final String SHARED_DRIVES_REQUEST = "drives/{driveId}/request";
     static final String SHARED_DRIVES_UPDATE_REQUEST = "drives/{driveId}/request/{passengerId}/{status}";
