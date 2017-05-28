@@ -120,4 +120,8 @@
     <string name="prompt_delete_account">Jeste li sigurni da želite da izbrišete nalog? Ne možete da ga povratite ponovo.</string>
     <string name="text_no_my_drives">Trenutno nemate vožnji</string>
     <string name="title_fragment_my_drives">Moje vožnje</string>
+    <string name="button_give_feedback">Oceni</string>
+    <string name="title_activity_give_feedback">Oceni</string>
+    <string name="label_driver">Vozač</string>
+    <string name="label_passengers">Putnici</string>
 </resources>

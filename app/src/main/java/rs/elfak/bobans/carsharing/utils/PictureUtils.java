@@ -18,6 +18,7 @@ public class PictureUtils {
     public static void loadImage(final String photoUrl, final ImageView imageView) {
         Glide.with(CarSharingApplication.getInstance())
                 .load(photoUrl)
+                .centerCrop()
                 .into(imageView);
     }
 
@@ -32,6 +33,7 @@ public class PictureUtils {
         Glide.with(CarSharingApplication.getInstance())
                 .load(photoUrl)
                 .placeholder(placeholder)
+                .centerCrop()
                 .into(imageView);
     }
 

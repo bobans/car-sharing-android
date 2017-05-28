@@ -34,7 +34,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -110,7 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_control_space"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -488,7 +490,8 @@
                 android:layout_marginTop="@dimen/layout_control_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -572,6 +575,16 @@
                 android:layout_marginTop="@dimen/layout_control_space"
                 android:id="@+id/button_request_ride"
                 android:text="@string/button_request_a_ride"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <Button
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:layout_marginBottom="@dimen/layout_side_margin"
+                android:id="@+id/button_give_feedback"
+                android:text="@string/button_give_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:visibility="gone"

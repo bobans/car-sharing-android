@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/item_padding">
+
+        <ImageView
+            android:id="@+id/image_view_user_photo"
+            android:layout_width="@dimen/shared_drive_picture_size"
+            android:layout_height="@dimen/shared_drive_picture_size"
+            android:layout_margin="@dimen/item_padding"
+            android:background="@color/colorDivider"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_user_placeholder" />
+
+        <TextView
+            android:id="@+id/text_view_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/item_padding"
+            android:textSize="@dimen/item_primary_text_size"
+            tools:text="Boban Stajic" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,11 +3,14 @@ package rs.elfak.bobans.carsharing.presenters;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import org.joda.time.DateTime;
+
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.interactors.ViewSharedDriveInteractor;
 import rs.elfak.bobans.carsharing.models.Passenger;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.ui.activities.CreateSharedDriveActivity;
+import rs.elfak.bobans.carsharing.ui.activities.GiveFeedbackActivity;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.IViewSharedDriveView;
 import rx.SingleSubscriber;
@@ -34,14 +37,20 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
     public void loadData() {
         if (isViewAttached() && sharedDrive != null) {
             getView().setData(sharedDrive);
-            getView().setIsOwner(sharedDrive.getUser().getId() == SessionManager.getInstance().getUser().getId());
+            boolean isOwner = sharedDrive.getUser().getId() == SessionManager.getInstance().getUser().getId();
+            DateTime time = sharedDrive.getTime().getDate();
+            DateTime departureTime = sharedDrive.getTime().getDepartureTime();
+            time = time.withTime(departureTime.getHourOfDay(), departureTime.getMinuteOfHour(), departureTime.getSecondOfMinute(), departureTime.getMillisOfSecond());
+            boolean isFromPast = time.isBeforeNow();
+            // TODO repeatable drive is from past ???
+            getView().setIsOwner(isOwner, isFromPast);
             boolean isPassenger = false;
             for (Passenger passenger : sharedDrive.getPassengers()) {
                 if (passenger.getUser().getId() == SessionManager.getInstance().getUser().getId()) {
                     isPassenger = true;
                 }
             }
-            getView().setIsPassenger(isPassenger);
+            getView().setIsPassenger(isPassenger, isFromPast);
         }
     }
 
@@ -143,6 +152,14 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
                 }
             }
         });
+    }
+
+    public void onGiveFeedback() {
+        Bundle extras = new Bundle();
+        extras.putParcelable(GiveFeedbackActivity.EXTRA_SHARED_DRIVE, sharedDrive);
+        if (isViewAttached()) {
+            getView().navigateToActivity(GiveFeedbackActivity.class, extras);
+        }
     }
 
 }

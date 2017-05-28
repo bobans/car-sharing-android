@@ -9,9 +9,9 @@ import rs.elfak.bobans.carsharing.models.SharedDrive;
  */
 public interface IViewSharedDriveView extends IBaseView<SharedDrive> {
     void deleteSuccessful();
-    void setIsOwner(boolean isOwner);
+    void setIsOwner(boolean isOwner, boolean isFromPast);
     void requestSuccessful();
-    void setIsPassenger(boolean isPassenger);
+    void setIsPassenger(boolean isPassenger, boolean isFromPast);
     void requestCanceled();
     void requestUpdated(int adapterPosition, int status);
 }

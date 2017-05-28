@@ -79,6 +79,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     @BindView(R.id.edit_text_price_type) EditText etPriceType;
     @BindView(R.id.recycler_view_passengers) RecyclerView recyclerViewPassengers;
     @BindView(R.id.button_request_ride) Button btnRequestRide;
+    @BindView(R.id.button_give_feedback) Button btnGiveFeedback;
 
     @BindColor(R.color.colorDivider) int colorDivider;
 
@@ -115,6 +116,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         setFonts();
 
         recyclerViewPassengers.setHasFixedSize(true);
+        recyclerViewPassengers.setLayoutFrozen(true);
         recyclerViewPassengers.setNestedScrollingEnabled(false);
         recyclerViewPassengers.setLayoutManager(new LinearLayoutManager(this));
         PassengersAdapter adapter = new PassengersAdapter();
@@ -122,6 +124,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         recyclerViewPassengers.setAdapter(adapter);
 
         btnRequestRide.setOnClickListener(this);
+        btnGiveFeedback.setOnClickListener(this);
     }
 
     private void setFonts() {
@@ -284,11 +287,12 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     }
 
     @Override
-    public void setIsOwner(boolean isOwner) {
+    public void setIsOwner(boolean isOwner, boolean isFromPast) {
         this.isOwner = isOwner;
         invalidateOptionsMenu();
         recyclerViewPassengers.setVisibility(isOwner ? View.VISIBLE : View.GONE);
         btnRequestRide.setVisibility(isOwner ? View.GONE : View.VISIBLE);
+        btnGiveFeedback.setVisibility(isFromPast ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -298,9 +302,13 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     }
 
     @Override
-    public void setIsPassenger(boolean isPassenger) {
+    public void setIsPassenger(boolean isPassenger, boolean isFromPast) {
         this.isPassenger = isPassenger;
         btnRequestRide.setText(isOwner || isPassenger ? R.string.button_cancel_ride_request : R.string.button_request_a_ride);
+        btnRequestRide.setEnabled(!isFromPast);
+        if (!isOwner) {
+            btnGiveFeedback.setVisibility(isFromPast && isPassenger ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
@@ -352,6 +360,11 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
                 } else {
                     getPresenter().cancelRideRequest();
                 }
+                break;
+            }
+
+            case R.id.button_give_feedback: {
+                getPresenter().onGiveFeedback();
                 break;
             }
         }

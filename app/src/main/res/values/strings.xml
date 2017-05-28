@@ -120,4 +120,8 @@
     <string name="prompt_delete_account">Are you sure you want to delete account? You can\'t restore it later.</string>
     <string name="text_no_my_drives">You don\'t have any drive</string>
     <string name="title_fragment_my_drives">My Drives</string>
+    <string name="button_give_feedback">Give feedback</string>
+    <string name="title_activity_give_feedback">Feedback</string>
+    <string name="label_driver">Driver</string>
+    <string name="label_passengers">Passengers</string>
 </resources>

@@ -17,11 +17,11 @@ import butterknife.ButterKnife;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.models.DrivePreferences;
 import rs.elfak.bobans.carsharing.models.DrivePrice;
-import rs.elfak.bobans.carsharing.models.Passenger;
 import rs.elfak.bobans.carsharing.models.PassengerDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.utils.CarSharingApplication;
 import rs.elfak.bobans.carsharing.utils.DateTimeUtils;
+import rs.elfak.bobans.carsharing.utils.PictureUtils;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 
 /**
@@ -62,6 +62,7 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
 
         setFonts(holder);
 
+        PictureUtils.loadImage(drive.getUser().getPhotoUrl(), R.drawable.ic_user_placeholder, holder.photo);
         switch (drive.userPassengerStatus(SessionManager.getInstance().getUser().getId())) {
             case PassengerDAO.STATUS_REQUESTED: {
                 holder.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.colorDriveRequested));
@@ -173,7 +174,7 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.drive_status) View status;
-        @BindView(R.id.image_view_user_photo) ImageView Photo;
+        @BindView(R.id.image_view_user_photo) ImageView photo;
         @BindView(R.id.text_view_route) TextView route;
         @BindView(R.id.image_view_request_indicator) ImageView requestIndicator;
         @BindView(R.id.image_view_preference_music) ImageView preferenceMusic;
