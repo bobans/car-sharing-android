@@ -4,7 +4,6 @@ import java.util.List;
 
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
-import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rx.SingleSubscriber;
 
 /**
@@ -16,7 +15,7 @@ import rx.SingleSubscriber;
 public class SharedDrivesInteractor extends BaseInteractor {
 
     public void getSharedDrives(int offset, int limit, SingleSubscriber<List<SharedDrive>> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().getSharedDrives(SessionManager.getInstance().getToken(), offset, limit), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().getSharedDrives(offset, limit), subscriber);
     }
 
 }

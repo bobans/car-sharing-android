@@ -5,7 +5,6 @@ import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.models.UploadPhotoResponse;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.models.UserDAO;
-import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rx.SingleSubscriber;
 
 /**
@@ -16,19 +15,19 @@ import rx.SingleSubscriber;
 public class ProfileInteractor extends BaseInteractor {
 
     public void getMyProfile(SingleSubscriber<User> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().getUser(SessionManager.getInstance().getToken()), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().getUser(), subscriber);
     }
 
     public void updateUser(UserDAO user, SingleSubscriber<User> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().updateUser(SessionManager.getInstance().getToken(), user), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().updateUser(user), subscriber);
     }
 
     public void uploadPhoto(MultipartBody.Part body, SingleSubscriber<UploadPhotoResponse> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().uploadPhoto(SessionManager.getInstance().getToken(), body), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().uploadPhoto(body), subscriber);
     }
 
     public void deleteAccount(SingleSubscriber<Void> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().deleteUser(SessionManager.getInstance().getToken()), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().deleteUser(), subscriber);
     }
 
 }

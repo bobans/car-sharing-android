@@ -13,12 +13,12 @@ import rx.SingleSubscriber;
 
 public class SplashScreenInteractor extends BaseInteractor {
 
-    public void login(String token, SingleSubscriber<Token> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().login(token), subscriber);
+    public void login(SingleSubscriber<Token> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().login(), subscriber);
     }
 
-    public void getUser(String token, SingleSubscriber<User> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().getUser(token), subscriber);
+    public void getUser(SingleSubscriber<User> subscriber) {
+        subscribe(ApiManager.getInstance().getApiMethods().getUser(), subscriber);
     }
 
 }

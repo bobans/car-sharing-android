@@ -8,7 +8,6 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -37,66 +36,67 @@ import rx.Single;
 public interface ApiMethods {
 
     @POST(ApiConstants.LOGIN)
-    Single<Token> login(@Header("Authorization") String token);
+    Single<Token> login();
 
     @POST(ApiConstants.REGISTER)
     Single<Token> register(@Body Registration registration);
 
     @GET(ApiConstants.USERS_ME)
-    Single<User> getUser(@Header("Authorization") String token);
+    Single<User> getUser();
 
     @POST(ApiConstants.USERS)
-    Single<Response<Void>> createUser(@Header("Authorization") String token, @Body UserDAO user);
+    Single<Response<Void>> createUser(@Body UserDAO user);
 
     @PUT(ApiConstants.USERS)
-    Single<User> updateUser(@Header("Authorization") String token, @Body UserDAO user);
+    Single<User> updateUser(@Body UserDAO user);
 
     @DELETE(ApiConstants.USERS)
-    Single<Void> deleteUser(@Header("Authorization") String token);
+    Single<Void> deleteUser();
 
     @Multipart
     @POST(ApiConstants.USERS_UPLOAD_PHOTO)
-    Single<UploadPhotoResponse> uploadPhoto(@Header("Authorization") String token, @Part MultipartBody.Part file);
+    Single<UploadPhotoResponse> uploadPhoto(@Part MultipartBody.Part file);
 
     @GET(ApiConstants.MAKES)
-    Single<List<Make>> getMakes(@Header("Authorization") String token);
+    Single<List<Make>> getMakes();
 
     @GET(ApiConstants.MODELS)
-    Single<List<Model>> getModels(@Header("Authorization") String token, @Path("makeId") long makeId);
+    Single<List<Model>> getModels(@Path("makeId") long makeId);
 
     @GET(ApiConstants.SHARED_DRIVES)
-    Single<List<SharedDrive>> getSharedDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
+    Single<List<SharedDrive>> getSharedDrives(@Query("offset") int offset, @Query("limit") int limit);
 
     @GET(ApiConstants.SHARED_DRIVES_ID)
-    Single<SharedDrive> getSharedDrive(@Header("Authorization") String token, @Path("id") long driveId);
+    Single<SharedDrive> getSharedDrive(@Path("id") long driveId);
 
     @GET(ApiConstants.CARS)
-    Single<List<Car>> getCars(@Header("Authorization") String token);
+    Single<List<Car>> getCars();
 
     @POST(ApiConstants.SHARED_DRIVES)
-    Single<ResponseBody> createSharedDrive(@Header("Authorization") String token, @Body SharedDriveDAO sharedDrive);
+    Single<ResponseBody> createSharedDrive(@Body SharedDriveDAO sharedDrive);
 
     @POST(ApiConstants.SHARED_DRIVES)
-    Single<ResponseBody> updateSharedDrive(@Header("Authorization") String token, @Body SharedDrive sharedDrive);
+    Single<ResponseBody> updateSharedDrive(@Body SharedDrive sharedDrive);
 
     @DELETE(ApiConstants.SHARED_DRIVES_ID)
-    Single<ResponseBody> deleteSharedDrive(@Header("Authorization") String token, @Path("id") long id);
+    Single<ResponseBody> deleteSharedDrive(@Path("id") long id);
 
     @POST(ApiConstants.SHARED_DRIVES_REQUEST)
-    Single<ResponseBody> requestARide(@Header("Authorization") String token, @Path("driveId") long driveId);
+    Single<ResponseBody> requestARide(@Path("driveId") long driveId);
 
     @DELETE(ApiConstants.SHARED_DRIVES_REQUEST)
-    Single<ResponseBody> cancelRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId);
+    Single<ResponseBody> cancelRideRequest(@Path("driveId") long driveId);
 
     @PUT(ApiConstants.SHARED_DRIVES_UPDATE_REQUEST)
-    Single<ResponseBody> updateRideRequest(@Header("Authorization") String token, @Path("driveId") long driveId, @Path("passengerId") long passengerId, @Path("status") int status);
+    Single<ResponseBody> updateRideRequest(@Path("driveId") long driveId, @Path("passengerId") long passengerId, @Path("status") int status);
 
     @PUT(ApiConstants.FCM_REGISTER)
-    Single<ResponseBody> registerFCM(@Header("Authorization") String token, @Body FirebaseToken firebaseToken);
+    Single<ResponseBody> registerFCM(@Body FirebaseToken firebaseToken);
 
     @DELETE(ApiConstants.FCM_UNREGISTER)
-    Single<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Path("device_id") String deviceId);
+    Single<ResponseBody> unregisterFCM(@Path("device_id") String deviceId);
 
     @GET(ApiConstants.SHARED_DRIVES_ME)
-    Single<List<SharedDrive>> getMyDrives(@Header("Authorization") String token, @Query("offset") int offset, @Query("limit") int limit);
+    Single<List<SharedDrive>> getMyDrives(@Query("offset") int offset, @Query("limit") int limit);
+
 }

@@ -69,7 +69,7 @@ public class LoginEmailPresenter extends BasePresenter<ILoginEmailView, LoginEma
     }
 
     private void getUser() {
-        getInteractor().getUser(SessionManager.getInstance().getToken(), new SingleSubscriber<User>() {
+        getInteractor().getUser(new SingleSubscriber<User>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {

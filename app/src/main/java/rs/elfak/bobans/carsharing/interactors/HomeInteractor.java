@@ -4,7 +4,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
-import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rx.SingleSubscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -20,7 +19,7 @@ public class HomeInteractor extends BaseInteractor {
 
     public void unregisterFCM() {
         Subscription subscription = ApiManager.getInstance().getApiMethods()
-                .unregisterFCM(SessionManager.getInstance().getToken(), FirebaseInstanceId.getInstance().getId())
+                .unregisterFCM(FirebaseInstanceId.getInstance().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
@@ -28,6 +27,6 @@ public class HomeInteractor extends BaseInteractor {
     }
 
     public void getSharedDrive(long driveId, SingleSubscriber<SharedDrive> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().getSharedDrive(SessionManager.getInstance().getToken(), driveId), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().getSharedDrive(driveId), subscriber);
     }
 }

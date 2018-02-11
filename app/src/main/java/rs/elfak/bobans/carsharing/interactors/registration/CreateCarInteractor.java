@@ -6,7 +6,6 @@ import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.interactors.BaseInteractor;
 import rs.elfak.bobans.carsharing.models.Make;
 import rs.elfak.bobans.carsharing.models.Model;
-import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rx.SingleSubscriber;
 
 /**
@@ -18,11 +17,11 @@ import rx.SingleSubscriber;
 public class CreateCarInteractor extends BaseInteractor {
 
     public void getMakes(SingleSubscriber<List<Make>> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().getMakes(SessionManager.getInstance().getToken()), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().getMakes(), subscriber);
     }
 
     public void getModels(long makeId, SingleSubscriber<List<Model>> subscriber) {
-        subscribe(ApiManager.getInstance().getApiMethods().getModels(SessionManager.getInstance().getToken(), makeId), subscriber);
+        subscribe(ApiManager.getInstance().getApiMethods().getModels(makeId), subscriber);
     }
 
 }

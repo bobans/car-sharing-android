@@ -33,8 +33,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
 
     public void login() {
         startTime = System.currentTimeMillis();
-        String authentication = SessionManager.getInstance().getToken();
-        getInteractor().login(authentication, new SingleSubscriber<Token>() {
+        getInteractor().login(new SingleSubscriber<Token>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {
@@ -71,7 +70,7 @@ public class SplashScreenPresenter extends BasePresenter<ISplashScreenView, Spla
     }
 
     private void getUser() {
-        getInteractor().getUser(SessionManager.getInstance().getToken(), new SingleSubscriber<User>() {
+        getInteractor().getUser(new SingleSubscriber<User>() {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof HttpException) {

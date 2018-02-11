@@ -7,7 +7,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import okhttp3.ResponseBody;
 import rs.elfak.bobans.carsharing.api.ApiManager;
 import rs.elfak.bobans.carsharing.models.FirebaseToken;
-import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -31,7 +30,7 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
         // Get device id
         String deviceId = FirebaseInstanceId.getInstance().getId();
         if (refreshedToken != null && !refreshedToken.isEmpty()) {
-            ApiManager.getInstance().getApiMethods().registerFCM(SessionManager.getInstance().getToken(), new FirebaseToken(deviceId, refreshedToken))
+            ApiManager.getInstance().getApiMethods().registerFCM(new FirebaseToken(deviceId, refreshedToken))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new SingleSubscriber<ResponseBody>() {

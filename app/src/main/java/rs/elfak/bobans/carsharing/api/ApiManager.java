@@ -1,14 +1,18 @@
 package rs.elfak.bobans.carsharing.api;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rs.elfak.bobans.carsharing.utils.CarSharingApplication;
+import rs.elfak.bobans.carsharing.utils.SessionManager;
 
 /**
  * Created by Boban Stajic.
@@ -36,6 +40,20 @@ public class ApiManager {
                 .addInterceptor(interceptor)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        String token = SessionManager.getInstance().getToken();
+                        if (token != null) {
+                            Request request = chain.request()
+                                    .newBuilder()
+                                    .header("Authorization", token)
+                                    .build();
+                            return chain.proceed(request);
+                        }
+                        return chain.proceed(chain.request());
+                    }
+                })
                 .build();
         retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConstants.BASE_URL)
