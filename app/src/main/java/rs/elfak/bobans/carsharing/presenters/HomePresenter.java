@@ -23,8 +23,8 @@ public class HomePresenter extends BasePresenter<IHomeView, HomeInteractor> {
         return new HomeInteractor();
     }
 
-    public void unregisterFCM() {
-        getInteractor().unregisterFCM();
+    public void unregisterFCM(String token) {
+        getInteractor().unregisterFCM(token);
     }
 
     public void loadDrive(long driveId) {

@@ -13,6 +13,7 @@ class ApiConstants {
 
     static final String LOGIN = "login";
     static final String REGISTER = "register";
+    static final String RESET_PASSWORD = "reset-password";
 
     static final String USERS_ME = "users/me";
     static final String USERS = "users";

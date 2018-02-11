@@ -59,6 +59,10 @@
             android:label="@string/title_activity_give_feedback"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.activities.ResetPasswordActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
+
         <service android:name=".utils.firebase.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

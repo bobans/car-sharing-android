@@ -17,9 +17,9 @@ import rx.schedulers.Schedulers;
 
 public class HomeInteractor extends BaseInteractor {
 
-    public void unregisterFCM() {
+    public void unregisterFCM(String token) {
         Subscription subscription = ApiManager.getInstance().getApiMethods()
-                .unregisterFCM(FirebaseInstanceId.getInstance().getId())
+                .unregisterFCM(token, FirebaseInstanceId.getInstance().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();

@@ -176,7 +176,7 @@ public class HomeActivity extends BaseActivity<Object, HomeInteractor, IHomeView
                 new TwoButtonsDialog(this, android.R.drawable.ic_dialog_alert, R.string.prompt_logout, R.string.prompt_answer_yes, R.string.prompt_answer_no, new TwoButtonsDialog.OnClickListener() {
                     @Override
                     public void onPositiveButtonClick(DialogInterface dialogInterface, View view) {
-                        getPresenter().unregisterFCM();
+                        getPresenter().unregisterFCM(SessionManager.getInstance().getToken());
                         SessionManager.getInstance().setToken(null);
                         Intent intent = new Intent(HomeActivity.this, LoginEmailActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

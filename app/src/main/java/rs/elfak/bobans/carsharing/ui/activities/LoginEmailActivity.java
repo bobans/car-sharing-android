@@ -96,7 +96,7 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
         ClickableSpan clickableForgot = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                // TODO start reset password activity
+                startActivity(new Intent(LoginEmailActivity.this, ResetPasswordActivity.class));
             }
         };
         String forgotLink = getString(R.string.link_forgot_password);

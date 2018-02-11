@@ -8,6 +8,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -94,9 +95,12 @@ public interface ApiMethods {
     Single<ResponseBody> registerFCM(@Body FirebaseToken firebaseToken);
 
     @DELETE(ApiConstants.FCM_UNREGISTER)
-    Single<ResponseBody> unregisterFCM(@Path("device_id") String deviceId);
+    Single<ResponseBody> unregisterFCM(@Header("Authorization") String token, @Path("device_id") String deviceId);
 
     @GET(ApiConstants.SHARED_DRIVES_ME)
     Single<List<SharedDrive>> getMyDrives(@Query("offset") int offset, @Query("limit") int limit);
+
+    @POST(ApiConstants.RESET_PASSWORD)
+    Single<ResponseBody> resetPassword(@Query("email") String email);
 
 }
