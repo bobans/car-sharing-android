@@ -1,9 +1,11 @@
 package rs.elfak.bobans.carsharing.ui.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -13,8 +15,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rs.elfak.bobans.carsharing.BuildConfig;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.LoginEmailInteractor;
 import rs.elfak.bobans.carsharing.presenters.LoginEmailPresenter;
@@ -32,6 +39,7 @@ import rs.elfak.bobans.carsharing.views.ILoginEmailView;
 
 public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteractor, ILoginEmailView, LoginEmailPresenter> implements ILoginEmailView, View.OnClickListener {
 
+    @BindView(R.id.login_header) View loginHeader;
     @BindView(R.id.text_input_username) TextInputLayout tiUsername;
     @BindView(R.id.edit_text_username) EditText etUsername;
     @BindView(R.id.text_input_password) TextInputLayout tiPassword;
@@ -60,6 +68,9 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
         btnLogin.setTypeface(fontMedium);
         tvSignUp.setTypeface(fontRegular);
 
+        if (BuildConfig.DEBUG) {
+            loginHeader.setOnClickListener(this);
+        }
         etUsername.addTextChangedListener(new ClearErrorTextWatcher(tiUsername));
         etPassword.addTextChangedListener(new ClearErrorTextWatcher(tiPassword));
         btnLogin.setOnClickListener(this);
@@ -116,11 +127,48 @@ public class LoginEmailActivity extends BaseActivity<Object, LoginEmailInteracto
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.login_header: {
+                showUsersDialog();
+                break;
+            }
             case R.id.button_login: {
                 if (validate()) {
                     getPresenter().login(etUsername.getText().toString(), etPassword.getText().toString());
                 }
                 break;
+            }
+        }
+    }
+
+    private void showUsersDialog() {
+        if (!BuildConfig.DEVELOPER_CREDENTIALS.isEmpty()) {
+            String[] credentials = BuildConfig.DEVELOPER_CREDENTIALS.split(";");
+            final Map<String, String> users = new HashMap<>();
+            for (String credential : credentials) {
+                String[] user = credential.split(":");
+                users.put(user[0], user[1]);
+            }
+            CharSequence[] items = new CharSequence[users.size()];
+            int index = 0;
+            for (String email : users.keySet()) {
+                items[index++] = email;
+            }
+            Arrays.sort(items);
+            if (items.length == 1) {
+                etUsername.setText(items[0]);
+                etPassword.setText(users.get(items[0].toString()));
+            } else if (items.length > 1) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Credentials")
+                        .setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                String email = (String) ((AlertDialog) dialogInterface).getListView().getItemAtPosition(which);
+                                etUsername.setText(email);
+                                etPassword.setText(users.get(email));
+                            }
+                        })
+                        .show();
             }
         }
     }

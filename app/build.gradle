@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+Properties localProperties = new Properties()
+localProperties.load(new FileInputStream("local.properties"))
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
@@ -23,11 +26,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.release
+            buildConfigField 'String', 'DEVELOPER_CREDENTIALS', '"' + localProperties.getProperty('developer.credentials') + '"'
         }
         release {
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'DEVELOPER_CREDENTIALS', '""'
         }
     }
     productFlavors {
