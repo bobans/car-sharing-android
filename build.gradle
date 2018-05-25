@@ -3,11 +3,11 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'com.google.gms:google-services:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.google.gms:google-services:3.3.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -35,10 +35,10 @@ ext {
     keyPassword = gradleProperties.getProperty("keyPassword")
 
     // compile options
-    compileSdkVersion = 25
-    buildToolsVersion = '26.0.0'
+    compileSdkVersion = 26
+    buildToolsVersion = '27.0.3'
     minSdkVersion = 16
-    targetSdkVersion = 24
+    targetSdkVersion = 26
 
     // version
     versionCode = {
@@ -47,7 +47,7 @@ ext {
     versionName = '1.0'
 
     // dependencies
-    supportLibVersion = '25.4.0'
+    supportLibVersion = '27.1.0'
     mosbyVersion = '2.0.1'
     retrofitVersion = '2.1.0'
     okhttp3Version = '3.4.1'
@@ -55,7 +55,7 @@ ext {
     rxJavaVersion = '1.1.6'
     jodaTimeVersion = '2.9.4'
     glideVersion = '3.7.0'
-    glideTransformationsVersion = '2.0.1'
+    glideTransformationsVersion = '2.0.2'
     butterKnifeVersion = '8.4.0'
     firebaseVersion = '10.2.0'
 }

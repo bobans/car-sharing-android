@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 Properties localProperties = new Properties()
 localProperties.load(new FileInputStream("local.properties"))
@@ -35,56 +34,59 @@ android {
             buildConfigField 'String', 'DEVELOPER_CREDENTIALS', '""'
         }
     }
+    flavorDimensions "carSharing"
     productFlavors {
         local {
+            dimension "carSharing"
             buildConfigField 'String', 'BASE_URL', '"http://192.168.1.12:8080/"'
         }
         heroku {
+            dimension "carSharing"
             buildConfigField 'String', 'BASE_URL', '"https://car-sharing.herokuapp.com/"'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
     // android support
-    compile "com.android.support:appcompat-v7:$rootProject.supportLibVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.supportLibVersion"
-    compile "com.android.support:design:$rootProject.supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibVersion"
+    implementation "com.android.support:design:$rootProject.supportLibVersion"
 
     // mosby
-    compile "com.hannesdorfmann.mosby:mvp:$rootProject.mosbyVersion"
+    implementation "com.hannesdorfmann.mosby:mvp:$rootProject.mosbyVersion"
 
     // Retrofit
-    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
-    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttp3Version"
-    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp3Version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
 
     //RxAndroid
-    compile "io.reactivex:rxandroid:$rootProject.rxAndroidVersion"
-    compile "io.reactivex:rxjava:$rootProject.rxJavaVersion"
+    implementation "io.reactivex:rxandroid:$rootProject.rxAndroidVersion"
+    implementation "io.reactivex:rxjava:$rootProject.rxJavaVersion"
 
     // Joda Time
-    compile "joda-time:joda-time:$rootProject.jodaTimeVersion"
+    implementation "joda-time:joda-time:$rootProject.jodaTimeVersion"
 
     // Glide
-    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     // Glide transformations
-    compile "jp.wasabeef:glide-transformations:$rootProject.glideTransformationsVersion"
+    implementation "jp.wasabeef:glide-transformations:$rootProject.glideTransformationsVersion"
 
     // Butter Knife
-    compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
 
     // Firebase
-    compile "com.google.firebase:firebase-messaging:$rootProject.firebaseVersion"
+    implementation "com.google.firebase:firebase-messaging:$rootProject.firebaseVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

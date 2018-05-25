@@ -53,7 +53,7 @@ public abstract class BaseFragment<M, I extends BaseInteractor, V extends IBaseV
     public final void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View content = onCreateView(getLayoutInflater(savedInstanceState), contentView);
+        View content = onCreateView(LayoutInflater.from(getContext()), contentView);
         contentView.removeAllViews();
         contentView.addView(content);
         onViewCreated(contentView);
