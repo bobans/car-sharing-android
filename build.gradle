@@ -41,7 +41,9 @@ ext {
     targetSdkVersion = 24
 
     // version
-    versionCode = 1
+    versionCode = {
+        (int) (System.currentTimeMillis() / 1000L)
+    }.call()
     versionName = '1.0'
 
     // dependencies
