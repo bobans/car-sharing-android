@@ -9,7 +9,8 @@ public class FirebaseMessageData {
 
     public enum MessageType {
         DRIVE_REQUESTED,
-        DRIVE_REQUEST_CANCELED
+        DRIVE_REQUEST_CANCELED,
+        NEW_DRIVE
     }
 
     private MessageType type;

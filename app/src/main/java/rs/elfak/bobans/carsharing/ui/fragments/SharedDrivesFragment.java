@@ -143,7 +143,9 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
             if (menuFilter != null) {
                 menuFilter.setVisible(true);
             }
-            floatingActionButton.show();
+            if (SessionManager.getInstance().getUser().getUserType() == User.TYPE_DRIVER) {
+                floatingActionButton.show();
+            }
         }
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -160,6 +162,7 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
         swipeRefreshLayout.setOnRefreshListener(this);
         if (SessionManager.getInstance().getUser() != null && SessionManager.getInstance().getUser().getUserType() != User.TYPE_DRIVER) {
             btnCreateDrive.setVisibility(View.GONE);
+            floatingActionButton.hide();
         }
         btnCreateDrive.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
