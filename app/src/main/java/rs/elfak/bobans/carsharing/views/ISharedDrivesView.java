@@ -11,4 +11,5 @@ import rs.elfak.bobans.carsharing.models.SharedDrive;
  */
 
 public interface ISharedDrivesView extends IBaseView<List<SharedDrive>> {
+    void filterChanged();
 }

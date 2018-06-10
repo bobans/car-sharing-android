@@ -3,6 +3,8 @@ package rs.elfak.bobans.carsharing.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class UserDAO implements Parcelable {
     private DateTime driverLicenseDate;
     private int userType;
     private List<CarDAO> cars;
+    @SerializedName("storedDirection")
+    private Filter filter;
 
     public UserDAO() {
         this.cars = new ArrayList<>();
@@ -46,6 +50,7 @@ public class UserDAO implements Parcelable {
         }
         userType = in.readInt();
         cars = in.createTypedArrayList(CarDAO.CREATOR);
+        filter = in.readParcelable(Filter.class.getClassLoader());
     }
 
     @Override
@@ -59,6 +64,7 @@ public class UserDAO implements Parcelable {
         dest.writeLong(driverLicenseDate != null ? driverLicenseDate.getMillis() : 0);
         dest.writeInt(userType);
         dest.writeTypedList(cars);
+        dest.writeParcelable(filter, flags);
     }
 
     @Override
@@ -152,6 +158,14 @@ public class UserDAO implements Parcelable {
 
     public void addCar(CarDAO car) {
         this.cars.add(car);
+    }
+
+    public Filter getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Filter filter) {
+        this.filter = filter;
     }
 
 }

@@ -129,4 +129,5 @@
     <string name="notification_ticker_new_ride">New drive matching your filter</string>
     <string name="notification_title_new_ride">New drive</string>
     <string name="notification_content_new_ride">New drive by %1$s from %2$s to %3$s</string>
+    <string name="button_clear_filter">Clear filter</string>
 </resources>

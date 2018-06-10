@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/action_filter"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="130dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_side_margin"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_input_departure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                <EditText
+                    android:id="@+id/edit_text_departure"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_departure"
+                    android:inputType="textCapWords"
+                    android:nextFocusDown="@+id/edit_text_destination"
+                    tools:text="Nis" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorDivider" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_input_destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:hintTextAppearance="@style/AppTheme.TextAppearance.Label">
+
+                <EditText
+                    android:id="@+id/edit_text_destination"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_destination"
+                    android:inputType="textCapWords"
+                    android:nextFocusDown="@+id/button_confirm"
+                    tools:text="Vranje" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorDivider" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_marginBottom="@dimen/layout_bottom_margin"
+        android:layout_marginLeft="@dimen/layout_side_margin"
+        android:layout_marginRight="@dimen/layout_side_margin"
+        android:text="@string/ok"
+        android:textSize="@dimen/dialog_button_text_size" />
+
+    <Button
+        android:id="@+id/button_clear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_height"
+        android:layout_marginBottom="@dimen/layout_bottom_margin"
+        android:layout_marginLeft="@dimen/layout_side_margin"
+        android:layout_marginRight="@dimen/layout_side_margin"
+        android:text="@string/button_clear_filter"
+        android:textSize="@dimen/dialog_button_text_size" />
+
+</LinearLayout>

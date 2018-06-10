@@ -16,6 +16,8 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rs.elfak.bobans.carsharing.models.Car;
+import rs.elfak.bobans.carsharing.models.Filter;
+import rs.elfak.bobans.carsharing.models.FilterDAO;
 import rs.elfak.bobans.carsharing.models.FirebaseToken;
 import rs.elfak.bobans.carsharing.models.Make;
 import rs.elfak.bobans.carsharing.models.Model;
@@ -67,6 +69,9 @@ public interface ApiMethods {
     @GET(ApiConstants.SHARED_DRIVES)
     Single<List<SharedDrive>> getSharedDrives(@Query("offset") int offset, @Query("limit") int limit);
 
+    @GET(ApiConstants.SHARED_DRIVES_FILTERED)
+    Single<List<SharedDrive>> getSharedDrives(@Query("departure") String departure, @Query("destination") String destination, @Query("offset") int offset, @Query("limit") int limit);
+
     @GET(ApiConstants.SHARED_DRIVES_ID)
     Single<SharedDrive> getSharedDrive(@Path("id") long driveId);
 
@@ -102,5 +107,14 @@ public interface ApiMethods {
 
     @POST(ApiConstants.RESET_PASSWORD)
     Single<ResponseBody> resetPassword(@Query("email") String email);
+
+    @POST(ApiConstants.USERS_FILTER)
+    Single<Filter> saveFilter(@Body FilterDAO filter);
+
+    @GET(ApiConstants.USERS_FILTER)
+    Single<Filter> getFilter();
+
+    @DELETE(ApiConstants.USERS_FILTER)
+    Single<ResponseBody> clearFilter();
 
 }

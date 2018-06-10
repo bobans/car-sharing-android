@@ -3,6 +3,7 @@ package rs.elfak.bobans.carsharing.ui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,10 +24,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import rs.elfak.bobans.carsharing.R;
 import rs.elfak.bobans.carsharing.interactors.SharedDrivesInteractor;
+import rs.elfak.bobans.carsharing.models.Filter;
+import rs.elfak.bobans.carsharing.models.FilterDAO;
 import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.User;
 import rs.elfak.bobans.carsharing.presenters.SharedDrivesPresenter;
 import rs.elfak.bobans.carsharing.ui.adapters.SharedDrivesAdapter;
+import rs.elfak.bobans.carsharing.ui.dialogs.FilterDialog;
 import rs.elfak.bobans.carsharing.utils.EndlessRecyclerOnScrollListener;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ISharedDrivesView;
@@ -38,7 +41,7 @@ import rs.elfak.bobans.carsharing.views.ISharedDrivesView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, SharedDrivesInteractor, ISharedDrivesView, SharedDrivesPresenter> implements ISharedDrivesView, SwipeRefreshLayout.OnRefreshListener, SharedDrivesAdapter.OnSharedDriveClickListener, View.OnClickListener {
+public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, SharedDrivesInteractor, ISharedDrivesView, SharedDrivesPresenter> implements ISharedDrivesView, SwipeRefreshLayout.OnRefreshListener, SharedDrivesAdapter.OnSharedDriveClickListener, View.OnClickListener, FilterDialog.OnFilterChangedListener {
 
     @BindView(R.id.swipe_refresh_shared_drives) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recycler_view_shared_drives) RecyclerView recyclerView;
@@ -52,7 +55,6 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
     }
 
     private Unbinder unbinder;
-    private MenuItem menuFilter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,6 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_shared_drives, menu);
-        menuFilter = menu.findItem(R.id.action_filter);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -77,8 +78,8 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_filter: {
-                // TODO filter click
-                Toast.makeText(getContext(), "Filter", Toast.LENGTH_SHORT).show();
+                Filter filter = SessionManager.getInstance().getUser() != null ? SessionManager.getInstance().getUser().getFilter() : null;
+                new FilterDialog(getContext(), filter != null ? filter.getStart() : null, filter != null ? filter.getStop() : null, this).show();
                 return true;
             }
 
@@ -92,11 +93,7 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        if (recyclerView.getAdapter() != null) {
-            menu.findItem(R.id.action_filter).setVisible(recyclerView.getAdapter().getItemCount() > 0);
-        } else {
-            menu.findItem(R.id.action_filter).setVisible(false);
-        }
+        menu.findItem(R.id.action_filter).setIcon(SessionManager.getInstance().getUser() != null && SessionManager.getInstance().getUser().getFilter() != null ? R.drawable.ic_filter_active :  R.drawable.ic_filter);
     }
 
     @NonNull
@@ -133,16 +130,10 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
         if (recyclerView.getAdapter().getItemCount() == 0) {
             noDrivesContainer.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
-            if (menuFilter != null) {
-                menuFilter.setVisible(false);
-            }
             floatingActionButton.hide();
         } else {
             noDrivesContainer.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
-            if (menuFilter != null) {
-                menuFilter.setVisible(true);
-            }
             if (SessionManager.getInstance().getUser().getUserType() == User.TYPE_DRIVER) {
                 floatingActionButton.show();
             }
@@ -160,9 +151,11 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
         initRecyclerView();
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         swipeRefreshLayout.setOnRefreshListener(this);
-        if (SessionManager.getInstance().getUser() != null && SessionManager.getInstance().getUser().getUserType() != User.TYPE_DRIVER) {
-            btnCreateDrive.setVisibility(View.GONE);
-            floatingActionButton.hide();
+        if (SessionManager.getInstance().getUser() != null) {
+            if (SessionManager.getInstance().getUser().getUserType() != User.TYPE_DRIVER) {
+                btnCreateDrive.setVisibility(View.GONE);
+                floatingActionButton.hide();
+            }
         }
         btnCreateDrive.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
@@ -243,4 +236,20 @@ public class SharedDrivesFragment extends BaseFragment<List<SharedDrive>, Shared
             }
         }
     }
+
+    @Override
+    public void onFilterChanged(@Nullable FilterDAO filter) {
+        getPresenter().onFilterChanged(filter);
+    }
+
+    @Override
+    public void filterChanged() {
+        showContent();
+        if (getActivity() != null) {
+            getActivity().invalidateOptionsMenu();
+        }
+        swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
+    }
+
 }
