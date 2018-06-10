@@ -77,7 +77,7 @@ public class FilterDialog extends BaseDialog implements View.OnClickListener {
             case R.id.button_confirm: {
                 if (checkInput()) {
                     dismiss();
-                    FilterDAO filter = new FilterDAO(etDeparture.getText().toString(), etDestination.getText().toString());
+                    FilterDAO filter = new FilterDAO(etDeparture.getText().toString().trim(), etDestination.getText().toString().trim());
                     if (listener != null) {
                         listener.onFilterChanged(filter);
                     }

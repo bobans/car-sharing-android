@@ -8,12 +8,14 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,8 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     @BindView(R.id.edit_text_departure) EditText etDeparture;
     @BindView(R.id.text_input_destination) TextInputLayout tiDestination;
     @BindView(R.id.edit_text_destination) EditText etDestination;
+    @BindView(R.id.text_view_stops_label) TextView tvStopsLabel;
+    @BindView(R.id.stops_container) LinearLayout stopsContainer;
     @BindView(R.id.text_input_car) TextInputLayout tiCar;
     @BindView(R.id.edit_text_car) EditText etCar;
     @BindView(R.id.text_input_seats) TextInputLayout tiSeats;
@@ -132,6 +136,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
         etDeparture.setTypeface(fontMedium);
         tiDestination.setTypeface(fontRegular);
         etDestination.setTypeface(fontMedium);
+        tvStopsLabel.setTypeface(fontRegular);
         tiCar.setTypeface(fontRegular);
         etCar.setTypeface(fontMedium);
         tiSeats.setTypeface(fontRegular);
@@ -210,6 +215,39 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
     public void setData(SharedDrive data) {
         etDeparture.setText(data.getDeparture());
         etDestination.setText(data.getDestination());
+        stopsContainer.removeAllViews();
+        if (data.getStops() != null) {
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            stopsContainer.addView(row);
+
+            row.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+
+            int width = 0;
+            int maxWidth = displayMetrics.widthPixels - 2 * getResources().getDimensionPixelSize(R.dimen.layout_side_margin);
+
+            for (String city : data.getStops()) {
+                TextView tvCity = (TextView) getLayoutInflater().inflate(R.layout.item_city, stopsContainer, false);
+                tvCity.setTypeface(fontMedium);
+                tvCity.setText(city);
+                tvCity.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+
+                width += tvCity.getMeasuredWidth();
+
+                if (width > maxWidth) {
+                    row = new LinearLayout(this);
+                    row.setOrientation(LinearLayout.HORIZONTAL);
+                    row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    stopsContainer.addView(row);
+                }
+
+                row.addView(tvCity);
+            }
+        }
         etCar.setText(getString(R.string.car,
                 data.getCar().getModel().getMake().getTitle(),
                 data.getCar().getModel().getTitle(),
@@ -339,7 +377,7 @@ public class ViewSharedDriveActivity extends BaseActivity<SharedDrive, ViewShare
             case 1: {
                 setResult(resultCode);
                 if (resultCode == RESULT_OK) {
-                    setData((SharedDrive) data.getParcelableExtra(CreateSharedDriveActivity.EXTRA_SHARED_DRIVE));
+                    getPresenter().onEditSharedDrive((SharedDrive) data.getParcelableExtra(CreateSharedDriveActivity.EXTRA_SHARED_DRIVE));
                 }
                 break;
             }

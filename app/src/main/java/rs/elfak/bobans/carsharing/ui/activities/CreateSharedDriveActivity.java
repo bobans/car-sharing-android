@@ -26,6 +26,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -205,6 +206,7 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
         SharedDriveDAO sharedDrive = new SharedDriveDAO();
         sharedDrive.setDeparture(etDeparture.getText().toString().trim());
         sharedDrive.setDestination(etDestination.getText().toString().trim());
+        sharedDrive.setStops(new ArrayList<String>());
         for (int i = 0; i < stopsContainer.getChildCount(); i++) {
             sharedDrive.addStop(((TextView) stopsContainer.getChildAt(i).findViewById(R.id.text_view_city)).getText().toString().trim());
         }
@@ -326,6 +328,11 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
         etDeparture.setText(data.getDeparture());
         etDestination.setText(data.getDestination());
         etSeats.setText(String.valueOf(data.getSeats()));
+        if (data.getStops() != null) {
+            for (String city : data.getStops()) {
+                addStop(city);
+            }
+        }
         setPreference(tvPreferenceMusic, data.getPreferences().getMusic());
         setPreference(tvPreferenceTalk, data.getPreferences().getTalk());
         setPreference(tvPreferencePets, data.getPreferences().getPets());
@@ -574,6 +581,10 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
 
     @Override
     public void onCityEntered(@NonNull String city) {
+        addStop(city);
+    }
+
+    private void addStop(@NonNull String city) {
         View item = getLayoutInflater().inflate(R.layout.item_drive_stop, stopsContainer, false);
 
         TextView tvCity = (TextView) item.findViewById(R.id.text_view_city);

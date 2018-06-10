@@ -162,4 +162,10 @@ public class ViewSharedDrivePresenter extends BasePresenter<IViewSharedDriveView
         }
     }
 
+    public void onEditSharedDrive(SharedDrive sharedDrive) {
+        this.sharedDrive = sharedDrive;
+        if (isViewAttached()) {
+            getView().setData(sharedDrive);
+        }
+    }
 }
