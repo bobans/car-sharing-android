@@ -3,6 +3,7 @@ package rs.elfak.bobans.carsharing.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -109,6 +110,13 @@ public class SharedDriveDAO implements Parcelable {
 
     public void setStops(List<String> stops) {
         this.stops = stops;
+    }
+
+    public void addStop(String stop) {
+        if (this.stops == null) {
+            this.stops = new ArrayList<>();
+        }
+        this.stops.add(stop);
     }
 
     public DrivePreferencesDAO getPreferences() {

@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,6 +42,7 @@ import rs.elfak.bobans.carsharing.models.SharedDrive;
 import rs.elfak.bobans.carsharing.models.SharedDriveDAO;
 import rs.elfak.bobans.carsharing.presenters.CreateSharedDrivePresenter;
 import rs.elfak.bobans.carsharing.ui.adapters.FontArrayAdapter;
+import rs.elfak.bobans.carsharing.ui.dialogs.AddStopDialog;
 import rs.elfak.bobans.carsharing.utils.SessionManager;
 import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
 
@@ -50,7 +52,7 @@ import rs.elfak.bobans.carsharing.views.ICreateSharedDriveView;
  * @author Boban Stajic<bobanstajic@gmail.com
  */
 
-public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateSharedDriveInteractor, ICreateSharedDriveView, CreateSharedDrivePresenter> implements ICreateSharedDriveView, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateSharedDriveInteractor, ICreateSharedDriveView, CreateSharedDrivePresenter> implements ICreateSharedDriveView, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AddStopDialog.OnCityEnteredListener {
 
     public static final String EXTRA_SHARED_DRIVE = "EXTRA_SHARED_DRIVE";
 
@@ -59,6 +61,9 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
     @BindView(R.id.edit_text_departure) EditText etDeparture;
     @BindView(R.id.text_input_destination) TextInputLayout tiDestination;
     @BindView(R.id.edit_text_destination) EditText etDestination;
+    @BindView(R.id.text_view_stops_label) TextView tvStopsLabel;
+    @BindView(R.id.image_view_add_stop) ImageView ivAddStop;
+    @BindView(R.id.stops_container) ViewGroup stopsContainer;
     @BindView(R.id.text_view_car_label) TextView tvCarLabel;
     @BindView(R.id.spinner_car) Spinner spCar;
     @BindView(R.id.text_input_seats) TextInputLayout tiSeats;
@@ -123,6 +128,7 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
         priceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPriceType.setAdapter(priceTypeAdapter);
 
+        ivAddStop.setOnClickListener(this);
         tvPreferenceMusic.setOnClickListener(this);
         tvPreferenceTalk.setOnClickListener(this);
         tvPreferencePets.setOnClickListener(this);
@@ -145,6 +151,7 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
         etDeparture.setTypeface(fontMedium);
         tiDestination.setTypeface(fontRegular);
         etDestination.setTypeface(fontMedium);
+        tvStopsLabel.setTypeface(fontRegular);
         tvCarLabel.setTypeface(fontRegular);
         tiSeats.setTypeface(fontRegular);
         etSeats.setTypeface(fontMedium);
@@ -196,11 +203,13 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
     @NonNull
     private SharedDriveDAO createSharedDriveDAO() {
         SharedDriveDAO sharedDrive = new SharedDriveDAO();
-        sharedDrive.setDeparture(etDeparture.getText().toString());
-        sharedDrive.setDestination(etDestination.getText().toString());
-        // TODO stops
+        sharedDrive.setDeparture(etDeparture.getText().toString().trim());
+        sharedDrive.setDestination(etDestination.getText().toString().trim());
+        for (int i = 0; i < stopsContainer.getChildCount(); i++) {
+            sharedDrive.addStop(((TextView) stopsContainer.getChildAt(i).findViewById(R.id.text_view_city)).getText().toString().trim());
+        }
         sharedDrive.setCar((Car) spCar.getSelectedItem());
-        sharedDrive.setSeats(Integer.parseInt(etSeats.getText().toString()));
+        sharedDrive.setSeats(Integer.parseInt(etSeats.getText().toString().trim()));
         DrivePreferencesDAO drivePreferences = new DrivePreferencesDAO();
         drivePreferences.setMusic(getDrivePreference(tvPreferenceMusic));
         drivePreferences.setTalk(getDrivePreference(tvPreferenceTalk));
@@ -228,7 +237,7 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
                 break;
             }
         }
-        drivePrice.setPrice(Double.parseDouble(etPrice.getText().toString()));
+        drivePrice.setPrice(Double.parseDouble(etPrice.getText().toString().trim()));
         sharedDrive.setPrice(drivePrice);
         sharedDrive.setUser(SessionManager.getInstance().getUser());
         return sharedDrive;
@@ -372,6 +381,11 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.image_view_add_stop: {
+                new AddStopDialog(this, this).show();
+                break;
+            }
+
             case R.id.text_view_preference_music: {
                 showPreferenceStatusPicker(tvPreferenceMusic);
                 break;
@@ -556,6 +570,26 @@ public class CreateSharedDriveActivity extends BaseActivity<SharedDrive, CreateS
                 break;
             }
         }
+    }
+
+    @Override
+    public void onCityEntered(@NonNull String city) {
+        View item = getLayoutInflater().inflate(R.layout.item_drive_stop, stopsContainer, false);
+
+        TextView tvCity = (TextView) item.findViewById(R.id.text_view_city);
+        ImageView ivRemove = (ImageView) item.findViewById(R.id.image_view_remove);
+
+        tvCity.setTypeface(fontMedium);
+        tvCity.setText(city);
+
+        ivRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopsContainer.removeView((View) view.getParent());
+            }
+        });
+
+        stopsContainer.addView(item);
     }
 
     private static class RepetitionOnClickListener implements View.OnClickListener {

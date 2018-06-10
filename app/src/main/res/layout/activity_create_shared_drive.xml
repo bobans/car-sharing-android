@@ -119,6 +119,46 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_control_space"
                 android:baselineAligned="false"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <TextView
+                        android:id="@+id/text_view_stops_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_stops"
+                        android:textColor="@color/colorTextLabel"
+                        android:textSize="@dimen/label_text_size" />
+
+                    <ImageView
+                        android:id="@+id/image_view_add_stop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_add" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/stops_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_control_space"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -312,13 +352,13 @@
 
                 <!-- TODO show repeat when logic is fixed -->
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/layout_control_space"
                     android:layout_marginStart="@dimen/layout_control_space"
                     android:gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <CheckBox
                         android:id="@+id/checkbox_repeat"
@@ -334,17 +374,17 @@
 
             <LinearLayout
                 android:id="@+id/repetition_container"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/layout_control_space"
                     android:layout_marginBottom="@dimen/layout_control_space"
+                    android:layout_marginTop="@dimen/layout_control_space"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 

@@ -128,4 +128,6 @@
     <string name="notification_title_new_ride">Nova vožnja</string>
     <string name="notification_content_new_ride">%1$s nudi vožnju od %2$s do %3$s</string>
     <string name="button_clear_filter">Poništi filter</string>
+    <string name="label_stops">Usputna zaustavljanja</string>
+    <string name="label_drive_stop">Usputno zaustavljanje</string>
 </resources>

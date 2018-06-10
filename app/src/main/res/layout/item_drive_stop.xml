@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/layout_side_margin"
+    android:paddingStart="@dimen/layout_side_margin"
+    tools:ignore="RtlSymmetry,UseCompoundDrawables">
+
+    <TextView
+        android:id="@+id/text_view_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/label_departure"
+        tools:text="Nis" />
+
+    <ImageView
+        android:id="@+id/image_view_remove"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_delete_dark" />
+
+</LinearLayout>
