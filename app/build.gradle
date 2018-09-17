@@ -45,6 +45,9 @@ android {
             buildConfigField 'String', 'BASE_URL', '"https://car-sharing.herokuapp.com/"'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
