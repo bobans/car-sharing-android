@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -83,7 +85,9 @@ public class SharedDrivesAdapter extends RecyclerViewArrayAdapter<SharedDrive, S
         }
         holder.route.setText(holder.itemView.getContext().getString(R.string.route, drive.getDeparture(), drive.getDestination()));
         holder.requestIndicator.setVisibility(drive.hasRequest() ? View.VISIBLE : View.GONE);
-        holder.date.setText(DateTimeUtils.printMediumDateTime(drive.getTime().getDepartureTime()));
+        DateTime date = drive.getTime().getDate();
+        DateTime time = drive.getTime().getDepartureTime();
+        holder.date.setText(DateTimeUtils.printMediumDateTime(date.withTime(time.getHourOfDay(), time.getMinuteOfHour(), time.getSecondOfMinute(), time.getMillisOfSecond())));
         if (drive.getTime().isRepeat()) {
             String repeatDays = drive.getTime().getRepeatDays();
             holder.monday.setActivated(repeatDays.contains("M"));
